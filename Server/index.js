@@ -2,6 +2,7 @@ const { db } = require("./config/firebase.js");
 const express = require("express");
 const logger = require("morgan");
 const dotenv = require("dotenv").config();
+const cors = require("cors");
 const CustomError = require("./utils/CustomError.js");
 const globalErrorHandler = require("./controllers/errorController.js");
 const usersRouter = require("./routes/users.Router.js");
@@ -12,6 +13,7 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(logger("dev"));
+app.use(cors());
 
 app.use("/petbay/api/v1/users", usersRouter);
 

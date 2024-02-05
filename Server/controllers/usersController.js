@@ -10,7 +10,7 @@ exports.createUser = asyncHandler(async (req, res, next) => {
     const newUser = await db.collection("users").doc(user.id).set(user);
     res.status(201).json(newUser);
   }else{
-    throw new CustomError(`User Already Exists! No Duplicate User Ids Accepted(User ID:${user.id})`);
+    throw new CustomError(`User Already Exists! No Duplicate User Ids Accepted(User ID:${user.id})`, 400);
   }
 });
 

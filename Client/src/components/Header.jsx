@@ -7,7 +7,7 @@ import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import styles from "./header.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUser } from "@fortawesome/free-solid-svg-icons";
+import { faUser, faPaw } from "@fortawesome/free-solid-svg-icons";
 
 export default function Header() {
   return (
@@ -23,8 +23,12 @@ export default function Header() {
               style={{ maxHeight: "100px" }}
               navbarScroll
             >
-              <Navbar.Brand href="#" className="mx-lg-4 mx-md-3 mx-2">
-                PetBay
+              <Navbar.Brand
+                href="#"
+                className="mx-lg-4 mx-md-3 mx-2"
+                style={{ fontWeight: "bolder" }}
+              >
+                <FontAwesomeIcon icon={faPaw} /> PetBay
               </Navbar.Brand>
               <Nav.Link href="#action1" className="mx-lg-4 mx-md-3 mx-2">
                 {" "}

@@ -9,6 +9,11 @@ import {
 import styles from "./footer.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPaw } from "@fortawesome/free-solid-svg-icons";
+import {
+  faFacebook,
+  faYoutube,
+  faInstagram,
+} from "@fortawesome/free-brands-svg-icons";
 
 export default function Footer() {
   return (
@@ -19,28 +24,7 @@ export default function Footer() {
       >
         <section className="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
           <div className="me-5 d-none d-lg-block">
-            <span>Get connected with us on social networks:</span>
-          </div>
-
-          <div>
-            <a href="" className="me-4 text-reset">
-              <MDBIcon fab icon="facebook-f" />
-            </a>
-            <a href="" className="me-4 text-reset">
-              <MDBIcon fab icon="twitter" />
-            </a>
-            <a href="" className="me-4 text-reset">
-              <MDBIcon fab icon="google" />
-            </a>
-            <a href="" className="me-4 text-reset">
-              <MDBIcon fab icon="instagram" />
-            </a>
-            <a href="" className="me-4 text-reset">
-              <MDBIcon fab icon="linkedin" />
-            </a>
-            <a href="" className="me-4 text-reset">
-              <MDBIcon fab icon="github" />
-            </a>
+            <span></span>
           </div>
         </section>
 
@@ -51,31 +35,48 @@ export default function Footer() {
                 <h6 className="text-uppercase fw-bold mb-4">
                   <FontAwesomeIcon icon={faPaw} /> PetBay
                 </h6>
-                <p>
-                  Explore the Unified Pet Care System: where pet wellness meets
-                  simplicity for a seamless, tail-wagging experience!
+                <p className="text-justify">
+                  Explore the Unified Pet Care System: <br />
+                  where pet wellness meets simplicity <br />
+                  for a seamless, tail-wagging experience!
                 </p>
               </MDBCol>
 
               <MDBCol md="2" lg="2" xl="2" className="mx-auto mb-4">
                 <h6 className="text-uppercase fw-bold mb-4">Quick Links</h6>
                 <p>
-                  <a href="#!" className="text-reset">
+                  <a
+                    href="#!"
+                    className="text-reset"
+                    style={{ textDecoration: "none" }}
+                  >
                     Home
                   </a>
                 </p>
                 <p>
-                  <a href="#!" className="text-reset">
+                  <a
+                    href="#!"
+                    className="text-reset"
+                    style={{ textDecoration: "none" }}
+                  >
                     Preferences
                   </a>
                 </p>
                 <p>
-                  <a href="#!" className="text-reset">
+                  <a
+                    href="#!"
+                    className="text-reset"
+                    style={{ textDecoration: "none" }}
+                  >
                     Reminders
                   </a>
                 </p>
                 <p>
-                  <a href="#!" className="text-reset">
+                  <a
+                    href="#!"
+                    className="text-reset"
+                    style={{ textDecoration: "none" }}
+                  >
                     Lost & Found
                   </a>
                 </p>
@@ -84,43 +85,79 @@ export default function Footer() {
               <MDBCol md="3" lg="2" xl="2" className="mx-auto mb-4">
                 <h6 className="text-uppercase fw-bold mb-4">Useful links</h6>
                 <p>
-                  <a href="#!" className="text-reset">
+                  <a
+                    href="#!"
+                    className="text-reset"
+                    style={{ textDecoration: "none" }}
+                  >
                     Community
                   </a>
                 </p>
                 <p>
-                  <a href="#!" className="text-reset">
+                  <a
+                    href="#!"
+                    className="text-reset"
+                    style={{ textDecoration: "none" }}
+                  >
                     Pet Predictions
                   </a>
                 </p>
                 <p>
-                  <a href="#!" className="text-reset">
+                  <a
+                    href="#!"
+                    className="text-reset"
+                    style={{ textDecoration: "none" }}
+                  >
                     Privacy Policy
                   </a>
                 </p>
                 <p>
-                  <a href="#!" className="text-reset">
+                  <a
+                    href="#!"
+                    className="text-reset"
+                    style={{ textDecoration: "none" }}
+                  >
                     Help
                   </a>
                 </p>
               </MDBCol>
 
               <MDBCol md="4" lg="3" xl="3" className="mx-auto mb-md-0 mb-4">
-                <h6 className="text-uppercase fw-bold mb-4">Contact</h6>
-                <p>
-                  <MDBIcon icon="home" className="me-2" />
-                  Address
-                </p>
-                <p>
-                  <MDBIcon icon="envelope" className="me-3" />
-                  info@example.com
-                </p>
-                <p>
-                  <MDBIcon icon="phone" className="me-3" /> + 01 234 567 88
-                </p>
-                <p>
-                  <MDBIcon icon="print" className="me-3" /> + 01 234 567 89
-                </p>
+                <h6 className="text-uppercase fw-bold mb-4">Newsletter</h6>
+                <div className="d-flex align-items-center justify-content-center mb-4">
+                  <input
+                    type="email"
+                    placeholder="Your email"
+                    className="form-control me-2"
+                  />
+                  <button
+                    className="btn btn-outline-light"
+                    style={{ backgroundColor: "#74c0fc", border: "none" }}
+                  >
+                    Subscribe
+                  </button>
+                </div>
+                <div>
+                  <a href="" className="me-4 text-reset">
+                    <FontAwesomeIcon
+                      icon={faFacebook}
+                      style={{ color: "#74C0FC", fontSize: "50px" }}
+                    />
+                  </a>
+                  <a href="" className="me-4 text-reset">
+                    <FontAwesomeIcon
+                      icon={faInstagram}
+                      rotation={1}
+                      style={{ color: "#d40c95", fontSize: "50px" }}
+                    />
+                  </a>
+                  <a href="" className="me-4 text-reset">
+                    <FontAwesomeIcon
+                      icon={faYoutube}
+                      style={{ color: "#ff1f1f", fontSize: "50px" }}
+                    />
+                  </a>
+                </div>
               </MDBCol>
             </MDBRow>
           </MDBContainer>
@@ -130,10 +167,7 @@ export default function Footer() {
           className="text-center p-4"
           style={{ backgroundColor: "rgba(255, 255, 255, 0.05)" }}
         >
-          © 2024 Copyright:
-          <a className="text-reset fw-bold" href="https://mdbootstrap.com/">
-            petBay.com
-          </a>
+          PetBay | All Rights Recerved © 2024
         </div>
       </MDBFooter>
     </div>

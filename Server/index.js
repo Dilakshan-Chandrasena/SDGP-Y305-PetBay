@@ -20,10 +20,7 @@ app.use("/petbay/api/v1/breed-recommendation/",breedRecommendationRoute);
 
 
 app.all("*", (req, res, next) => {
-    const err = new CustomError(
-      `Invalid Call! URL Not Found: ${req.originalUrl}`,
-      404
-    );
+    const err = new CustomError(`Invalid Call! URL Not Found: ${req.originalUrl}`, 404);
     next(err);
   });
   

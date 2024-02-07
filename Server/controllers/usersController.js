@@ -6,11 +6,16 @@ const CustomError = require("../utils/CustomError");
 //@route POST /petbay/api/v1/users
 exports.createUser = asyncHandler(async (req, res, next) => {
   const user = req.body;
-  if(!getUserById(user.id)){
+  const checkUser = await getUserById(user.id);
+  if (!checkUser) {
     const newUser = await db.collection("users").doc(user.id).set(user);
-    res.status(201).json(newUser);
-  }else{
-    throw new CustomError(`User Already Exists! No Duplicate User Ids Accepted(User ID:${user.id})`, 400);
+    const savedUser = await getUserById(user.id);
+    res.status(201).json(savedUser);
+  } else {
+    throw new CustomError(
+      `User Already Exists! No Duplicate User Ids Accepted(User ID:${user.id})`,
+      400
+    );
   }
 });
 
@@ -18,10 +23,13 @@ exports.createUser = asyncHandler(async (req, res, next) => {
 //@route GET /petbay/api/v1/users
 exports.getUser = asyncHandler(async (req, res, next) => {
   const user = await getUserById(req.params.id);
-  if (user.exists) {
-    res.status(200).json(user.data());
+  if (user) {
+    res.status(200).json(user);
   } else {
-    const error = new CustomError(`User Not Found (user id:${req.params.id})`, 400);
+    const error = new CustomError(
+      `User Not Found (user id:${req.params.id})`,
+      400
+    );
     next(error);
   }
 });
@@ -30,8 +38,8 @@ exports.getUser = asyncHandler(async (req, res, next) => {
 //@route GET /petbay/api/v1/users
 exports.getOwnedPets = asyncHandler(async (req, res, next) => {
   const user = await getUserById(req.params.id);
-  if (user.exists) {
-    const ownedPets = user.data().pets;
+  if (user) {
+    const ownedPets = user.pets;
     console.log(ownedPets);
     res.status(200).json({ pets: ownedPets });
   } else {
@@ -40,22 +48,10 @@ exports.getOwnedPets = asyncHandler(async (req, res, next) => {
   }
 });
 
-
-//@desc Check if user vreed preferences already set
-//@route GET /petbay/api/v1/users
-exports.isUserBreedPreferencesSet = asyncHandler(async (req, res, next) => {
-  const user = await getUserById(req.params.id);
-  if (user.data().breedPreferences.length !== 0) {
-    res.status(200).json({ breedPreferencesSet: true });
-  } else {
-    res.status(200).json({ breedPreferencesSet: false });
-  }
-});
-
 //@desc set breed preferences for a user
 //@route PUT /petbay/api/v1/users
 exports.setUserBreedPreferences = asyncHandler(async (req, res, next) => {
-  const user = await getUserById(req.params.id);
+  const user = await db.collection("users").doc(req.params.id);
   const userBreedPreferences = req.body.breedPreferences;
   if (userBreedPreferences) {
     await user.update({ breedPreferences: userBreedPreferences });
@@ -66,6 +62,6 @@ exports.setUserBreedPreferences = asyncHandler(async (req, res, next) => {
 });
 
 // fetch an user by id from the db
-getUserById = (id)=>{
-  return db.collection("users").doc(id).get();
-};
+getUserById = asyncHandler(async (id) => {
+  return (await db.collection("users").doc(id).get()).data();
+});

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styles from "./auth.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGoogle } from "@fortawesome/free-brands-svg-icons";
+import { faPaw } from "@fortawesome/free-solid-svg-icons";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import {
   doSignInWithEmailAndPassword,
@@ -60,7 +61,9 @@ export default function LogIn() {
       {userLoggedIn ? <Navigate to="/HomePage" /> : null}
       <div className={styles.form}>
         <div className={styles.headingContainer}>
-          <h1 className={styles.heading}>Login</h1>
+          <h1 className={styles.heading}>
+            <FontAwesomeIcon icon={faPaw} /> Login
+          </h1>
         </div>
 
         <div className={styles.inputBox}>

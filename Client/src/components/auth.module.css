@@ -7,10 +7,15 @@ body {
 .headingContainer {
   padding-bottom: 10px;
 }
+
 .formContainer {
+  width: 350px;
+}
+.formContainer,
+.detailsForm {
   background-color: #ffff;
   margin: 0 auto;
-  width: 350px;
+
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -109,4 +114,65 @@ body {
 
 .errorMessage {
   color: red;
+}
+
+.detailsForm {
+  width: 550px;
+}
+
+/* Dropdown container */
+.dropdown {
+  position: relative;
+  width: 99%;
+}
+
+/* Dropdown select */
+.select {
+  width: 100%;
+  padding: 15px 30px 15px 10px; /* Adjust padding for icon */
+  font-size: 16px;
+  border-radius: 10px;
+  border: 1px solid #cacaca;
+  outline: none;
+  appearance: none; /* Remove default arrow */
+  -webkit-appearance: none; /* Remove default arrow for Safari */
+  -moz-appearance: none; /* Remove default arrow for Firefox */
+  background-color: #fff;
+}
+
+/* Dropdown arrow */
+.dropdownIcon {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: #666;
+}
+
+/* Dropdown options container */
+.dropdownOptions {
+  position: absolute;
+  top: calc(100% + 5px); /* Place options below select box */
+  left: 0;
+  width: 100%;
+  max-height: 200px; /* Limit options height */
+  overflow-y: auto; /* Add scroll if options exceed container height */
+  background-color: #fff;
+  border: 1px solid #cacaca;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 1; /* Ensure options appear above other content */
+}
+
+/* Dropdown option */
+.option {
+  padding: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease; /* Smooth transition on hover */
+}
+
+/* Dropdown option on hover */
+.option:hover {
+  background-color: #f0f0f0;
 }

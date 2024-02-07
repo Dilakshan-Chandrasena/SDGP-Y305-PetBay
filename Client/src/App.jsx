@@ -1,6 +1,7 @@
 import LogIn from "./components/LogIn";
 import SignUp from "./components/SignUp";
 import HomePage from "./components/HomePage";
+import GetUserDetails from "./components/GetUserDetails";
 import { AuthProvider } from "./contexts/authContext";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
@@ -13,6 +14,7 @@ function App() {
             <Route exact path="/" element={<LogIn />} />
             <Route path="/LogIn" element={<LogIn />} />
             <Route path="/SignUp" element={<SignUp />} />
+            <Route path="/GetUserDetails" element={<GetUserDetails />} />
             <Route path="/HomePage" element={<HomePage />} />
           </Routes>
         </Router>

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styles from "./auth.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGoogle } from "@fortawesome/free-brands-svg-icons";
+import { faPaw } from "@fortawesome/free-solid-svg-icons";
 import { Link, Navigate } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import {
@@ -54,10 +55,12 @@ export default function SignUp() {
 
   return (
     <div className={styles.formContainer}>
-      {userLoggedIn && <Navigate to={"/HomePage"} />}
+      {userLoggedIn && <Navigate to={"/GetUserDetails"} />}
       <div className={styles.form}>
         <div className={styles.headingContainer}>
-          <h1 className={styles.heading}>Sign Up</h1>
+          <h1 className={styles.heading}>
+            <FontAwesomeIcon icon={faPaw} /> Sign Up
+          </h1>
         </div>
 
         <div className={styles.inputBox}>

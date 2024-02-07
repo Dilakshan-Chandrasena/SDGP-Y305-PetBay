@@ -15,8 +15,7 @@ export default function SignUp() {
   const navigate = useNavigate();
 
   const { userLoggedIn } = useAuth();
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -29,12 +28,7 @@ export default function SignUp() {
         alert("Password do not match");
       } else {
         try {
-          await doCreateUserWithEmailAndPassword(
-            email,
-            password,
-            firstName,
-            lastName
-          );
+          await doCreateUserWithEmailAndPassword(email, password);
           navigate("/LogIn");
         } catch (error) {
           if (error.code === "auth/invalid-email") {
@@ -64,24 +58,6 @@ export default function SignUp() {
       <div className={styles.form}>
         <div className={styles.headingContainer}>
           <h1 className={styles.heading}>Sign Up</h1>
-        </div>
-
-        <div className={styles.inputBox}>
-          <input
-            className={styles.input}
-            type="text"
-            placeholder="First Name"
-            onChange={(e) => setFirstName(e.target.value)}
-          />
-        </div>
-
-        <div className={styles.inputBox}>
-          <input
-            className={styles.input}
-            type="text"
-            placeholder="Last Name"
-            onChange={(e) => setLastName(e.target.value)}
-          />
         </div>
 
         <div className={styles.inputBox}>

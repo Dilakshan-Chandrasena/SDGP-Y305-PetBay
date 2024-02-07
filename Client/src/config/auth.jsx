@@ -1,5 +1,5 @@
-import { auth, db } from "../config/firebase";
-import { collection, addDoc } from "firebase/firestore";
+import { auth } from "../config/firebase";
+
 import {
   createUserWithEmailAndPassword,
   GoogleAuthProvider,
@@ -7,12 +7,7 @@ import {
   signInWithPopup,
 } from "firebase/auth";
 
-export const doCreateUserWithEmailAndPassword = async (
-  email,
-  password,
-  firstName,
-  lastName
-) => {
+export const doCreateUserWithEmailAndPassword = async (email, password) => {
   try {
     const useCredendial = await createUserWithEmailAndPassword(
       auth,
@@ -22,11 +17,6 @@ export const doCreateUserWithEmailAndPassword = async (
 
     const { uid } = useCredendial.user;
 
-    await addDoc(collection(db, "users"), {
-      email: email,
-      firstName: firstName,
-      lastName: lastName,
-    });
     return useCredendial;
   } catch (error) {
     console.error("Error creating user:", error);

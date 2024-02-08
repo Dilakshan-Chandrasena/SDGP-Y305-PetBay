@@ -5,7 +5,7 @@ const dotenv = require("dotenv").config();
 const cors = require("cors");
 const CustomError = require("./utils/CustomError.js");
 const globalErrorHandler = require("./controllers/errorController.js");
-const usersRouter = require("./routes/users.Router.js");
+const usersRouter = require("./routes/usersRouter.js");
 
 const app = express();
 

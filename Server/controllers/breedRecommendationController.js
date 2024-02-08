@@ -5,10 +5,7 @@ const CustomError = require("../utils/CustomError");
 exports.createBreed = asyncHandler(async (req, res, next) => {
   const newBreed = req.body;
   if (newBreed) {
-    const savedBreed = await db
-      .collection("breeds")
-      .doc(newBreed.breedName)
-      .set(newBreed);
+    const savedBreed = await db.collection("breeds").doc(newBreed.breedName).set(newBreed);
     res.status(201).json(savedBreed);
   } else {
     throw new CustomError("Invalid Breed Object Sent! Check Again", 400);
@@ -28,19 +25,25 @@ exports.generateBreedRecommendation = asyncHandler(async (req, res, next) => {
   if (breedDetails.exists && user.exists) {
     if (isUserBreedPreferencesSet(user.data())) {
       const userBreedPreferences = user.data().breedPreferences;
-      const breedCharacteristics = breedDetails.data().breedRatings;
+      const breed = breedDetails.data();
+      const breedCharacteristics = breed.breedRatings;
 
       const characsComparisonResults = compareRatings(userBreedPreferences,breedCharacteristics);
       const overallMatchingPercentage = calOverallMatchingPercentage(characsComparisonResults);
 
       const recommendationResult = {
-        breedName: breed,
+        breedName: breed.breedName,
+        description: breed.description,
+        imageLink: breed.imageLink,
+        dogSize: breed.dogSize,
+        avgHeight: breed.avgHeight,
+        avgWeight: breed.avgWeight,
+        avgLifeSpan: breed.avgLifeSpan,
         overallMatchingPercentage: overallMatchingPercentage,
         comparisonResults: characsComparisonResults,
       };
 
       res.status(200).json(recommendationResult);
-
     } else {
       throw new CustomError("User Preferences Not Set", 404);
     }
@@ -48,7 +51,6 @@ exports.generateBreedRecommendation = asyncHandler(async (req, res, next) => {
     throw new CustomError("Failed to generate recommendation. Try again", 400);
   }
 });
-
 
 //checking if user preferences are set
 isUserBreedPreferencesSet = (user) => {
@@ -69,10 +71,7 @@ compareRatings = (userPreferencesRatings, breedCharacteristicRatings) => {
     const breedCharRating = breedCharacteristicRatings[i].actualRating;
 
     //calculating the difference of the ratings
-    const prefDifference = calculatePrefDifference(
-      userPrefRating,
-      breedCharRating
-    );
+    const prefDifference = calculatePrefDifference(userPrefRating,breedCharRating);
 
     // calculating matching percentage for each characteristic
     const matchingPercentage = 100 - (prefDifference / breedCharacteristicRatings.length) * 100;
@@ -106,7 +105,6 @@ calOverallMatchingPercentage = (characsComparisonResults) => {
   for (let i = 0; i < characsComparisonResults.length; i++) {
     totalMatchingPercentage += characsComparisonResults[i].matchingPercentage;
   }
-  const overallMatchingPercentage =
-    totalMatchingPercentage / characsComparisonResults.length;
+  const overallMatchingPercentage = totalMatchingPercentage / characsComparisonResults.length;
   return overallMatchingPercentage;
 };

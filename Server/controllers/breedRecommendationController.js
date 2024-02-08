@@ -2,6 +2,8 @@ const asyncHandler = require("express-async-handler");
 const { db } = require("./../config/firebase");
 const CustomError = require("../utils/CustomError");
 
+// @Desc POST add breed details
+// @route /petbay/api/v1/breed-recommendation/
 exports.createBreed = asyncHandler(async (req, res, next) => {
   const newBreed = req.body;
   if (newBreed) {
@@ -11,6 +13,7 @@ exports.createBreed = asyncHandler(async (req, res, next) => {
     throw new CustomError("Invalid Breed Object Sent! Check Again", 400);
   }
 });
+
 
 // @Desc GET generating a breed recommendation
 // @route /petbay/api/v1/breed-recommendation/
@@ -64,17 +67,16 @@ isUserBreedPreferencesSet = (user) => {
 // compares user preference rating and actual breed rating and generate matching percentages for each characteristic
 compareRatings = (userPreferencesRatings, breedCharacteristicRatings) => {
   const comparisonResults = [];
-
   for (let i = 0; i < breedCharacteristicRatings.length; i++) {
     const characteristic = breedCharacteristicRatings[i].characteristic;
-    const userPrefRating = userPreferencesRatings[i].actualRating;
+    const userPrefRating = userPreferencesRatings[i].userRating;
     const breedCharRating = breedCharacteristicRatings[i].actualRating;
 
     //calculating the difference of the ratings
     const prefDifference = calculatePrefDifference(userPrefRating,breedCharRating);
 
     // calculating matching percentage for each characteristic
-    const matchingPercentage = 100 - (prefDifference / breedCharacteristicRatings.length) * 100;
+    const matchingPercentage = Math.round(100 - (prefDifference / 5) * 100);
 
     // creating result json obj with necessary calculated details
     const result = {
@@ -105,6 +107,6 @@ calOverallMatchingPercentage = (characsComparisonResults) => {
   for (let i = 0; i < characsComparisonResults.length; i++) {
     totalMatchingPercentage += characsComparisonResults[i].matchingPercentage;
   }
-  const overallMatchingPercentage = totalMatchingPercentage / characsComparisonResults.length;
+  const overallMatchingPercentage = Math.round(totalMatchingPercentage / characsComparisonResults.length);
   return overallMatchingPercentage;
 };

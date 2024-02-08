@@ -14,12 +14,31 @@ export default function GetUserDetails() {
 
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+  const [subscriptionPlan, setSubscriptionPlan] = useState("");
+  const [paymentMethod, setPaymentMethod] = useState("");
   const [isSigningIn, setIsSigningIn] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
+  const handleSubscriptionChange = (e) => {
+    setSubscriptionPlan(e.target.value);
+  };
+
+  const handlePaymentMethodChange = (e) => {
+    setPaymentMethod(e.target.value);
+  };
+
   const finishSignUp = async () => {
-    navigate("/HomePage");
+    if (
+      firstName == "" ||
+      lastName == "" ||
+      subscriptionPlan == "" ||
+      paymentMethod == ""
+    ) {
+      setErrorMessage("Please provide all the details");
+    } else {
+      console.log(firstName, lastName, subscriptionPlan, paymentMethod);
+      navigate("/HomePage");
+    }
   };
 
   return (
@@ -50,10 +69,10 @@ export default function GetUserDetails() {
         <div className={`${styles.inputBox} ${styles.dropdown}`}>
           <select
             className={`${styles.input} ${styles.select}`}
-            // value={subscriptionPlan}
-            // onChange={(e) => setSubscriptionPlan(e.target.value)}
+            value={subscriptionPlan}
+            onChange={handleSubscriptionChange}
           >
-            <option value="Subscription Plan">Subscription Plan</option>
+            <option>Subscription Plan</option>
             <option value="Free">Free</option>
             <option value="Basic">Basic</option>
             <option value="Pro">Pro</option>
@@ -65,13 +84,15 @@ export default function GetUserDetails() {
         <div className={`${styles.inputBox} ${styles.dropdown}`}>
           <select
             className={`${styles.input} ${styles.select}`}
-            // value={subscriptionPlan}
-            // onChange={(e) => setSubscriptionPlan(e.target.value)}
+            value={paymentMethod}
+            onChange={handlePaymentMethodChange}
           >
-            <option value="Subscription Plan">Payment method</option>
-            <option value="Free">Visa</option>
-            <option value="Basic">Master Card</option>
-            <option value="Pro">Paypal</option>
+            <option value="Payment method" className={styles.disableOption}>
+              Payment method
+            </option>
+            <option>Visa</option>
+            <option value="Master Card">Master Card</option>
+            <option value="Paypal">Paypal</option>
           </select>
           <div className={styles.dropdownIcon}>
             <FontAwesomeIcon icon={faAngleDown} />

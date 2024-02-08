@@ -176,3 +176,9 @@ body {
 .option:hover {
   background-color: #f0f0f0;
 }
+
+.disableOption {
+  /* CSS */
+  color: #999; /* Gray out the text */
+  pointer-events: none; /* Disable mouse events */
+}

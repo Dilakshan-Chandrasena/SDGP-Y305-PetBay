@@ -1,5 +1,5 @@
 const {initializeApp, cert} = require("firebase-admin/app");
-const {getFirestore} = require("firebase-admin/firestore");
+const {getFirestore, getStorage} = require("firebase-admin/firestore");
 
 const serviceAccount = require("./firebase-key.json");
 
@@ -8,5 +8,6 @@ initializeApp({
 })
 
 const db = getFirestore();
+const storage = getStorage();
 
-module.exports = {db};
+module.exports = {db, storage};

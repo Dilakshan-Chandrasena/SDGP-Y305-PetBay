@@ -29,14 +29,20 @@ export default function SignUp() {
         alert("Password do not match");
       } else {
         try {
-          await doCreateUserWithEmailAndPassword(email, password);
-          navigate("/LogIn");
+          const authResult = await doCreateUserWithEmailAndPassword(
+            email,
+            password
+          );
+          const userId = authResult.user.uid;
+          const userEmail = authResult.user.email;
+
+          navigate(`/GetUserDetails/${userId}/${userEmail}`);
         } catch (error) {
           if (error.code === "auth/invalid-email") {
             setErrorMessage("Invalid email or password. Please try again.");
-            console.error(error.code);
+          } else if (error.code === "auth/weak-password") {
+            setErrorMessage("Password should be at least 6 characters");
           }
-          console.error(error);
         }
       }
     } else {
@@ -47,15 +53,23 @@ export default function SignUp() {
   const signIngoogle = async () => {
     if (!isSigningIn) {
       setIsSigningIn(true);
-      await doSignInWithGoogle().catch((err) => {
+
+      try {
+        const authResult = await doSignInWithGoogle();
+
+        const userId = authResult.user.uid;
+        const userEmail = authResult.user.email;
+
+        navigate(`/GetUserDetails/${userId}/${userEmail}`);
+      } catch (error) {
+        console.error("Error signing in with Google:", error);
         setIsSigningIn(false);
-      });
+      }
     }
   };
 
   return (
     <div className={styles.formContainer}>
-      {userLoggedIn && <Navigate to={"/GetUserDetails"} />}
       <div className={styles.form}>
         <div className={styles.headingContainer}>
           <h1 className={styles.heading}>

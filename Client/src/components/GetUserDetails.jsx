@@ -4,13 +4,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleDown } from "@fortawesome/free-solid-svg-icons";
 import { Link, Navigate } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-
+import { useParams } from "react-router-dom";
 import { useAuth } from "../contexts/authContext";
+import axios from "axios";
 
 export default function GetUserDetails() {
   const navigate = useNavigate();
-
-  const { userLoggedIn } = useAuth();
 
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -18,6 +17,8 @@ export default function GetUserDetails() {
   const [paymentMethod, setPaymentMethod] = useState("");
   const [isSigningIn, setIsSigningIn] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+
+  const { userId, email } = useParams();
 
   const handleSubscriptionChange = (e) => {
     setSubscriptionPlan(e.target.value);
@@ -29,21 +30,50 @@ export default function GetUserDetails() {
 
   const finishSignUp = async () => {
     if (
-      firstName == "" ||
-      lastName == "" ||
-      subscriptionPlan == "" ||
-      paymentMethod == ""
+      firstName === "" ||
+      lastName === "" ||
+      subscriptionPlan === "" ||
+      paymentMethod === ""
     ) {
       setErrorMessage("Please provide all the details");
     } else {
-      console.log(firstName, lastName, subscriptionPlan, paymentMethod);
-      navigate("/HomePage");
+      try {
+        const userData = {
+          id: userId,
+          firstName: firstName,
+          lastName: lastName,
+          subscriptionPlan: subscriptionPlan,
+          paymentMethod: paymentMethod,
+          pets: [],
+          breedPreferences: [],
+          communityPost: [],
+          lostAndFoundPosts: [],
+        };
+
+        // const response = await axios.post(
+        //   "http://localhost:8080/petbay/api/v1/users/create",
+        //   userData
+        // );
+
+        // console.log("User data posted successfully", response.data);
+        console.log(
+          userId,
+          email,
+          firstName,
+          lastName,
+          subscriptionPlan,
+          paymentMethod
+        );
+        navigate("/HomePage");
+      } catch (error) {
+        console.error(error);
+        setErrorMessage("An error occured. Please try again!");
+      }
     }
   };
 
   return (
     <div className={styles.detailsForm}>
-      {userLoggedIn && <Navigate to={"/GetUserDetails"} />}
       <div className={styles.form}>
         <div className={styles.headingContainer}>
           <h1 className={styles.heading}>Let's Finish Sign Up</h1>

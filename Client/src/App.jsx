@@ -14,7 +14,10 @@ function App() {
             <Route exact path="/" element={<LogIn />} />
             <Route path="/LogIn" element={<LogIn />} />
             <Route path="/SignUp" element={<SignUp />} />
-            <Route path="/GetUserDetails" element={<GetUserDetails />} />
+            <Route
+              path="/GetUserDetails/:userId/:email"
+              element={<GetUserDetails />}
+            />
             <Route path="/HomePage" element={<HomePage />} />
           </Routes>
         </Router>

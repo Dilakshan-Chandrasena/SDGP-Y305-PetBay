@@ -9,6 +9,8 @@ import {
   doSignInWithGoogle,
 } from "../config/auth";
 import { useAuth } from "../contexts/authContext";
+import { auth, db } from "../config/firebase";
+import { getFirestore, collection, doc, getDoc } from "firebase/firestore";
 
 export default function LogIn() {
   const navigate = useNavigate();
@@ -47,18 +49,57 @@ export default function LogIn() {
     }
   };
 
-  const signIngoogle = async () => {
-    if (!isSigningIn) {
-      setIsSigningIn(true);
-      await doSignInWithGoogle().catch((err) => {
-        setIsSigningIn(false);
-      });
+  const checkIfUserExists = async (userId) => {
+    try {
+      const userRef = doc(db, "users", userId); // Construct document reference
+      const userSnap = await getDoc(userRef); // Retrieve the user document snapshot
+
+      return userSnap.exists(); // Return true if the user document exists, false otherwise
+    } catch (error) {
+      console.error("Error checking if user exists:", error);
+      throw error;
     }
   };
 
+  const signInGoogle = async () => {
+    try {
+      setIsSigningIn(true);
+
+      // Sign in with Google
+      const authCredential = await doSignInWithGoogle();
+
+      // Get the user's information from the credential
+      const { user } = authCredential;
+
+      if (user) {
+        // Check if the user exists in the database
+        const userExists = await checkIfUserExists(user.uid);
+
+        setIsSigningIn(false);
+
+        if (userExists) {
+          // If the user exists, navigate to HomePage
+          navigate("/HomePage");
+        } else {
+          // If the user doesn't exist, navigate to GetUserDetails
+          navigate(`/GetUserDetails/${user.uid}/${user.email}`);
+        }
+      } else {
+        // Handle the case where the user is null
+        console.error("Sign-in with Google returned null user");
+        setIsSigningIn(false);
+        setErrorMessage(
+          "An unexpected error occurred. Please try again later."
+        );
+      }
+    } catch (error) {
+      console.error("Error signing in with Google:", error);
+      setIsSigningIn(false);
+      setErrorMessage("An unexpected error occurred. Please try again later.");
+    }
+  };
   return (
     <div className={styles.formContainer}>
-      {userLoggedIn ? <Navigate to="/HomePage" /> : null}
       <div className={styles.form}>
         <div className={styles.headingContainer}>
           <h1 className={styles.heading}>
@@ -99,7 +140,7 @@ export default function LogIn() {
           <Link to="/SignUp"> Signup</Link>
         </div>
         <div className={styles.line}></div>
-        <button className={styles.googleButton} onClick={signIngoogle}>
+        <button className={styles.googleButton} onClick={signInGoogle}>
           <span className={styles.googleSpan}>
             <span className={styles.googleIcon}>
               <FontAwesomeIcon icon={faGoogle} />

@@ -15,7 +15,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(logger("dev"));
 app.use(cors());
 
-app.use("/pet-bay/api/v1/pet-profile/", petProfileRoute);
+app.use("/petbay/api/v1/pet-profiles/", petProfileRoute);
 
 app.all("*", (req, res, next) => {
   const err = new CustomError(

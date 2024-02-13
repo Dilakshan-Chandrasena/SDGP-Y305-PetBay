@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const { body, validationResult } = require("express-validator");
 const petProfileController = require("../controllers/petProfileController");
+const { petProfileValidator } = require("../middlewares/validator");
 
 const multer = require("multer");
 
@@ -10,7 +11,11 @@ const multer = require("multer");
 const upload = multer({ 
   storage: multer.memoryStorage(),
  });
-router.route("/add-pet").post(upload.single("filename"),petProfileController.addPet);
+router.route("/add-pet").post(upload.single("filename"),petProfileValidator,petProfileController.addPet);
+
+router.route("/owned-pets/:id").get(petProfileController.getUserOwnedPets);
+
+router.route("/:id").delete(petProfileController.deletePet).put(upload.single("filename"),petProfileValidator,petProfileController.updatePet);
 
 
 

@@ -2,10 +2,8 @@ import React, { useState } from "react";
 import styles from "./auth.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleDown } from "@fortawesome/free-solid-svg-icons";
-import { Link, Navigate } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
-import { useAuth } from "../contexts/authContext";
 import axios from "axios";
 
 export default function GetUserDetails() {
@@ -15,7 +13,7 @@ export default function GetUserDetails() {
   const [lastName, setLastName] = useState("");
   const [subscriptionPlan, setSubscriptionPlan] = useState("");
   const [paymentMethod, setPaymentMethod] = useState("");
-  const [isSigningIn, setIsSigningIn] = useState(false);
+
   const [errorMessage, setErrorMessage] = useState("");
 
   const { userId, email } = useParams();
@@ -40,6 +38,7 @@ export default function GetUserDetails() {
       try {
         const userData = {
           id: userId,
+          email: email,
           firstName: firstName,
           lastName: lastName,
           subscriptionPlan: subscriptionPlan,
@@ -50,20 +49,11 @@ export default function GetUserDetails() {
           lostAndFoundPosts: [],
         };
 
-        // const response = await axios.post(
-        //   "http://localhost:8080/petbay/api/v1/users/create",
-        //   userData
-        // );
-
-        // console.log("User data posted successfully", response.data);
-        console.log(
-          userId,
-          email,
-          firstName,
-          lastName,
-          subscriptionPlan,
-          paymentMethod
+        const response = await axios.post(
+          "http://localhost:8080/petbay/api/v1/users/create",
+          userData
         );
+
         navigate("/HomePage");
       } catch (error) {
         console.error(error);

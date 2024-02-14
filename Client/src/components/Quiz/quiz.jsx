@@ -1,4 +1,4 @@
-import styles from "./quiz.module.css";
+import styles from "../../assets/quiz.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faChevronRight,

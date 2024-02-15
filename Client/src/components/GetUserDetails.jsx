@@ -1,22 +1,21 @@
 import React, { useState } from "react";
-import styles from "./auth.module.css";
+import styles from "../assets/css/auth.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleDown } from "@fortawesome/free-solid-svg-icons";
-import { useNavigate } from "react-router-dom";
-import { useParams } from "react-router-dom";
 import axios from "axios";
+import { useLocation, useNavigate } from "react-router-dom";
 
 export default function GetUserDetails() {
   const navigate = useNavigate();
+  const location = useLocation();
 
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [subscriptionPlan, setSubscriptionPlan] = useState("");
   const [paymentMethod, setPaymentMethod] = useState("");
-
   const [errorMessage, setErrorMessage] = useState("");
 
-  const { userId, email } = useParams();
+  const { userId, email } = location.state;
 
   const handleSubscriptionChange = (e) => {
     setSubscriptionPlan(e.target.value);
@@ -24,6 +23,19 @@ export default function GetUserDetails() {
 
   const handlePaymentMethodChange = (e) => {
     setPaymentMethod(e.target.value);
+  };
+
+  const postUserData = async (userData) => {
+    try {
+      const response = await axios.post(
+        "http://localhost:8080/petbay/api/v1/users/create",
+        userData
+      );
+      console.log("Response:", response);
+    } catch (error) {
+      console.error("Error:", error);
+      throw new Error("An error occurred while posting user data.");
+    }
   };
 
   const finishSignUp = async () => {
@@ -49,10 +61,7 @@ export default function GetUserDetails() {
           lostAndFoundPosts: [],
         };
 
-        const response = await axios.post(
-          "http://localhost:8080/petbay/api/v1/users/create",
-          userData
-        );
+        await postUserData(userData);
 
         navigate("/HomePage");
       } catch (error) {

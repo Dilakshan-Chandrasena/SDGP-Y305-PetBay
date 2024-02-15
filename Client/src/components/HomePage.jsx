@@ -1,4 +1,4 @@
-import styles from "./auth.module.css";
+import styles from "../assets/css/auth.module.css";
 
 import { auth } from "../config/firebase";
 import { signOut } from "firebase/auth";

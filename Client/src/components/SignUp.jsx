@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import styles from "./auth.module.css";
+import styles from "../assets/css/auth.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGoogle } from "@fortawesome/free-brands-svg-icons";
 import { faPaw } from "@fortawesome/free-solid-svg-icons";
@@ -11,12 +11,12 @@ import {
 } from "../config/auth";
 
 import { useAuth } from "../contexts/authContext";
+import { collection, query, where, getDocs } from "firebase/firestore";
+import { db } from "../config/firebase";
 
 export default function SignUp() {
   const navigate = useNavigate();
-
   const { userLoggedIn } = useAuth();
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -35,8 +35,7 @@ export default function SignUp() {
           );
           const userId = authResult.user.uid;
           const userEmail = authResult.user.email;
-
-          navigate(`/GetUserDetails/${userId}/${userEmail}`);
+          navigate("/GetUserDetails", { state: { userId, email: userEmail } });
         } catch (error) {
           if (error.code === "auth/invalid-email") {
             setErrorMessage("Invalid email or password. Please try again.");
@@ -50,20 +49,37 @@ export default function SignUp() {
     }
   };
 
+  const checkUserExistsInCollection = async (email) => {
+    try {
+      const userRef = collection(db, "users");
+      const q = query(userRef, where("email", "==", email));
+      const querySnapshot = await getDocs(q);
+      return !querySnapshot.empty;
+    } catch (error) {
+      console.error("Error checking user existence:", error);
+      return false;
+    }
+  };
+
   const signIngoogle = async () => {
     if (!isSigningIn) {
       setIsSigningIn(true);
-
       try {
         const authResult = await doSignInWithGoogle();
-
-        const userId = authResult.user.uid;
         const userEmail = authResult.user.email;
-
-        navigate(`/GetUserDetails/${userId}/${userEmail}`);
+        const userExists = await checkUserExistsInCollection(userEmail);
+        if (userExists) {
+          navigate("/HomePage");
+        } else {
+          const userId = authResult.user.uid;
+          navigate("/GetUserDetails", { state: { userId, email: userEmail } });
+        }
       } catch (error) {
-        console.error("Error signing in with Google:", error);
         setIsSigningIn(false);
+        console.error("Error signing in with Google:", error);
+        setErrorMessage(
+          "An unexpected error occurred. Please try again later."
+        );
       }
     }
   };

@@ -1,16 +1,18 @@
+// LogIn.js
+
 import React, { useState } from "react";
-import styles from "./auth.module.css";
+import styles from "../assets/css/auth.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGoogle } from "@fortawesome/free-brands-svg-icons";
 import { faPaw } from "@fortawesome/free-solid-svg-icons";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   doSignInWithEmailAndPassword,
   doSignInWithGoogle,
 } from "../config/auth";
 import { useAuth } from "../contexts/authContext";
-import { auth, db } from "../config/firebase";
-import { getFirestore, collection, doc, getDoc } from "firebase/firestore";
+import { collection, query, where, getDocs } from "firebase/firestore";
+import { db } from "../config/firebase";
 
 export default function LogIn() {
   const navigate = useNavigate();
@@ -36,7 +38,6 @@ export default function LogIn() {
           setErrorMessage("Invalid email or password. Please try again.");
           console.error(error.code);
         } else {
-          // Handle other authentication errors
           console.error("Authentication Error:", error);
           console.error(error.code);
           setErrorMessage(
@@ -49,55 +50,41 @@ export default function LogIn() {
     }
   };
 
-  const checkIfUserExists = async (userId) => {
+  const checkUserExistsInCollection = async (email) => {
     try {
-      const userRef = doc(db, "users", userId); // Construct document reference
-      const userSnap = await getDoc(userRef); // Retrieve the user document snapshot
-
-      return userSnap.exists(); // Return true if the user document exists, false otherwise
+      const userRef = collection(db, "users");
+      const q = query(userRef, where("email", "==", email));
+      const querySnapshot = await getDocs(q);
+      return !querySnapshot.empty;
     } catch (error) {
-      console.error("Error checking if user exists:", error);
-      throw error;
+      console.error("Error checking user existence:", error);
+      return false;
     }
   };
 
   const signInGoogle = async () => {
-    try {
+    if (!isSigningIn) {
       setIsSigningIn(true);
-
-      // Sign in with Google
-      const authCredential = await doSignInWithGoogle();
-
-      // Get the user's information from the credential
-      const { user } = authCredential;
-
-      if (user) {
-        // Check if the user exists in the database
-        const userExists = await checkIfUserExists(user.uid);
-
-        setIsSigningIn(false);
-
+      try {
+        const authResult = await doSignInWithGoogle();
+        const userEmail = authResult.user.email;
+        const userExists = await checkUserExistsInCollection(userEmail);
         if (userExists) {
-          // If the user exists, navigate to HomePage
           navigate("/HomePage");
         } else {
-          // If the user doesn't exist, navigate to GetUserDetails
-          navigate(`/GetUserDetails/${user.uid}/${user.email}`);
+          const userId = authResult.user.uid;
+          navigate("/GetUserDetails", { state: { userId, email: userEmail } });
         }
-      } else {
-        // Handle the case where the user is null
-        console.error("Sign-in with Google returned null user");
+      } catch (error) {
         setIsSigningIn(false);
+        console.error("Error signing in with Google:", error);
         setErrorMessage(
           "An unexpected error occurred. Please try again later."
         );
       }
-    } catch (error) {
-      console.error("Error signing in with Google:", error);
-      setIsSigningIn(false);
-      setErrorMessage("An unexpected error occurred. Please try again later.");
     }
   };
+
   return (
     <div className={styles.formContainer}>
       <div className={styles.form}>

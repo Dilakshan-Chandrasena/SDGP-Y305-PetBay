@@ -1,6 +1,7 @@
-import styles from "../assets/css/auth.module.css";
+import "../../assets/css/auth.module.css";
+import styles from "./home.module.css";
 
-import { auth } from "../config/firebase";
+import { auth } from "../../config/firebase";
 import { signOut } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 
@@ -9,7 +10,7 @@ export default function HomePage() {
   const logout = async () => {
     try {
       await signOut(auth);
-      navigate("/LogIn");
+      navigate("/login");
       console.log("sign out");
     } catch (err) {
       console.error(err);

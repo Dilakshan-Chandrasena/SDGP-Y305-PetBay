@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import styles from "../assets/css/auth.module.css";
+import styles from "../../assets/css/auth.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleDown } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
@@ -25,7 +25,7 @@ export default function GetUserDetails() {
     setPaymentMethod(e.target.value);
   };
 
-  const postUserData = async (userData) => {
+  const PostUserData = async (userData) => {
     try {
       const response = await axios.post(
         "http://localhost:8080/petbay/api/v1/users/create",
@@ -61,9 +61,9 @@ export default function GetUserDetails() {
           lostAndFoundPosts: [],
         };
 
-        await postUserData(userData);
+        await PostUserData(userData);
 
-        navigate("/HomePage");
+        navigate("/home");
       } catch (error) {
         console.error(error);
         setErrorMessage("An error occured. Please try again!");

@@ -57,8 +57,7 @@ body {
   text-decoration: underline;
 }
 .signInButton,
-.googleButton,
-.signOutButton {
+.googleButton {
   padding: 10px;
   cursor: pointer;
   border: none;
@@ -89,11 +88,7 @@ body {
   opacity: 0.6;
   color: #232836;
 }
-.signOutButton {
-  width: 20%;
-  color: #232836;
-  margin-top: 20%;
-}
+
 .line {
   position: relative;
   height: 1px;

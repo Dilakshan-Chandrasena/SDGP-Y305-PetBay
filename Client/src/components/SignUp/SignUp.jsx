@@ -1,48 +1,47 @@
-// LogIn.js
-
 import React, { useState } from "react";
-import styles from "../assets/css/auth.module.css";
+import styles from "../../assets/css/auth.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGoogle } from "@fortawesome/free-brands-svg-icons";
 import { faPaw } from "@fortawesome/free-solid-svg-icons";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import {
-  doSignInWithEmailAndPassword,
+  doCreateUserWithEmailAndPassword,
   doSignInWithGoogle,
-} from "../config/auth";
-import { useAuth } from "../contexts/authContext";
-import { collection, query, where, getDocs } from "firebase/firestore";
-import { db } from "../config/firebase";
+} from "../../config/auth";
 
-export default function LogIn() {
+import { useAuth } from "../../contexts/authContext";
+import { collection, query, where, getDocs } from "firebase/firestore";
+import { db } from "../../config/firebase";
+
+export default function SignUp() {
   const navigate = useNavigate();
   const { userLoggedIn } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [isSigningIn, setIsSigningIn] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
-  const signIn = async () => {
-    if (email !== "" && password !== "") {
-      try {
-        setIsSigningIn(true);
-        await doSignInWithEmailAndPassword(email, password);
-        setIsSigningIn(false);
-        navigate("/HomePage");
-      } catch (error) {
-        setIsSigningIn(false);
-        if (
-          error.code === "auth/invalid-email" ||
-          error.code === "auth/invalid-credential"
-        ) {
-          setErrorMessage("Invalid email or password. Please try again.");
-          console.error(error.code);
-        } else {
-          console.error("Authentication Error:", error);
-          console.error(error.code);
-          setErrorMessage(
-            "An unexpected error occurred. Please try again later."
+  const signUp = async () => {
+    if (email !== "" && password !== "" && confirmPassword !== "") {
+      if (password !== confirmPassword) {
+        alert("Password do not match");
+      } else {
+        try {
+          const authResult = await doCreateUserWithEmailAndPassword(
+            email,
+            password
           );
+          const userId = authResult.user.uid;
+          const userEmail = authResult.user.email;
+          navigate("/getuserdetails", { state: { userId, email: userEmail } });
+        } catch (error) {
+          if (error.code === "auth/invalid-email") {
+            setErrorMessage("Invalid email or password. Please try again.");
+          } else if (error.code === "auth/weak-password") {
+            setErrorMessage("Password should be at least 6 characters");
+          }
         }
       }
     } else {
@@ -62,7 +61,7 @@ export default function LogIn() {
     }
   };
 
-  const signInGoogle = async () => {
+  const signIngoogle = async () => {
     if (!isSigningIn) {
       setIsSigningIn(true);
       try {
@@ -70,10 +69,10 @@ export default function LogIn() {
         const userEmail = authResult.user.email;
         const userExists = await checkUserExistsInCollection(userEmail);
         if (userExists) {
-          navigate("/HomePage");
+          navigate("/home");
         } else {
           const userId = authResult.user.uid;
-          navigate("/GetUserDetails", { state: { userId, email: userEmail } });
+          navigate("/getuserdetails", { state: { userId, email: userEmail } });
         }
       } catch (error) {
         setIsSigningIn(false);
@@ -90,14 +89,13 @@ export default function LogIn() {
       <div className={styles.form}>
         <div className={styles.headingContainer}>
           <h1 className={styles.heading}>
-            <FontAwesomeIcon icon={faPaw} /> Login
+            <FontAwesomeIcon icon={faPaw} /> Sign Up
           </h1>
         </div>
 
         <div className={styles.inputBox}>
           <input
             className={styles.input}
-            id="email"
             type="email"
             placeholder="Email"
             onChange={(e) => setEmail(e.target.value)}
@@ -107,32 +105,37 @@ export default function LogIn() {
         <div className={styles.inputBox}>
           <input
             className={styles.input}
-            id="password"
             type="password"
             placeholder="Password"
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
-        <div className={styles.formLink}>
-          <a href="#">Forgot password?</a>
+        <div className={styles.inputBox}>
+          <input
+            className={styles.input}
+            type="password"
+            placeholder="Confirm Password"
+            onChange={(e) => setConfirmPassword(e.target.value)}
+          />
         </div>
+
         <div className={styles.button}>
-          <button className={styles.signInButton} onClick={signIn}>
-            Login
+          <button className={styles.signInButton} onClick={signUp}>
+            Sign Up
           </button>
         </div>
 
         <div className={styles.formLink}>
-          <span>Don't have an account?</span>
-          <Link to="/SignUp"> Signup</Link>
+          <span>Already have an account?</span>
+          <Link to="/LogIn"> Login</Link>
         </div>
         <div className={styles.line}></div>
-        <button className={styles.googleButton} onClick={signInGoogle}>
+        <button className={styles.googleButton} onClick={signIngoogle}>
           <span className={styles.googleSpan}>
             <span className={styles.googleIcon}>
               <FontAwesomeIcon icon={faGoogle} />
             </span>{" "}
-            Login with Google
+            Sign up with Google
           </span>
         </button>
         {errorMessage && <p className={styles.errorMessage}>{errorMessage}</p>}

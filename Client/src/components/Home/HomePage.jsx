@@ -1,4 +1,3 @@
-import "../../assets/css/auth.module.css";
 import styles from "./home.module.css";
 
 import { auth } from "../../config/firebase";
@@ -19,7 +18,6 @@ export default function HomePage() {
 
   return (
     <div>
-      Home
       <div>
         <button className={styles.signOutButton} onClick={logout}>
           <span className={styles.signOutButton}>

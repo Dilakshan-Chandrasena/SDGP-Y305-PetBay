@@ -1,6 +1,7 @@
 // LogIn.js
 import React, { useState } from "react";
 import styles from "../../assets/css/auth.module.css";
+import "./login.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGoogle } from "@fortawesome/free-brands-svg-icons";
 import { faPaw } from "@fortawesome/free-solid-svg-icons";

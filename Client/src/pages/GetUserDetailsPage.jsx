@@ -1,6 +1,6 @@
 import GetUserDetails from "../components/UserDetails/GetUserDetails";
 
-export default function HomePage() {
+export default function GetUserDetailsPage() {
   return (
     <div>
       <GetUserDetails />

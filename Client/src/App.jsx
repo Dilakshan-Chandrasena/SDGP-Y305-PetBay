@@ -1,10 +1,10 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "./contexts/authContext";
-import LogIn from "./pages/LogIn";
-import SignUp from "./pages/SignUp";
+import LogIn from "./pages/LogInPage";
+import SignUp from "./pages/SignUpPage";
 import Home from "./pages/HomePage";
-import GetUserDetails from "./components/UserDetails/GetUserDetails";
+import GetUserDetails from "./pages/GetUserDetailsPage";
 
 function App() {
   return (

@@ -5,6 +5,7 @@ const dotenv = require("dotenv").config();
 const cors = require("cors");
 const CustomError = require("./utils/CustomError.js");
 const globalErrorHandler = require("./controllers/errorController.js");
+const breedRecommendationRoute = require("./routes/breedRecommendationRoute.js");
 
 const usersRouter = require("./routes/usersRouter.js");
 
@@ -16,7 +17,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(logger("dev"));
 app.use(cors());
 
-
+app.use("/petbay/api/v1/breed-recommendation/",breedRecommendationRoute);
 app.use("/petbay/api/v1/users", usersRouter);
 
 app.all("*", (req, res, next) => {

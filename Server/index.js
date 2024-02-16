@@ -6,6 +6,7 @@ const cors = require("cors");
 const CustomError = require("./utils/CustomError.js");
 const globalErrorHandler = require("./controllers/errorController.js");
 
+const usersRouter = require("./routes/usersRouter.js");
 
 const app = express();
 
@@ -16,15 +17,18 @@ app.use(logger("dev"));
 app.use(cors());
 
 
+app.use("/petbay/api/v1/users", usersRouter);
+
 app.all("*", (req, res, next) => {
-    const err = new CustomError(
-      `Invalid Call! URL Not Found: ${req.originalUrl}`,
-      404
-    );
-    next(err);
-  });
+  const err = new CustomError(
+    `Invalid Call! URL Not Found: ${req.originalUrl}`,
+    404
+  );
+  next(err);
+});
   
-  app.use(globalErrorHandler);
+
+app.use(globalErrorHandler);
 
 const PORT = process.env.PORT || 8081;
 

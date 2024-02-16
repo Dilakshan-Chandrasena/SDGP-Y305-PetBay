@@ -1,0 +1,179 @@
+body {
+  font-family: sans-serif;
+  text-align: center;
+  background-color: #0171d3;
+}
+
+.headingContainer {
+  padding-bottom: 10px;
+}
+
+.formContainer {
+  width: 350px;
+}
+.formContainer,
+.detailsForm {
+  background-color: #ffff;
+  margin: 0 auto;
+
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-top: 6%;
+}
+
+.inputBox {
+  position: relative;
+}
+.inputBox .label {
+  left: 10px;
+  font-size: 1rem;
+  pointer-events: none;
+  transition: 0.5s;
+}
+.input {
+  display: block;
+  color: rgb(18, 18, 18);
+  width: 95%;
+  font-size: 16px;
+  padding: 15px 10px 15px 10px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  border: 1px solid#CACACA;
+  outline: none;
+}
+
+.formLink span {
+  color: #232836;
+  font-size: 14px;
+}
+.formLink a {
+  font-size: 14px;
+  font-weight: 400;
+  color: #0171d3;
+  text-decoration: none;
+}
+.formLink a:hover {
+  text-decoration: underline;
+}
+.signInButton,
+.googleButton {
+  padding: 10px;
+  cursor: pointer;
+  border: none;
+  color: #ffff;
+  font-size: 16px;
+  border-radius: 5px;
+}
+
+.button {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.signInButton {
+  width: 100%;
+  background-color: #0171d3;
+}
+.signInButton:hover {
+  background-color: #016dcb;
+}
+.googleButton {
+  width: 100%;
+  margin-top: 10px;
+  border: 1px solid #cacaca;
+}
+
+.googleSpan {
+  font-weight: 500;
+  opacity: 0.6;
+  color: #232836;
+}
+
+.line {
+  position: relative;
+  height: 1px;
+  width: 100%;
+  margin: 36px 0;
+  background-color: #d4d4d4;
+}
+.line::before {
+  content: "Or";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  color: #8b8b8b;
+  padding: 0 15px;
+}
+
+.errorMessage {
+  color: red;
+}
+
+.detailsForm {
+  width: 550px;
+}
+
+/* Dropdown container */
+.dropdown {
+  position: relative;
+  width: 99%;
+}
+
+/* Dropdown select */
+.select {
+  width: 100%;
+  padding: 15px 30px 15px 10px; /* Adjust padding for icon */
+  font-size: 16px;
+  border-radius: 10px;
+  border: 1px solid #cacaca;
+  outline: none;
+  appearance: none; /* Remove default arrow */
+  -webkit-appearance: none; /* Remove default arrow for Safari */
+  -moz-appearance: none; /* Remove default arrow for Firefox */
+  background-color: #fff;
+}
+
+/* Dropdown arrow */
+.dropdownIcon {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: #666;
+}
+
+/* Dropdown options container */
+.dropdownOptions {
+  position: absolute;
+  top: calc(100% + 5px); /* Place options below select box */
+  left: 0;
+  width: 100%;
+  max-height: 200px; /* Limit options height */
+  overflow-y: auto; /* Add scroll if options exceed container height */
+  background-color: #fff;
+  border: 1px solid #cacaca;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 1; /* Ensure options appear above other content */
+}
+
+/* Dropdown option */
+.option {
+  padding: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease; /* Smooth transition on hover */
+}
+
+/* Dropdown option on hover */
+.option:hover {
+  background-color: #f0f0f0;
+}
+
+.disableOption {
+  /* CSS */
+  color: #999; /* Gray out the text */
+  pointer-events: none; /* Disable mouse events */
+}

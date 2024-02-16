@@ -1,0 +1,12 @@
+.body {
+  font-family: "Inter", sans-serif;
+}
+
+.userIcon {
+  background-color: rgb(134, 136, 138);
+  border-radius: 20px;
+  padding: 10px;
+  margin-top: -5px;
+  color: white;
+  margin-left: 50px;
+}

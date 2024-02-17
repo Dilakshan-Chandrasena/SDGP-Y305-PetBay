@@ -4,7 +4,11 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import styles from "./header.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUser, faPaw } from "@fortawesome/free-solid-svg-icons";
+import {
+  faUser,
+  faPaw,
+  faArrowRightFromBracket,
+} from "@fortawesome/free-solid-svg-icons";
 import { auth } from "../../config/firebase";
 import { signOut } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
@@ -40,28 +44,28 @@ export default function Header() {
               >
                 <FontAwesomeIcon icon={faPaw} /> PetBay
               </Navbar.Brand>
-              <Nav.Link href="#action1" className="mx-lg-4 mx-md-3 mx-2">
+              <Nav.Link href="#action1" className="mx-lg-3 mx-md-3 mx-2">
                 {" "}
                 Home
               </Nav.Link>
 
-              <Nav.Link href="#action2" className="mx-lg-4 mx-md-3 mx-2">
+              <Nav.Link href="#action2" className="mx-lg-3 mx-md-3 mx-2">
                 {" "}
                 Preferences
               </Nav.Link>
-              <Nav.Link href="#action2" className="mx-lg-4 mx-md-3 mx-2">
+              <Nav.Link href="#action2" className="mx-lg-3 mx-md-2 mx-2">
                 {" "}
                 Reminders
               </Nav.Link>
-              <Nav.Link href="#action2" className="mx-lg-4 mx-md-3 mx-2">
+              <Nav.Link href="#action2" className="mx-lg-3 mx-md-2 mx-2">
                 {" "}
                 Community
               </Nav.Link>
-              <Nav.Link href="#action2" className="mx-lg-4 mx-md-3 mx-2">
+              <Nav.Link href="#action2" className="mx-lg-3 mx-md-2 mx-2">
                 {" "}
                 Lost & Found
               </Nav.Link>
-              <Nav.Link href="#action2" className="mx-lg-4 mx-md-3 mx-2">
+              <Nav.Link href="#action2" className="mx-lg-3 mx-md-2 mx-2">
                 {" "}
                 Pet Prediction
               </Nav.Link>
@@ -70,9 +74,15 @@ export default function Header() {
                   <FontAwesomeIcon icon={faUser} className={styles.userIcon} />
                 </Nav.Link>
               </Nav>
-              <button className={styles.signOutButton} onClick={logout}>
-                <span>Log out</span>
-              </button>
+              <nav>
+                <Nav.Link href="#user">
+                  <FontAwesomeIcon
+                    icon={faArrowRightFromBracket}
+                    className={styles.signOutButton}
+                    onClick={logout}
+                  />
+                </Nav.Link>
+              </nav>
             </Nav>
           </Navbar.Collapse>
         </Container>

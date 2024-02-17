@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "../../assets/css/auth.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleDown } from "@fortawesome/free-solid-svg-icons";
@@ -6,6 +6,13 @@ import axios from "axios";
 import { useLocation, useNavigate } from "react-router-dom";
 
 export default function GetUserDetails() {
+  useEffect(() => {
+    document.body.classList.add("auth-background");
+    return () => {
+      document.body.classList.remove("auth-background"); // Clean up when component unmounts
+    };
+  }, []);
+
   const navigate = useNavigate();
   const location = useLocation();
 

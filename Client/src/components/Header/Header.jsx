@@ -5,8 +5,21 @@ import Navbar from "react-bootstrap/Navbar";
 import styles from "./header.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faPaw } from "@fortawesome/free-solid-svg-icons";
+import { auth } from "../../config/firebase";
+import { signOut } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
 
 export default function Header() {
+  const navigate = useNavigate();
+  const logout = async () => {
+    try {
+      await signOut(auth);
+      navigate("/login");
+      console.log("sign out");
+    } catch (err) {
+      console.error(err);
+    }
+  };
   return (
     <div className={styles.body}>
       {" "}
@@ -57,6 +70,9 @@ export default function Header() {
                   <FontAwesomeIcon icon={faUser} className={styles.userIcon} />
                 </Nav.Link>
               </Nav>
+              <button className={styles.signOutButton} onClick={logout}>
+                <span>Log out</span>
+              </button>
             </Nav>
           </Navbar.Collapse>
         </Container>

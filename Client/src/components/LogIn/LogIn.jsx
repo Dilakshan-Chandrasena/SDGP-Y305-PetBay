@@ -1,5 +1,5 @@
 // LogIn.js
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "../../assets/css/auth.module.css";
 import "./login.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -15,6 +15,13 @@ import { collection, query, where, getDocs } from "firebase/firestore";
 import { db } from "../../config/firebase";
 
 export default function LogIn() {
+  useEffect(() => {
+    document.body.classList.add("auth-background");
+    return () => {
+      document.body.classList.remove("auth-background"); // Clean up when component unmounts
+    };
+  }, []);
+
   const navigate = useNavigate();
   const { userLoggedIn } = useAuth();
   const [email, setEmail] = useState("");

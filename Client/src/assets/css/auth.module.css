@@ -1,9 +1,12 @@
 .headingContainer {
   padding-bottom: 10px;
 }
+.heading {
+  font-size: 32px;
+}
 
 .formContainer {
-  width: 350px;
+  width: 400px;
 }
 .formContainer,
 .detailsForm {
@@ -13,6 +16,7 @@
   border-radius: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   margin-top: 6%;
+  text-align: center;
 }
 
 .inputBox {
@@ -27,7 +31,7 @@
 .input {
   display: block;
   color: rgb(18, 18, 18);
-  width: 95%;
+  width: 100%;
   font-size: 16px;
   padding: 15px 10px 15px 10px;
   margin-bottom: 20px;
@@ -111,7 +115,7 @@
 /* Dropdown container */
 .dropdown {
   position: relative;
-  width: 99%;
+  width: 100%;
 }
 
 /* Dropdown select */

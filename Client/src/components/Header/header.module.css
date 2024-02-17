@@ -1,12 +1,18 @@
-.body {
-  font-family: "Inter", sans-serif;
-}
-
 .userIcon {
   background-color: rgb(134, 136, 138);
   border-radius: 20px;
   padding: 10px;
   margin-top: -5px;
   color: white;
+  margin-left: 50px;
+}
+.signOutButton {
+  color: #fdfdfd;
+  background-color: #232836;
+  cursor: pointer;
+  border: none;
+  font-size: 12px;
+  border-radius: 5px;
+  width: 100px;
   margin-left: 50px;
 }

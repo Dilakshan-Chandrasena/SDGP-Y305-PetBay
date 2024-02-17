@@ -18,7 +18,6 @@ export default function quiz() {
   const handleNext = async () => {
     setIndex(index + 1);
     if (index + 1 === questionsData.length) {
-      // navigate("/uploadImage");
       console.log(userPreferences);
     }
     console.log(questionsData.length);
@@ -27,7 +26,6 @@ export default function quiz() {
 
   const handleBack = async () => {
     if (index === 0) {
-      // Optionally handle what happens when trying to go back from the first question
     } else {
       setIndex(index - 1);
       setQuestion(questionsData[index - 1]);
@@ -72,8 +70,8 @@ export default function quiz() {
               <FontAwesomeIcon
                 icon={faChevronLeft}
                 style={{ fontSize: "19px" }}
-              />
-              Back{" "}
+              />{" "}
+              Back
             </button>
           </div>
           <div>

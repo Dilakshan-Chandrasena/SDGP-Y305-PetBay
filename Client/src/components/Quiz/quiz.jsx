@@ -4,7 +4,7 @@ import {
   faChevronRight,
   faChevronLeft,
 } from "@fortawesome/free-solid-svg-icons";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { questionsData } from "../../assets/questionsData";
 
 import { useNavigate } from "react-router-dom";
@@ -12,16 +12,35 @@ import { useNavigate } from "react-router-dom";
 export default function quiz() {
   let [index, setIndex] = useState(0);
   let [question, setQuestion] = useState(questionsData[index]);
+  let [lock, setLock] = useState(false);
+
+  let option1 = useRef(null);
+  let option2 = useRef(null);
+  let option3 = useRef(null);
+  let option4 = useRef(null);
+  let option5 = useRef(null);
+
+  let optionArray = [option1, option2, option3, option4, option5];
+
   const [userPreferences, setUserPreferences] = useState([]);
   const navigate = useNavigate();
 
   const handleNext = async () => {
-    setIndex(index + 1);
-    if (index + 1 === questionsData.length) {
-      console.log(userPreferences);
+    if (lock === true) {
+      console.log(index);
+      if (index === questionsData.length - 1) {
+        console.log(userPreferences);
+        navigate("/UploadImage");
+      } else {
+        setIndex(++index);
+        setQuestion(questionsData[index]);
+        setLock(false);
+        optionArray.map((option) => {
+          option.current.classList.remove(styles.selected);
+          return null;
+        });
+      }
     }
-    console.log(questionsData.length);
-    setQuestion(questionsData[index + 1]);
   };
 
   const handleBack = async () => {
@@ -32,33 +51,70 @@ export default function quiz() {
     }
   };
 
-  const handleOptionClick = (optionId) => {
-    setUserPreferences([...userPreferences, optionId]);
+  const handleOptionClick = (e, optionId) => {
+    if (lock === false) {
+      setUserPreferences([...userPreferences, optionId]);
+      e.target.classList.add(styles.selected);
+      setLock(true);
+    }
   };
 
   return (
     <div>
       <div className={styles.container}>
-        <div> {index + 1} of 11 question</div>
+        <div>
+          {" "}
+          {index + 1} of {questionsData.length} question
+        </div>
         <h2>{question.question}</h2>
         <ul>
-          <li id="1" onClick={() => handleOptionClick(1)}>
+          <li
+            ref={option1}
+            id="1"
+            onClick={(e) => {
+              handleOptionClick(e, 1);
+            }}
+          >
             {" "}
             {question.option1}{" "}
           </li>
-          <li id="2" onClick={() => handleOptionClick(2)}>
+          <li
+            ref={option2}
+            id="2"
+            onClick={(e) => {
+              handleOptionClick(e, 2);
+            }}
+          >
             {" "}
             {question.option2}{" "}
           </li>
-          <li id="3" onClick={() => handleOptionClick(3)}>
+          <li
+            ref={option3}
+            id="3"
+            onClick={(e) => {
+              handleOptionClick(e, 3);
+            }}
+          >
             {" "}
             {question.option3}{" "}
           </li>
-          <li id="4" onClick={() => handleOptionClick(4)}>
+          <li
+            ref={option4}
+            id="4"
+            onClick={(e) => {
+              handleOptionClick(e, 4);
+            }}
+          >
             {" "}
             {question.option4}{" "}
           </li>
-          <li id="5" onClick={() => handleOptionClick(5)}>
+          <li
+            ref={option5}
+            id="5"
+            onClick={(e) => {
+              handleOptionClick(e, 5);
+            }}
+          >
             {" "}
             {question.option5}{" "}
           </li>

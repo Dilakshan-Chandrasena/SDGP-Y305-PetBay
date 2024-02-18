@@ -5,52 +5,51 @@
 body {
   height: 100vh;
   font-family: "Inter", sans-serif;
+  background-color: #f6f6f6;
 }
 
 .container {
-  width: 50%;
+  width: 640px;
   margin: auto;
   margin-top: 100px;
-  background-color: #c7c4c4;
+  background-color: #ffffff;
   color: #262626;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 10px;
   padding: 40px 50px;
   border-radius: 10px;
-  border: 1px solid #262626;
-}
-.container h2 {
-  font-size: 25px;
-  font-weight: 500;
-  text-align: center;
-  padding-bottom: 20px;
-  padding-top: 20px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
-.container ul {
-  margin-left: 20%;
+.container h2 {
+  font-size: 22px;
+  font-weight: 500;
+  padding-bottom: 15px;
 }
 
 .container ul li {
+  border: 1px solid #d3cdcd;
   list-style: none;
+  align-items: center;
+  font-size: 16px;
   display: flex;
-  background-color: #6cabd9;
-  margin-bottom: 15px;
-  padding: 15px;
-  width: 70%;
+  height: 50px;
+  background-color: #ffffff;
+  margin-bottom: 20px;
   border-radius: 10px;
   cursor: pointer;
   padding-left: 15px;
 }
 
 .container ul li:hover {
-  background-color: #47a4e6;
+  background-color: #4fa2eb;
+  color: #ffffff;
 }
 .container button {
   background: none;
   border: none;
-  font-size: 20px;
+  font-size: 18px;
   text-align: right;
   cursor: pointer;
 }
@@ -58,5 +57,11 @@ body {
 .buttons {
   display: flex;
   flex-direction: row;
-  gap: 84%;
+  gap: 82%;
+}
+
+.container ul li.selected {
+  background-color: #4fa2eb;
+  color: #ffffff;
+  border: 1px solid #031d35;
 }

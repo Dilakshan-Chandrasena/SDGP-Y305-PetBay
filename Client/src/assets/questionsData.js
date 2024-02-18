@@ -1,5 +1,6 @@
 export const questionsData = [
   {
+    characteristic: "Adapts Well To Apartment Living",
     question:
       "How important is it for your ideal dog breed to adapt well to apartment living?",
     option1: "Not necessarily apartment-friendly",
@@ -9,6 +10,7 @@ export const questionsData = [
     option5: "Thrives in apartments",
   },
   {
+    characteristic: "Tolerates Being Alone",
     question:
       "How important is it for your ideal dog breed to tolerate being alone?",
     option1: "Prefers constant company",
@@ -18,6 +20,7 @@ export const questionsData = [
     option5: "Comfortable being alone for long durations",
   },
   {
+    characteristic: "Tolerates Being Alone",
     question:
       "How important is it for your ideal dog breed to be kid-friendly?",
     option1: "Less suitable for kids.",
@@ -27,6 +30,7 @@ export const questionsData = [
     option5: "Highly suited for kids.",
   },
   {
+    characteristic: "Kid-Friendly",
     question:
       "How important is it for your ideal dog breed to be friendly toward strangers?",
     option1: "Prefer reserved behavior",
@@ -36,6 +40,7 @@ export const questionsData = [
     option5: "Extreamly friendly with anyone",
   },
   {
+    characteristic: "Friendly Toward Strangers",
     question: "How friendly is your dog?",
     option1: "Extremely friendly",
     option2: "Friendly when its been pet",
@@ -44,6 +49,7 @@ export const questionsData = [
     option5: "Extremely tough",
   },
   {
+    characteristic: "Easy To Groom",
     question:
       "How important is it for your ideal dog breed to be easy to groom?",
     option1: "Minimal grooming needed",
@@ -53,6 +59,7 @@ export const questionsData = [
     option5: "Very easy grooming",
   },
   {
+    characteristic: "Size",
     question: "How important is the size of your ideal dog breed?",
     option1: "Very Small",
     option2: "Small",
@@ -61,6 +68,7 @@ export const questionsData = [
     option5: "Very Large",
   },
   {
+    characteristic: "Easy To Train",
     question:
       "How important is it for your ideal dog breed to be easy to train?",
     option1: "Not trainable",
@@ -70,6 +78,7 @@ export const questionsData = [
     option5: "Extremely trainable",
   },
   {
+    characteristic: "Intelligence",
     question: "How important is it for your ideal dog breed to be intelligent?",
     option1: "Not important",
     option2: "Somewhat important",
@@ -78,6 +87,7 @@ export const questionsData = [
     option5: "Extremely important",
   },
   {
+    characteristic: "Tendency To Bark Or Howl",
     question:
       "How important is it for your ideal dog breed to have a tendency to bark or howl?",
     option1: "Quiet - Minimal barking or howling.",
@@ -87,6 +97,7 @@ export const questionsData = [
     option5: "High - Barks or howls excessively.",
   },
   {
+    characteristic: "Energy Level",
     question: "How important is the energy level of your ideal dog breed?",
     option1: "Low - Prefer a calm, relaxed dog.",
     option2: "Moderate - Want a dog with balanced energy.",

@@ -1,5 +1,19 @@
 .body {
   font-family: "Inter", sans-serif;
+  padding-top: 10px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background-color: #212121;
+}
+
+.link {
+  color: #f6f6f6;
+}
+
+.link:hover {
+  color: #f6f6f6;
+  text-decoration: underline;
 }
 
 .userIcon {
@@ -16,8 +30,9 @@
   border-radius: 20px;
   padding: 10px;
   margin-top: -5px;
-  color: rgb(134, 136, 138);
+  color: #86888a;
 }
 .signOutButton:hover {
   color: rgb(71, 71, 71);
 }
+

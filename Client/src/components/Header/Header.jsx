@@ -27,10 +27,13 @@ export default function Header() {
   return (
     <div className={styles.body}>
       {" "}
-      <Navbar expand="lg" className="bg-body-tertiary py-lg-4 py-md-3 py-2">
+      <Navbar expand="lg" className=" ">
         {" "}
         <Container fluid>
-          <Navbar.Toggle aria-controls="navbarScroll" />
+          <Navbar.Toggle
+            aria-controls="navbarScroll"
+            style={{ color: "whitesmoke", background: "whitesmoke" }}
+          />
           <Navbar.Collapse id="navbarScroll">
             <Nav
               className="mx-auto my-2 my-lg-0"
@@ -40,32 +43,50 @@ export default function Header() {
               <Navbar.Brand
                 href="#"
                 className="mx-lg-4 mx-md-3 mx-2"
-                style={{ fontWeight: "bolder" }}
+                style={{ fontWeight: "bolder", color: "whitesmoke" }}
               >
                 <FontAwesomeIcon icon={faPaw} /> PetBay
               </Navbar.Brand>
-              <Nav.Link href="#action1" className="mx-lg-3 mx-md-3 mx-2">
+              <Nav.Link
+                href="#action1"
+                className={`mx-lg-3 mx-md-3 mx-2 ` + styles.link}
+              >
                 {" "}
                 Home
               </Nav.Link>
 
-              <Nav.Link href="#action2" className="mx-lg-3 mx-md-3 mx-2">
+              <Nav.Link
+                href="#action2"
+                className={`mx-lg-3 mx-md-3 mx-2 ` + styles.link}
+              >
                 {" "}
                 Preferences
               </Nav.Link>
-              <Nav.Link href="#action2" className="mx-lg-3 mx-md-2 mx-2">
+              <Nav.Link
+                href="#action2"
+                className={`mx-lg-3 mx-md-3 mx-2 ` + styles.link}
+              >
                 {" "}
                 Reminders
               </Nav.Link>
-              <Nav.Link href="#action2" className="mx-lg-3 mx-md-2 mx-2">
+              <Nav.Link
+                href="#action2"
+                className={`mx-lg-3 mx-md-3 mx-2 ` + styles.link}
+              >
                 {" "}
                 Community
               </Nav.Link>
-              <Nav.Link href="#action2" className="mx-lg-3 mx-md-2 mx-2">
+              <Nav.Link
+                href="#action2"
+                className={`mx-lg-3 mx-md-3 mx-2 ` + styles.link}
+              >
                 {" "}
                 Lost & Found
               </Nav.Link>
-              <Nav.Link href="#action2" className="mx-lg-3 mx-md-2 mx-2">
+              <Nav.Link
+                href="#action2"
+                className={`mx-lg-3 mx-md-3 mx-2 ` + styles.link}
+              >
                 {" "}
                 Pet Prediction
               </Nav.Link>

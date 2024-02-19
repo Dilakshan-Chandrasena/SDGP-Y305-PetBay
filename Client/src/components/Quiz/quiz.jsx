@@ -1,4 +1,4 @@
-import styles from "../../assets/quiz.module.css";
+import styles from "./quiz.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faChevronRight,
@@ -8,11 +8,13 @@ import { useRef, useState } from "react";
 import { questionsData } from "../../assets/questionsData";
 
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 export default function quiz() {
   let [index, setIndex] = useState(0);
   let [question, setQuestion] = useState(questionsData[index]);
   let [lock, setLock] = useState(false);
+  let [optionId, setOptionId] = useState(0);
 
   let option1 = useRef(null);
   let option2 = useRef(null);
@@ -22,26 +24,8 @@ export default function quiz() {
 
   let optionArray = [option1, option2, option3, option4, option5];
 
-  const [userPreferences, setUserPreferences] = useState([]);
+  const [userPreferences, setUserPreferences] = useState({});
   const navigate = useNavigate();
-
-  const handleNext = async () => {
-    if (lock === true) {
-      console.log(index);
-      if (index === questionsData.length - 1) {
-        console.log(userPreferences);
-        navigate("/UploadImage");
-      } else {
-        setIndex(++index);
-        setQuestion(questionsData[index]);
-        setLock(false);
-        optionArray.map((option) => {
-          option.current.classList.remove(styles.selected);
-          return null;
-        });
-      }
-    }
-  };
 
   const handleBack = async () => {
     if (index === 0) {
@@ -52,10 +36,57 @@ export default function quiz() {
   };
 
   const handleOptionClick = (e, optionId) => {
-    if (lock === false) {
-      setUserPreferences([...userPreferences, optionId]);
+    if (!lock) {
       e.target.classList.add(styles.selected);
+      setOptionId(optionId);
       setLock(true);
+    }
+
+    if (lock) {
+      optionArray.forEach((option) => {
+        option.current.classList.remove(styles.selected);
+      });
+      e.target.classList.add(styles.selected);
+      setOptionId(optionId);
+      setLock(true);
+    }
+  };
+
+  useEffect(() => {
+    if (lock && optionId !== 0) {
+      setUserPreferences((prevPreferences) => ({
+        ...prevPreferences,
+        [question.characteristic]: optionId,
+      }));
+    }
+  }, [lock, optionId, index]);
+
+  // Store the optionId of the last question when component unmounts
+  useEffect(() => {
+    return () => {
+      if (lock && optionId !== 0) {
+        setUserPreferences((prevPreferences) => ({
+          ...prevPreferences,
+          [question.characteristic]: optionId,
+        }));
+      }
+    };
+  }, []);
+
+  const handleNext = async () => {
+    if (lock && optionId !== 0) {
+      if (index === questionsData.length - 1) {
+        console.log(userPreferences);
+        navigate("/UploadImage");
+      } else {
+        setIndex(index + 1);
+        setQuestion(questionsData[index + 1]);
+        setLock(false);
+        optionArray.forEach((option) => {
+          option.current.classList.remove(styles.selected);
+        });
+        setOptionId(0); // Reset optionId after moving to the next question
+      }
     }
   };
 

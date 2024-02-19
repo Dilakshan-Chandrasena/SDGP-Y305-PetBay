@@ -43,8 +43,8 @@ body {
 }
 
 .container ul li:hover {
-  background-color: #4fa2eb;
-  color: #ffffff;
+  background-color: #d4eafd;
+  border: 2px solid #2293f7;
 }
 .container button {
   background: none;
@@ -61,7 +61,6 @@ body {
 }
 
 .container ul li.selected {
-  background-color: #4fa2eb;
-  color: #ffffff;
-  border: 1px solid #031d35;
+  background-color: #d4eafd;
+  border: 2px solid #2293f7;
 }

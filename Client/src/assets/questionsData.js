@@ -20,7 +20,7 @@ export const questionsData = [
     option5: "Comfortable being alone for long durations",
   },
   {
-    characteristic: "Tolerates Being Alone",
+    characteristic: "Kid-Friendly",
     question:
       "How important is it for your ideal dog breed to be kid-friendly?",
     option1: "Less suitable for kids.",
@@ -30,7 +30,7 @@ export const questionsData = [
     option5: "Highly suited for kids.",
   },
   {
-    characteristic: "Kid-Friendly",
+    characteristic: "Friendly Toward Strangers",
     question:
       "How important is it for your ideal dog breed to be friendly toward strangers?",
     option1: "Prefer reserved behavior",
@@ -40,7 +40,7 @@ export const questionsData = [
     option5: "Extreamly friendly with anyone",
   },
   {
-    characteristic: "Friendly Toward Strangers",
+    characteristic: "Friendly",
     question: "How friendly is your dog?",
     option1: "Extremely friendly",
     option2: "Friendly when its been pet",

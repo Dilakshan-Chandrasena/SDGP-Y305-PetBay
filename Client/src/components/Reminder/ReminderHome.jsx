@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 function ReminderHome(){
     const [data, setData] = useState([])
     useEffect(() => {
-        axios.get('http://localhost:5173/petbay/api/v1/reminders/reminder')
+        axios.get('http://localhost:8080/petbay/api/v1/reminders/reminder' + data.id)
         .then(res => setData(res.data))
         .catch(err => console.log(err));
     }, [])

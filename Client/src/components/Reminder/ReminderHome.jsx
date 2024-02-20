@@ -1,17 +1,18 @@
 import React, {useEffect, useState} from 'react'
 import axios from 'axios'
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 
 function ReminderHome(){
     const [data, setData] = useState([])
+    const { userId } = useParams();
     useEffect(() => {
-        axios.get('http://localhost:8080/petbay/api/v1/reminders/reminder' + data.id)
+        axios.get('http://localhost:8080/petbay/api/v1/reminders/reminder/' + userId)
         .then(res => setData(res.data))
         .catch(err => console.log(err));
     }, [])
 
     const handleDelete = (id) => {
-        axios.delete('http://localhost:5173/deleteReminder/' + id)
+        axios.delete('http://localhost:8080/petbay/api/v1/reminders/deleteReminder' + id)
         .then(res => {
             window.location.reload()
         })

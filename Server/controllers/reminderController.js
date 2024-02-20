@@ -5,33 +5,18 @@ const uuid = require("uuid");
 const CustomError = require("../utils/CustomError");
 const {  ref,  getDownloadURL,  uploadBytesResumable, deleteObject} = require("firebase/storage");
 
-
-const remindersCollection = db.collection('reminders')
-const petsCollection = db.collection("pets");
-// GET data from Firestore
-// exports.getReminders = (async (req, res) => {
-//   try {
-//     const snapshot = await db.collection("reminders").get();
-//     const data = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
-//     res.json(data);
-//   } catch (error) {
-//     console.error("Error fetching data:", error);
-//     res.status(500).json({ error: "Internal Server Error" });
-//   }
-// });
+const remindersCollection = db.collection('reminders');
 
 exports.getReminders = asyncHandler(async(req,res,next) => {
   const userId = req.params.id;
-  console.log(userId);
-  const pet = await petsCollection.where('petId', '==', userId).get();
-  const reminderList = pet.docs.map(doc => doc.data());
-  console.log(reminderList);
+  
+  const userReminders = await remindersCollection.where('userId', '==', userId).get();
+  const reminderList = userReminders.docs.map(doc => doc.data())
   if(reminderList.length !== 0){
-      res.status(200).json(reminderList);
-    }else{
-      res.status(200).json([]);
-    }
-
+    res.status(200).json(reminderList);
+  }else{
+    res.status(200).json([]);
+  }
 });
 
 // exports.addRecord = asyncHandler(async (req,res,next) =>{

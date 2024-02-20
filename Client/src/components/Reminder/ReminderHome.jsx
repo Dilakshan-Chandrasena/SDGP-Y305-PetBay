@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link, useParams } from "react-router-dom";
-import Header from "../Header/Header";
-import Footer from "../Footer/Footer";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
-import styles from './ReminderStyle.css';
+import styles from './reminder.module.css';
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFile, faFileLines, faPaw } from "@fortawesome/free-solid-svg-icons";
+import { faFile, faFileLines, faPaw, faUser, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { faPenToSquare, faXmark } from "@fortawesome/free-solid-svg-icons";
 
 
@@ -34,19 +32,13 @@ function ReminderHome() {
   };
 
   return (
-    
-    <div className="main">
-      <div className="header">
-        <Header />
-      </div>
-
-      <div>
+    <div>
       <div className={styles.recordsHeader}>
         <h1 id="pet-records">
           <span>
             <FontAwesomeIcon icon={faPaw} />
           </span>{" "}
-          Pet Records
+          Pet Reminders
         </h1>
         {/* <AddPetRecord reloadRecordsList={getPetRecordsById} /> */}
       </div>
@@ -56,24 +48,25 @@ function ReminderHome() {
           <Card.Body className={styles.recordBody}>
             <span>
               <FontAwesomeIcon
-                icon={faFileLines}
-                style={{ color: "#6cabd9", fontSize: "34px" }}
+                icon={faUser}
+                style={{ color: "#6cabd9", fontSize: "34px", marginLeft: "30px", }}
               />
             </span>
             <div className={styles.recordInfoContainer}>
-              <h1 className={styles.reminder}>{reminder.dogName}</h1>
-              <h2 className={styles.reminder}>{reminder.reminderText}</h2>
+              <div className="main-reminder">
+              <span className={styles.dogName}>{reminder.dogName}</span>
+              <h1 className={styles.reminder}>{reminder.reminderText}</h1>
+              </div>
               <span className={styles.dateAndTime}>{reminder.date}</span>
               <span className={styles.dateAndTime}>{reminder.time}</span>
             </div>
             <div className={styles.btnContainer}>
-              <Button
-                variant="outline-danger"
+              <Button className="deleteButton"
                 onClick={() => {
                   deletePetRecordByID(record.id);
                 }}
               >
-                <FontAwesomeIcon icon={faXmark} />
+                <FontAwesomeIcon icon={faTrash} />
               </Button>
             </div>
           </Card.Body>
@@ -88,11 +81,7 @@ function ReminderHome() {
       >
         <EmptyRecords key={""} emptyProperty={"Pet Records"} />
       </div> */}
-    </div>
-      <div className="footer">
-        <Footer />
-      </div>
-    </div>
+          </div>
   );
 }
 

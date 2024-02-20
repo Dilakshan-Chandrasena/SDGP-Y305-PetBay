@@ -6,7 +6,7 @@ import LogIn from "./pages/LogInPage";
 import SignUp from "./pages/SignUpPage";
 import Home from "./pages/HomePage";
 import GetUserDetails from "./pages/GetUserDetailsPage";
-import Reminder from './components/Reminder/ReminderHome';
+import Reminder from './pages/ReminderPage';
 
 function App() {
   return (

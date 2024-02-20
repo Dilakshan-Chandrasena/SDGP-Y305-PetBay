@@ -15,38 +15,48 @@ body {
   }
   
 .recordCard {
-    margin: 25px 180px;
+    margin: 30px 180px;
     width: 72%;
-    height: 80px;
+    height: 130px;
     background-color: #eeeeee;
     padding: 0px 10px;
-    box-shadow: rgba(163, 165, 169, 0.25) 0px 1px 4px,
-      rgba(88, 93, 102, 0.13) 0px 0px 1px 1px;
+    border-radius: 20px;
+    border: none;
+    box-shadow: 2px 5px 5px rgba(0, 0, 0, 0.1);
   }
   
 .recordBody {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    align-items: baseline;
+    align-items: center;
   }
   
-.reminder {
-    color: #4a4141;
-    font-size: 18px;
+.dogName {
+    color: #6cabd9;
+    font-size: 16px;
     font-weight: 600;
   }
+.main-reminder{
+  display: block;
+}
+
+.reminder{
+  font-size: 24px;
+}
   
+
 .recordInfoContainer {
     width: 50%;
     display: flex;
     justify-content: space-between;
   }
   
-.dateAndTi {
+.dateAndTime {
     color: #4a4141;
-    font-size: 14px;
-    font-weight: 500;
+    font-size: 18px;
+    font-weight: 400;
+    margin-top: 20px;
   }
 .btnContainer {
     display: flex;
@@ -58,4 +68,9 @@ body {
 .btnContainer Button:nth-child(1) {
     width: 70px;
   }
+
+  .deleteButton{
+    
+  }
+
   

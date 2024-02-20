@@ -25,6 +25,7 @@ function AddPetModal({ reloadPetList }) {
   const formSchema = z.object({
     name: z.string().min(1, "Name is required"),
     breed: z.string().min(1, "Breed is required"),
+    gender: z.string().min(1, "Gender is required"),
     address: z.string().min(1, "Address is required"),
     age: z.string().min(1, "Age is required"),
     height: z.string().min(1, "Height is required"),
@@ -59,6 +60,7 @@ function AddPetModal({ reloadPetList }) {
     formData.append("userId", userId);
     formData.append("name", data.name);
     formData.append("breed", data.breed);
+    formData.append("gender", data.gender);
     formData.append("address", data.address);
     formData.append("age", data.age);
     formData.append("height", data.height);
@@ -149,6 +151,19 @@ function AddPetModal({ reloadPetList }) {
 
             <Form.Group className="mb-3">
               <Form.Control
+                {...register("gender")}
+                type="text"
+                placeholder="Select Gender"
+              />
+              {errors.breed && (
+                <span className={styles.errorValidation}>
+                  {errors.breed.message}
+                </span>
+              )}
+            </Form.Group>
+
+            <Form.Group className="mb-3">
+              <Form.Control
                 {...register("address")}
                 type="text"
                 placeholder="Enter Address"
@@ -212,7 +227,7 @@ function AddPetModal({ reloadPetList }) {
                 </span>
               )}
             </Form.Group>
-            <div style={{visibility: isSubmitting ? "visible" : "hidden"}}>
+            <div style={{ visibility: isSubmitting ? "visible" : "hidden" }}>
               <Loading />
             </div>
           </Modal.Body>

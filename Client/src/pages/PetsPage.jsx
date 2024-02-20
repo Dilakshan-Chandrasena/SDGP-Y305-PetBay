@@ -4,14 +4,16 @@ import Header from "../components/Header/Header";
 import Footer from "../components/Footer/Footer";
 import PetCard from "../components/PetCard/PetCard";
 import styles from "../assets/css/petpage.module.css";
-import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import { faPaw, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import AddPetModal from "../components/AddPet/AddPetModal";
+import EmptyRecords from "../components/EmptyRecords/EmptyRecords";
 
 export default function PetsPage() {
   const { userId } = useParams();
   const [petList, setPetList] = useState([]);
+  const [showEmptyRecs, setShowEmptyRecs] = useState(false);
 
   useEffect(() => {
     getPetsByUserId(userId);
@@ -23,7 +25,12 @@ export default function PetsPage() {
         `http://localhost:8080/petbay/api/v1/pet-profiles/owned-pets/${userId}`
       )
       .then((res) => {
-        setPetList(res.data);
+        const data = res.data;
+        if (data.length > 0) {
+          setPetList(res.data);
+        } else {
+          setShowEmptyRecs(true);
+        }
       })
       .catch((err) => console.log(err));
   };
@@ -33,8 +40,14 @@ export default function PetsPage() {
       <Header />
       <div className={styles.petsHeaderContainer}>
         <div className={styles.petPageHeader}>
-          <h1>My Companions</h1>
-          <AddPetModal reloadPetList={getPetsByUserId}/>
+          <h1>
+            {" "}
+            <span>
+              <FontAwesomeIcon icon={faPaw} />
+            </span>{" "}
+            My Companions
+          </h1>
+          <AddPetModal reloadPetList={getPetsByUserId} />
         </div>
       </div>
 
@@ -49,6 +62,16 @@ export default function PetsPage() {
           />
         ))}
       </div>
+
+      <div
+        style={{
+          visibility: showEmptyRecs ? "visible" : "hidden",
+          height: showEmptyRecs ? "fit-content" : "0px",
+        }}
+      >
+        <EmptyRecords key={""} emptyProperty={"Pets"} />
+      </div>
+
       <Footer />
     </div>
   );

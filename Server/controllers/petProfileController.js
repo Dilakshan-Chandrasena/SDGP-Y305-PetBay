@@ -52,6 +52,23 @@ exports.getUserOwnedPets = asyncHandler(async(req,res,next) => {
   }
 });
 
+/**
+ * @description: get pet by the pet id
+ * @param: petId
+ * @method: GET
+ * @returns: pet obj
+ */
+exports.getPetProfileById = asyncHandler((async(req,res,next)=>{
+  const petId = req.params.id;
+  const pet = (await petsCollection.doc(petId).get()).data()
+  console.log(pet);
+  if(pet){
+    res.status(200).json(pet);
+  }else{
+    throw new CustomError("Pet Not Found", 404);
+  }
+}))
+
 
 /**
  * @description: Updates pet details including the pet image if included
@@ -96,7 +113,7 @@ exports.updatePet = asyncHandler(async (req, res, next) => {
 exports.deletePet = asyncHandler(async(req,res,next) => {
   const petId = req.params.id;
   const petRef = (await petsCollection.doc(petId).get()).data();
-  console.log(petRef);
+
   if(petRef){
     if(petRef.petImageURL){
       const petImageRef = ref(storage, `pet-profile-images/${petId}`)

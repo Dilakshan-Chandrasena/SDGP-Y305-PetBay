@@ -3,8 +3,12 @@ import axios from "axios";
 import { Link, useParams } from "react-router-dom";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
+import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faFile, faFileLines, faPaw } from "@fortawesome/free-solid-svg-icons";
+import { faPenToSquare, faXmark } from "@fortawesome/free-solid-svg-icons";
 
 
 function ReminderHome() {
@@ -35,52 +39,56 @@ function ReminderHome() {
         <Header />
       </div>
 
-      <div className="d-flex  vh-100 justify-content-center align-items-center">
-        <div className="w-50 bg-white rounded p-3">
-          <h2>Reminder List</h2>
-          <div className="d-flex justify-content-end">
-            <Link to="/addReminder" className="btn btn-success">
-              Add Reminder +
-            </Link>
-          </div>
-          <table className="table">
-            <tbody>
-              {data.map((reminder, index) => {
-                return (
-                  <tr key={index}>
-                    <td>
-                      <Card>
-                        <Card.Body>
-                            <div className="card d-flex ">
-                                {reminder.reminderText}
-                            </div>
-                            </Card.Body>
-                      </Card>
-                    </td>
-                    {/* <td>{reminder.dogName}</td>
-                    <td>{reminder.time}</td>
-                    <td>{reminder.date}</td> */}
-                    {/* <td>
-                      <Link
-                        to={`/editReminder/${reminder.id}`}
-                        className="btn btn-primary me-2"
-                      >
-                        Edit
-                      </Link>
-                      <button
-                        onClick={() => handleDelete(reminder.id)}
-                        className="btn btn-danger"
-                      >
-                        Delete
-                      </button>
-                    </td> */}
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
-        </div>
+      <div>
+      <div className={styles.recordsHeader}>
+        <h1 id="pet-records">
+          <span>
+            <FontAwesomeIcon icon={faPaw} />
+          </span>{" "}
+          Pet Records
+        </h1>
+        {/* <AddPetRecord reloadRecordsList={getPetRecordsById} /> */}
       </div>
+
+      {petRecords.map((record) => (
+        <Card className={styles.recordCard}>
+          <Card.Body className={styles.recordBody}>
+            <span>
+              <FontAwesomeIcon
+                icon={faFileLines}
+                style={{ color: "#6cabd9", fontSize: "34px" }}
+              />
+            </span>
+            <div className={styles.recordInfoContainer}>
+              <h1 className={styles.recordTitle}>{record.recordName}</h1>
+              <span className={styles.recordDate}>{record.date}</span>
+            </div>
+            <div className={styles.btnContainer}>
+              <a href={record.petRecordURL} target="_blank">
+                <Button variant="dark">View</Button>
+              </a>
+              <Button
+                variant="outline-danger"
+                onClick={() => {
+                  deletePetRecordByID(record.id);
+                }}
+              >
+                <FontAwesomeIcon icon={faXmark} />
+              </Button>
+            </div>
+          </Card.Body>
+        </Card>
+      ))}
+
+      <div
+        style={{
+          visibility: showEmptyRecs ? "visible" : "hidden",
+          height: showEmptyRecs ? "fit-content" : "0px",
+        }}
+      >
+        <EmptyRecords key={""} emptyProperty={"Pet Records"} />
+      </div>
+    </div>
       <div className="footer">
         <Footer />
       </div>

@@ -5,6 +5,7 @@ import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
+import styles from './ReminderStyle.css';
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFile, faFileLines, faPaw } from "@fortawesome/free-solid-svg-icons";
@@ -50,7 +51,7 @@ function ReminderHome() {
         {/* <AddPetRecord reloadRecordsList={getPetRecordsById} /> */}
       </div>
 
-      {petRecords.map((record) => (
+      {data.map((reminder) => (
         <Card className={styles.recordCard}>
           <Card.Body className={styles.recordBody}>
             <span>
@@ -60,13 +61,12 @@ function ReminderHome() {
               />
             </span>
             <div className={styles.recordInfoContainer}>
-              <h1 className={styles.recordTitle}>{record.recordName}</h1>
-              <span className={styles.recordDate}>{record.date}</span>
+              <h1 className={styles.reminder}>{reminder.dogName}</h1>
+              <h2 className={styles.reminder}>{reminder.reminderText}</h2>
+              <span className={styles.dateAndTime}>{reminder.date}</span>
+              <span className={styles.dateAndTime}>{reminder.time}</span>
             </div>
             <div className={styles.btnContainer}>
-              <a href={record.petRecordURL} target="_blank">
-                <Button variant="dark">View</Button>
-              </a>
               <Button
                 variant="outline-danger"
                 onClick={() => {
@@ -80,14 +80,14 @@ function ReminderHome() {
         </Card>
       ))}
 
-      <div
+      {/* <div
         style={{
           visibility: showEmptyRecs ? "visible" : "hidden",
           height: showEmptyRecs ? "fit-content" : "0px",
         }}
       >
         <EmptyRecords key={""} emptyProperty={"Pet Records"} />
-      </div>
+      </div> */}
     </div>
       <div className="footer">
         <Footer />

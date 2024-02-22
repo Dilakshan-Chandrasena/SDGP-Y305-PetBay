@@ -2,19 +2,19 @@ body {
     background-color: #f4f4f4a2;
   }
 
-.recordsHeader {
+.reminderHeader {
     display: flex;
     justify-content: space-between;
     margin: 30px 175px;
   }
   
-.recordsHeader h1 {
+.reminderHeader h1 {
     font-size: 26px;
     color: #6cabd9;
     font-weight: 700;
   }
   
-.recordCard {
+.reminderCard {
     margin: 30px 180px;
     width: 72%;
     height: 130px;
@@ -25,7 +25,7 @@ body {
     box-shadow: 2px 5px 5px rgba(0, 0, 0, 0.1);
   }
   
-.recordBody {
+.reminderBody {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
@@ -46,7 +46,7 @@ body {
 }
   
 
-.recordInfoContainer {
+.reminderInfoContainer {
     width: 50%;
     display: flex;
     justify-content: space-between;

@@ -15,12 +15,26 @@ function ReminderHome() {
   const [data, setData] = useState([]);
   const { userId } = useParams();
   const [showEmptyRecs, setShowEmptyRecs] = useState(false);
+
   useEffect(() => {
-    axios
-      .get("http://localhost:8080/petbay/api/v1/reminders/reminder/" + userId)
-      .then((res) => setData(res.data))
-      .catch((err) => console.log(err));
+    getReminders(userId);
   }, []);
+
+  const getReminders = async (userId) => {
+    await axios
+      .get("http://localhost:8080/petbay/api/v1/reminders/reminder/" + userId)
+      .then((res) => {
+        const data = res.data;
+        if (data.length > 0) {
+          setData(data);
+        } else {
+          setShowEmptyRecs(true);
+        }
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  };
 
   const deleteReminderHandle = (id) => {
     axios

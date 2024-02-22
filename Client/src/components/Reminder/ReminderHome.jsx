@@ -14,6 +14,7 @@ import { faPenToSquare, faXmark } from "@fortawesome/free-solid-svg-icons";
 function ReminderHome() {
   const [data, setData] = useState([]);
   const { userId } = useParams();
+  const [showEmptyRecs, setShowEmptyRecs] = useState(false);
   useEffect(() => {
     axios
       .get("http://localhost:8080/petbay/api/v1/reminders/reminder/" + userId)

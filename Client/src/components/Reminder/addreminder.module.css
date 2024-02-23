@@ -1,0 +1,11 @@
+.addReminder{
+    color: #6cabd9;
+    background-color: #d4d0d0d2;
+    padding: 10px 14px;
+    border-radius: 90px;
+    border: none;
+}
+.addReminder:hover {
+    background-color: #d8d8d8;
+    color:#5e96be;
+  }

@@ -44,7 +44,6 @@ body {
 .reminder{
   font-size: 24px;
 }
-  
 
 .reminderInfoContainer {
     width: 50%;
@@ -62,15 +61,16 @@ body {
     display: flex;
     align-items: baseline;
   }
-.btnContainer Button {
-    margin: 0px 12px;
-  }
-.btnContainer Button:nth-child(1) {
-    width: 70px;
-  }
-
-  .deleteButton{
-    
-  }
-
   
+  .btnContainer button {
+    background-color: transparent;
+    color: rgb(204, 42, 42);
+    font-size: 30px;
+    border: none;
+  }
+
+  .btnContainer button:hover {
+    background-color: transparent;
+    color: rgb(124, 0, 0);
+    transition: .3s ease-in;
+  }

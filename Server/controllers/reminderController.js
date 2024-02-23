@@ -6,12 +6,14 @@ const CustomError = require("../utils/CustomError");
 const {  ref,  getDownloadURL,  uploadBytesResumable, deleteObject} = require("firebase/storage");
 
 const remindersCollection = db.collection('reminders');
+const petsCollection = db.collection('pets');
 
 exports.getReminders = asyncHandler(async(req,res,next) => {
   const userId = req.params.id;
-  
   const userReminders = await remindersCollection.where('userId', '==', userId).get();
   const reminderList = userReminders.docs.map(doc => doc.data())
+  const pets = await petsCollection.where('userId', '==', userId).get();
+  const petsList = pets.docs.map(doc => doc.data())
   if(reminderList.length !== 0){
     res.status(200).json(reminderList);
   }else{
@@ -19,6 +21,17 @@ exports.getReminders = asyncHandler(async(req,res,next) => {
   }
 });
 
+exports.getPetNames = asyncHandler(async(req,res,next) => {
+  const userId = req.params.id;
+  
+  const pets = await petsCollection.where('userId', '==', userId).get();
+  const petsList = pets.docs.map(doc => doc.data())
+  if(petsList.length !== 0){
+    res.status(200).json(petsList);
+  }else{
+    res.status(200).json([]);
+  }
+})
 // exports.addRecord = asyncHandler(async (req,res,next) =>{
 //   const petRecocrd = req.body;
 //   const recordFile = req.file;

@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import styles from './reminder.module.css';
 import EmptyRecords from "../EmptyRecords/EmptyRecords";
+import AddReminder from './AddReminder';
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFile, faFileLines, faPaw, faUser, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faPaw, faUser, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { faPenToSquare, faXmark } from "@fortawesome/free-solid-svg-icons";
 
 
@@ -15,7 +16,7 @@ function ReminderHome() {
   const [data, setData] = useState([]);
   const { userId } = useParams();
   const [showEmptyRecs, setShowEmptyRecs] = useState(false);
-
+  const navigate = useNavigate();
   useEffect(() => {
     getReminders(userId);
   }, []);
@@ -46,7 +47,6 @@ function ReminderHome() {
       })
       .catch((err) => console.log(err));
   };
-
   return (
     <div>
       <div className={styles.reminderHeader}>
@@ -56,7 +56,7 @@ function ReminderHome() {
           </span>{" "}
           Pet Reminders
         </h1>
-        {/* <AddPetRecord reloadRecordsList={getPetRecordsById} /> */}
+        <AddReminder reloadReminderList={getReminders} />
       </div>
 
       {data.map((reminder) => (
@@ -77,7 +77,7 @@ function ReminderHome() {
               <span className={styles.dateAndTime}>{reminder.time}</span>
             </div>
             <div className={styles.btnContainer}>
-              <Button className="deleteButton"
+              <Button
                 onClick={() => {
                   deleteReminderHandle(reminder.id);
                 }}

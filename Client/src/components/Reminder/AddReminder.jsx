@@ -36,7 +36,7 @@ function AddReminder(){
           event.stopPropagation();
         }
         event.preventDefault();
-        axios.post('http://localhost:8080/reminder/add-reminder', values)
+        axios.post('http://localhost:8080/petbay/api/v1/reminder/addReminder', values)
         .then(res =>{
             console.log(res);
             navigate('/')
@@ -79,7 +79,7 @@ function AddReminder(){
           <Form.Select required defaultValue="">
             <option value="" disabled>Select your pet's name</option>
             {data.map((data, index) => (
-            <option key={index}>{data.name}</option>
+          <option key={index}>{data.name}<span className={styles.hidden}>{data.id}</span></option>
             ))}
           </Form.Select>
           <Form.Control.Feedback type="invalid">

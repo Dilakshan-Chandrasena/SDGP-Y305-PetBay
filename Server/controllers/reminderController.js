@@ -3,17 +3,13 @@ const { storage } = require("../config/firebaseCloudStorage");
 const { db } = require("../config/firebase");
 const uuid = require("uuid");
 const CustomError = require("../utils/CustomError");
-const {  ref,  getDownloadURL,  uploadBytesResumable, deleteObject} = require("firebase/storage");
 
 const remindersCollection = db.collection('reminders');
-const petsCollection = db.collection('pets');
 
 exports.getReminders = asyncHandler(async(req,res,next) => {
   const userId = req.params.id;
   const userReminders = await remindersCollection.where('userId', '==', userId).get();
   const reminderList = userReminders.docs.map(doc => doc.data())
-  const pets = await petsCollection.where('userId', '==', userId).get();
-  const petsList = pets.docs.map(doc => doc.data())
   if(reminderList.length !== 0){
     res.status(200).json(reminderList);
   }else{
@@ -21,23 +17,15 @@ exports.getReminders = asyncHandler(async(req,res,next) => {
   }
 });
 
-// exports.addRecord = asyncHandler(async (req,res,next) =>{
-//   const petRecocrd = req.body;
-//   const recordFile = req.file;
-//   if(recordFile){
-//       const recordId = uuid.v4();
-//       petRecocrd.id = recordId;
-//       const recordsPath = `pet-records/${recordId + '-' +petRecocrd.recordName}`;
-//       const recordURL = await saveFile(storage,recordsPath,req);
-//       petRecocrd.petRecordURL = recordURL;
-//       await petRecordsCollection.doc(recordId).set(petRecocrd);
-//       const newPetRecord = (await petRecordsCollection.doc(recordId).get()).data();
-
-//       res.status(201).json(newPetRecord);
-//   }else{
-//       throw new CustomError("Pet record file is required", 400);
-//   }
-// });
+exports.addReminder = asyncHandler(async (req,res,next) =>{
+  const reminder = req.body;
+  if(reminder){
+    await db.collection("reminders").add(reminder)
+      res.status(201).send("Reminder added successfully");
+  }else{
+      throw new CustomError("Failed to add reminder", 400);
+  }
+});
 // // GET data using the document ID
 // exports.getReminderById =("/reminder/:id", async (req, res) => {
 //   const documentId = req.params.id;

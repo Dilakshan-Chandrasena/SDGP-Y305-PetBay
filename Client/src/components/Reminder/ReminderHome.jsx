@@ -69,7 +69,7 @@ function ReminderHome() {
         <h1 id="pet-reminders">
           <span>
           <FontAwesomeIcon
-                icon={faFileLines}
+                icon={faPaw}
                 style={{ color: "#6cabd9", fontSize: "34px" }}
               />
           </span>{" "}
@@ -81,11 +81,7 @@ function ReminderHome() {
       {data.map((reminder) => (
         <Card className={styles.reminderCard}>
           <Card.Body className={styles.reminderBody}>
-            <span>
-              {img.map((image) => {
-                <img src={image.petImageURL} alt="" />
-              })}
-            </span>
+          <Card.Img variant="top" src={img.petImageURL} />
             <div className={styles.reminderInfoContainer}>
               <div className="main-reminder">
               <span className={styles.dogName}>{reminder.dogName}</span>

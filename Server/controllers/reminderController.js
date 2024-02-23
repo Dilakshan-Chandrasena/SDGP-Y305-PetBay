@@ -21,17 +21,6 @@ exports.getReminders = asyncHandler(async(req,res,next) => {
   }
 });
 
-exports.getPetNames = asyncHandler(async(req,res,next) => {
-  const userId = req.params.id;
-  
-  const pets = await petsCollection.where('userId', '==', userId).get();
-  const petsList = pets.docs.map(doc => doc.data())
-  if(petsList.length !== 0){
-    res.status(200).json(petsList);
-  }else{
-    res.status(200).json([]);
-  }
-})
 // exports.addRecord = asyncHandler(async (req,res,next) =>{
 //   const petRecocrd = req.body;
 //   const recordFile = req.file;

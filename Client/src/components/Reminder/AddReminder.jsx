@@ -17,6 +17,8 @@ function AddReminder(){
     const handleShow = () => setShow(true);
     const { userId } = useParams();
     const [values, setValues] = useState({
+        userId: '',
+        petId: '',
         dogName: '',
         reminderText: '',
         time: '',
@@ -34,7 +36,7 @@ function AddReminder(){
           event.stopPropagation();
         }
         event.preventDefault();
-        axios.post('http://localhost:8080/addReminder', values)
+        axios.post('http://localhost:8080/reminder/add-reminder', values)
         .then(res =>{
             console.log(res);
             navigate('/')
@@ -126,7 +128,6 @@ function AddReminder(){
         </Modal.Body>
       </Modal>
     </>
-
     )
 }
 

@@ -14,14 +14,18 @@ import { faPenToSquare, faXmark } from "@fortawesome/free-solid-svg-icons";
 
 function ReminderHome() {
   const [data, setData] = useState([]);
+  const [img, setImage] = useState([]);
   const { userId } = useParams();
   const [showEmptyRecs, setShowEmptyRecs] = useState(false);
   const navigate = useNavigate();
   useEffect(() => {
-    getReminders(userId);
+    getReminders();
   }, []);
 
-  const getReminders = async (userId) => {
+  useEffect(() => {
+    getPetNames();
+  }, []);
+  const getReminders = async () => {
     await axios
       .get("http://localhost:8080/petbay/api/v1/reminders/reminder/" + userId)
       .then((res) => {
@@ -47,12 +51,27 @@ function ReminderHome() {
       })
       .catch((err) => console.log(err));
   };
+
+  const getPetNames = async () => {
+    await axios
+      .get("http://localhost:8080/petbay/api/v1/pet-profiles/owned-pets/" + userId)
+      .then((res) => {
+        const img = res.img;
+        setImage(img);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  };
   return (
     <div>
       <div className={styles.reminderHeader}>
         <h1 id="pet-reminders">
           <span>
-            <FontAwesomeIcon icon={faPaw} />
+          <FontAwesomeIcon
+                icon={faFileLines}
+                style={{ color: "#6cabd9", fontSize: "34px" }}
+              />
           </span>{" "}
           Pet Reminders
         </h1>
@@ -63,10 +82,9 @@ function ReminderHome() {
         <Card className={styles.reminderCard}>
           <Card.Body className={styles.reminderBody}>
             <span>
-              <FontAwesomeIcon
-                icon={faUser}
-                style={{ color: "#6cabd9", fontSize: "34px", marginLeft: "30px", }}
-              />
+              {img.map((image) => {
+                <img src={image.petImageURL} alt="" />
+              })}
             </span>
             <div className={styles.reminderInfoContainer}>
               <div className="main-reminder">

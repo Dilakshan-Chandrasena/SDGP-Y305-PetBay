@@ -50,7 +50,6 @@ body {
   background: none;
   border: none;
   font-size: 18px;
-  text-align: right;
   cursor: pointer;
 }
 
@@ -63,4 +62,20 @@ body {
 .container ul li.selected {
   background-color: #d4eafd;
   border: 2px solid #2293f7;
+}
+
+.container .finishButton {
+  background-color: #2293f7;
+  width: 100px;
+  padding: 10px;
+  border-radius: 8px;
+  margin-left: 250px;
+  margin-bottom: 20px;
+}
+.container .finishButton:hover {
+  background-color: #64abe9;
+}
+.finishHeading {
+  text-align: center;
+  margin-bottom: 50px;
 }

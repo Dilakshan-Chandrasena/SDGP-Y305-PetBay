@@ -26,8 +26,9 @@ export default function PetsPage() {
       )
       .then((res) => {
         const data = res.data;
+        setPetList(res.data);
         if (data.length > 0) {
-          setPetList(res.data);
+          setShowEmptyRecs(false);
         } else {
           setShowEmptyRecs(true);
         }

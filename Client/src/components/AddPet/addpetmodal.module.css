@@ -1,10 +1,11 @@
 .addBtn {
   border: none;
-  background-color: #f7f3f3;
+  background-color: transparent;
 }
 
 .addIcon {
   color: #6cabd9;
+
   background-color: #d4d0d0d2;
   padding: 10px 14px;
   border-radius: 90px;

@@ -12,8 +12,11 @@ import {
 import { auth } from "../../config/firebase";
 import { signOut } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../contexts/authContext";
 
 export default function Header() {
+  const { userId } = useAuth();
+  console.log();
   const navigate = useNavigate();
   const logout = async () => {
     try {
@@ -27,7 +30,7 @@ export default function Header() {
   return (
     <div className={styles.body}>
       {" "}
-      <Navbar expand="lg" className=" ">
+      <Navbar bg="dark" data-bs-theme="dark">
         {" "}
         <Container fluid>
           <Navbar.Toggle
@@ -38,53 +41,52 @@ export default function Header() {
             <Nav
               className="mx-auto my-2 my-lg-0"
               style={{ maxHeight: "100px" }}
-              navbarScroll
             >
               <Navbar.Brand
-                href="#"
+                href="/home"
                 className="mx-lg-4 mx-md-3 mx-2"
                 style={{ fontWeight: "bolder", color: "whitesmoke" }}
               >
                 <FontAwesomeIcon icon={faPaw} /> PetBay
               </Navbar.Brand>
               <Nav.Link
-                href="#action1"
+                href={`/pets/${userId}`}
                 className={`mx-lg-3 mx-md-3 mx-2 ` + styles.link}
               >
                 {" "}
-                Home
+                My Pets
               </Nav.Link>
 
               <Nav.Link
-                href="#action2"
+                href="#Preferences"
                 className={`mx-lg-3 mx-md-3 mx-2 ` + styles.link}
               >
                 {" "}
                 Preferences
               </Nav.Link>
               <Nav.Link
-                href="#action2"
+                href="#Reminders"
                 className={`mx-lg-3 mx-md-3 mx-2 ` + styles.link}
               >
                 {" "}
                 Reminders
               </Nav.Link>
               <Nav.Link
-                href="#action2"
+                href="#Community"
                 className={`mx-lg-3 mx-md-3 mx-2 ` + styles.link}
               >
                 {" "}
                 Community
               </Nav.Link>
               <Nav.Link
-                href="#action2"
+                href="#LostFound"
                 className={`mx-lg-3 mx-md-3 mx-2 ` + styles.link}
               >
                 {" "}
                 Lost & Found
               </Nav.Link>
               <Nav.Link
-                href="#action2"
+                href="#Prediction"
                 className={`mx-lg-3 mx-md-3 mx-2 ` + styles.link}
               >
                 {" "}

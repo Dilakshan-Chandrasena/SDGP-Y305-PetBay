@@ -7,12 +7,13 @@
   background-color: #212121;
 }
 
-.link {
-  color: #f6f6f6;
+.link:hover {
+  color: #6cabd9;
+  /* text-decoration: underline; */
 }
 
-.link:hover {
-  color: #f6f6f6;
+.activeLink {
+  color: #6cabd9;
   text-decoration: underline;
 }
 
@@ -35,4 +36,3 @@
 .signOutButton:hover {
   color: rgb(71, 71, 71);
 }
-

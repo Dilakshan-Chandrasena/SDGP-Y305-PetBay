@@ -34,7 +34,7 @@ export default function PetProfile() {
               {petDetails.name}
             </Card.Title>
           </Card.Body>
-          <Card.Img variant="top" src={petDetails.petImageURL} />
+          <Card.Img className={styles.profImage} variant="top" src={petDetails.petImageURL} />
         </Card>
       </div>
 

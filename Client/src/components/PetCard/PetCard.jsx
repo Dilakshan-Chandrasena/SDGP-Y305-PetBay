@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPenToSquare, faXmark } from "@fortawesome/free-solid-svg-icons";
+import { faPenToSquare, faXmark, faTrash } from "@fortawesome/free-solid-svg-icons";
 
 import styles from "./petcard.module.css";
 import axios from "axios";
@@ -51,7 +51,7 @@ export default function PetCard({ name, petId, petImageURL, reloadPetList }) {
                 <FontAwesomeIcon icon={faPenToSquare} />
               </Button>
               <Button variant="outline-danger" onClick={deletePetByID}>
-                <FontAwesomeIcon icon={faXmark} />
+                <FontAwesomeIcon icon={faTrash} />
               </Button>
             </div>
           </div>

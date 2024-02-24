@@ -41,6 +41,7 @@ export default function AddPetRecord({ reloadRecordsList }) {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors, isSubmitting },
   } = useForm({ resolver: zodResolver(formSchema) });
 
@@ -85,6 +86,7 @@ export default function AddPetRecord({ reloadRecordsList }) {
         .then((res) => {
           console.log(res);
           if (res.status == 201) {
+            reset();
             handleClose();
             reloadRecordsList(petId);
           } else {

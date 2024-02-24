@@ -41,6 +41,7 @@ function AddPetModal({ reloadPetList }) {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors, isSubmitting },
   } = useForm({ resolver: zodResolver(formSchema) });
 
@@ -83,6 +84,7 @@ function AddPetModal({ reloadPetList }) {
         .then((res) => {
           console.log(res);
           if (res.status == 201) {
+            reset();
             handleClose();
             reloadPetList(userId);
           } else {

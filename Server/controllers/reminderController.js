@@ -19,35 +19,15 @@ exports.getReminders = asyncHandler(async(req,res,next) => {
 
 exports.addReminder = asyncHandler(async (req,res,next) =>{
   const reminder = req.body;
-  if(reminder){
+  // reminder.userId = req.params.id;
+  try{
+    console.log(reminder)
     await db.collection("reminders").add(reminder)
-      res.status(201).send("Reminder added successfully");
-  }else{
+    res.status(201).send("Reminder added successfully");
+  }catch {
       throw new CustomError("Failed to add reminder", 400);
   }
 });
-// // GET data using the document ID
-// exports.getReminderById =("/reminder/:id", async (req, res) => {
-//   const documentId = req.params.id;
-
-//   try {
-//     const doc = await admin
-//       .firestore()
-//       .collection("reminders")
-//       .doc(documentId)
-//       .get();
-
-//     if (!doc.exists) {
-//       return res.status(404).json({ error: "Document not found" });
-//     }
-
-//     const data = { id: doc.id, ...doc.data() };
-//     res.json(data);
-//   } catch (error) {
-//     console.error("Error fetching data:", error);
-//     res.status(500).json({ error: "Internal Server Error" });
-//   }
-// });
 
 // // Adding a new Reminder
 // exports.addReminder = ("/addReminder", async (req, res) => {

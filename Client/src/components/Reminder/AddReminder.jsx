@@ -18,7 +18,6 @@ function AddReminder(){
     const { userId } = useParams();
     const [values, setValues] = useState({
         userId: '',
-        petId: '',
         dogName: '',
         reminderText: '',
         time: '',
@@ -29,17 +28,18 @@ function AddReminder(){
     useEffect(() => {
       getPetNames();
     }, []);
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         const form = event.currentTarget;
         if (form.checkValidity() === false) {
           event.preventDefault();
           event.stopPropagation();
         }
         event.preventDefault();
-        axios.post('http://localhost:8080/petbay/api/v1/reminder/addReminder', values)
-        .then(res =>{
-            console.log(res);
-            navigate('/')
+        values.userId = userId;
+        await axios.post('http://localhost:8080/petbay/api/v1/reminders/addReminder/', values)
+        .then((res) =>{
+            console.log(values);
+            navigate('/reminder/' + userId)
         })
         .catch(err => console.log(err))
         setValidated(true);
@@ -76,10 +76,10 @@ function AddReminder(){
       <Row className="mb-3">
         <Form.Group as={Col} md="7" controlId="validationCustom01">
           <Form.Label>Pet's Name</Form.Label>
-          <Form.Select required defaultValue="">
+          <Form.Select required defaultValue="" onChange={e => setValues({...values, dogName: e.target.value})}>
             <option value="" disabled>Select your pet's name</option>
             {data.map((data, index) => (
-          <option key={index}>{data.name}<span className={styles.hidden}>{data.id}</span></option>
+          <option key={index}>{data.name}</option>
             ))}
           </Form.Select>
           <Form.Control.Feedback type="invalid">
@@ -97,6 +97,7 @@ function AddReminder(){
             type="text"
             placeholder="Enter your Reminder"
             defaultValue=""
+            onChange={e => setValues({...values, reminderText: e.target.value})}
           />
           <Form.Control.Feedback type="invalid">
             Please enter a Reminder.
@@ -107,14 +108,14 @@ function AddReminder(){
       <Row className="mb-3">
         <Form.Group as={Col} md="5" controlId="validationCustom04">
           <Form.Label>Date</Form.Label>
-          <Form.Control type="date" placeholder="State" required />
+          <Form.Control type="date" placeholder="State" required onChange={e => setValues({...values, date: e.target.value})}/>
           <Form.Control.Feedback type="invalid">
             Please provide a valid date.
           </Form.Control.Feedback>
         </Form.Group>
         <Form.Group as={Col} md="5" controlId="validationCustom05">
           <Form.Label>Time</Form.Label>
-          <Form.Control type="time" required />
+          <Form.Control type="time" required onChange={e => setValues({...values, time: e.target.value})}/>
           <Form.Control.Feedback type="invalid">
             Please provide a valid time.
           </Form.Control.Feedback>

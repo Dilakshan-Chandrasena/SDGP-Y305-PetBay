@@ -3,14 +3,14 @@ import Tabs from "react-bootstrap/Tabs";
 import styles from "./lostfound.module.css";
 import "./custom.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCirclePlus } from "@fortawesome/free-solid-svg-icons";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
 
 function Filters() {
   return (
     <div className={styles.filterContainer}>
       <div className={styles.iconContainer}>
         <FontAwesomeIcon
-          icon={faCirclePlus}
+          icon={faPlus}
           className={styles.addIcon}
           style={{ color: "#69a6ec" }}
         />

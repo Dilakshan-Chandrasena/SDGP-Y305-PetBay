@@ -53,8 +53,10 @@
 }
 
 .addIcon {
-  font-size: 40px;
-  margin-top: -20px;
+  background-color: #d4d0d0d2;
+  padding: 10px 12px;
+  border-radius: 100px;
+  margin-right: 22px;
   cursor: pointer;
 }
 

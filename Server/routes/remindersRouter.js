@@ -6,7 +6,6 @@ const { userValidator } = require("../middlewares/validator");
 
 router.route("/addReminder").post(reminderController.addReminder);
 router.route('/reminder/:id').get(reminderController.getReminders)
-// router.route('/reminder/add-reminder/:id').post(reminderController.addReminder)
-// router.route("/deleteReminder/:id").delete(reminderController.deletReminder);
+router.route("/deleteReminder/:id").delete(reminderController.deleteReminder);
 
 module.exports = router;

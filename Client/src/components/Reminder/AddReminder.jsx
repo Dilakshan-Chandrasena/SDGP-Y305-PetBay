@@ -40,6 +40,7 @@ function AddReminder(){
         .then((res) =>{
             console.log(values);
             navigate('/reminder/' + userId)
+            location.reload();
         })
         .catch(err => console.log(err))
         setValidated(true);

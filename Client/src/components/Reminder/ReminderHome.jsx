@@ -44,10 +44,11 @@ function ReminderHome() {
   const deleteReminderHandle = (id) => {
     axios
       .delete(
-        "http://localhost:8080/petbay/api/v1/reminders/deleteReminder" + id
+        "http://localhost:8080/petbay/api/v1/reminders/deleteReminder/" + id
       )
       .then((res) => {
-        window.location.reload();
+        alert("Reminder deleted successfully!");
+        getReminders(userId);
       })
       .catch((err) => console.log(err));
   };

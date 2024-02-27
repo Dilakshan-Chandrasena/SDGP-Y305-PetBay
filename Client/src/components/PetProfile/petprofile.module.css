@@ -23,7 +23,6 @@
 .profImage {
   width: 400px;
   height: 265px;
-  
 }
 
 .petInfoContainer {
@@ -54,4 +53,55 @@
   margin: 25px 0px;
   display: flex;
   justify-content: space-between;
+}
+
+@media (max-width: 768px) {
+  .petProfContainer {
+    margin: auto;
+  }
+
+  .petIdentityContainer {
+    width: 300px;
+    margin-top: 20px;
+    margin: 0px 20px;
+  }
+
+  .profImage {
+    width: 18rem;
+  }
+
+  .petInfoContainer {
+    width: 20rem;
+  }
+}
+
+@media (max-width: 426px) {
+  .petProfContainer {
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .petIdentityContainer {
+    text-align: center;
+    width: 300px;
+    margin-top: 20px;
+    margin: 0px 20px;
+  }
+
+  .petName {
+    padding: 10px 12px;
+  }
+
+  .profImage {
+    align-items: center;
+    width: 18rem;
+  }
+
+  .petDetText {
+    font-size: 13px;
+  }
+
+  .cardLink {
+    font-size: 12px;
+  }
 }

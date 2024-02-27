@@ -55,14 +55,12 @@ export default function AddPetRecord({ reloadRecordsList }) {
 
 //on submitting the form   
   const onSubmit = async (data) => {
-    console.log("OnSubmit");
     const addPetRecordFormData = createFormData(data);
     await addPetRecord(addPetRecordFormData);
   };
 
 //creates the form data from the user input   
   const createFormData = (data) => {
-    console.log("Create Form Data");
     const formData = new FormData();
     formData.append("petId", petId);
     formData.append("recordName", data.recordName);
@@ -84,7 +82,6 @@ export default function AddPetRecord({ reloadRecordsList }) {
           newPetRecordData
         )
         .then((res) => {
-          console.log(res);
           if (res.status == 201) {
             reset();
             handleClose();

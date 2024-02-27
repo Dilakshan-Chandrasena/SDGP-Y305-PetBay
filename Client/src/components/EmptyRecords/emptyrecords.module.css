@@ -3,11 +3,11 @@
   flex-direction: column;
   justify-content: center;
   text-align: center;
-  margin: 0px 450px;
+  align-items: center;
 }
 
 .image {
-  text-align: center;
+  /* text-align: center; */
   width: 24rem;
 }
 
@@ -19,4 +19,10 @@
 .container span {
   color: #6cabd9;
   font-weight: 500;
+}
+
+@media (max-width: 560px) {
+  .image {
+    width: 16rem;
+  }
 }

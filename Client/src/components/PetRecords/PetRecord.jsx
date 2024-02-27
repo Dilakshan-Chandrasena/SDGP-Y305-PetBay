@@ -97,7 +97,7 @@ export default function PetRecord() {
           height: showEmptyRecs ? "fit-content" : "0px",
         }}
       >
-        <EmptyRecords key={""} emptyProperty={"Pet Records"} />
+        <EmptyRecords key={"key"} emptyProperty={"Pet Records"} />
       </div>
     </div>
   );

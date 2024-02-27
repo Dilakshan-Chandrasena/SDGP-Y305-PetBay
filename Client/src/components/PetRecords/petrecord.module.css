@@ -23,7 +23,7 @@
 
 .recordBody {
   display: flex;
-  flex-wrap: wrap;
+  /* flex-wrap: wrap; */
   justify-content: space-between;
   align-items: baseline;
 }
@@ -54,4 +54,52 @@
 }
 .btnContainer Button:nth-child(1) {
   width: 70px;
+}
+
+@media (max-width: 769px) {
+  .recordsHeader {
+    align-items: center;
+    margin: 0px 50px;
+    margin-top: 30px;
+  }
+  .recordCard {
+    margin: auto;
+    margin-top: 20px;
+    height: max-content;
+  }
+  .recordBody {
+    align-items: center;
+    /* flex-direction: column; */
+  }
+
+  .recordInfoContainer {
+    margin: 10px 0px;
+    align-items: center;
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 426px) {
+  .recordsHeader {
+    align-items: center;
+    margin: auto;
+    margin-top: 30px;
+    flex-direction: column;
+  }
+  .recordCard {
+    margin: auto;
+    margin-top: 20px;
+    height: max-content;
+  }
+  .recordBody {
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .recordInfoContainer {
+    margin: 10px 0px;
+
+    align-items: center;
+    flex-direction: column;
+  }
 }

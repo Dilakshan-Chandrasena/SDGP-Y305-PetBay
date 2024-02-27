@@ -34,3 +34,22 @@ body {
   background-color: #d8d8d8;
   color: #5e96be;
 }
+
+@media (max-width: 426px) {
+  .petsHeaderContainer {
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .petsHeaderContainer h1 {
+    margin-bottom: 20px;
+  }
+  .petPageHeader {
+    flex-direction: column;
+
+    text-align: center;
+  }
+
+
+}

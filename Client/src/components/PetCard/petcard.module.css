@@ -6,8 +6,8 @@
 }
 
 .petCard {
-  width: 72%;
-  height: 100px;
+  width: 70%;
+  height: fit-content;
   background-color: #eeeeee;
   border: none;
   padding: 0px 10px;
@@ -35,6 +35,7 @@
 
 .innerContainer {
   display: flex;
+
   justify-content: space-around;
   align-items: center;
 }
@@ -58,4 +59,35 @@
 .innerContainer Button:nth-child(1):hover {
   background-color: #5e96be;
   color: #eeeeee;
+}
+
+@media (max-width: 769px) {
+  /* .detailsContainer {
+    flex-direction: column;
+  }
+
+  .innerContainer {
+    flex-direction: column;
+  } */
+}
+
+@media (max-width: 426px) {
+  .detailsContainer {
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .innerContainer:nth-child(1) {
+    align-items: center;
+    flex-direction: column;
+    margin: 10px 0px;
+  }
+
+  .innerContainer h2 {
+    margin-top: 10px;
+    margin-right: 25px;
+  }
+  .petCard {
+    margin: 8px 0px;
+  }
 }

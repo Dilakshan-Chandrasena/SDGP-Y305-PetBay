@@ -157,9 +157,9 @@ function AddPetModal({ reloadPetList }) {
                 type="text"
                 placeholder="Select Gender"
               />
-              {errors.breed && (
+              {errors.gender && (
                 <span className={styles.errorValidation}>
-                  {errors.breed.message}
+                  {errors.gender.message}
                 </span>
               )}
             </Form.Group>

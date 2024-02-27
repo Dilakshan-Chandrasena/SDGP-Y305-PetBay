@@ -22,6 +22,9 @@ function App() {
             <Route path="/home" element={<Home />} />
             <Route path="/pets/:userId" element={<Pets />}/>
             <Route path="/pet-profile/:petId" element={<PetProfile />} />
+            <Route path="/Quiz" element={<Quiz />} />
+            <Route path="/UploadImage" element={<UploadImage />} />
+
           </Routes>
         </Router>
       </div>

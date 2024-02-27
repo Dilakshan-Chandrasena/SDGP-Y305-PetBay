@@ -5,16 +5,12 @@ import "./custom.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 
+import AddPost from "./AddLostFoundModal";
+
 function Filters() {
   return (
     <div className={styles.filterContainer}>
-      <div className={styles.iconContainer}>
-        <FontAwesomeIcon
-          icon={faPlus}
-          className={styles.addIcon}
-          style={{ color: "#69a6ec" }}
-        />
-      </div>
+      <AddPost />
       <div className={styles.tabsContainer}>
         <Tabs
           defaultActiveKey="all"

@@ -10,7 +10,6 @@ export function useAuth() {
 
 export function AuthProvider({ children }) {
   const [currentUser, setCurrentUser] = useState(null);
-  const [userLoggedIn, setUserLoggedIn] = useState(false);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -20,18 +19,16 @@ export function AuthProvider({ children }) {
 
   async function initializeUser(user) {
     if (user) {
-      setCurrentUser({ ...user });
-      setUserLoggedIn(true);
+      setCurrentUser(user); // Set current user
     } else {
       setCurrentUser(null);
-      setUserLoggedIn(false);
     }
     setLoading(false);
   }
 
   const value = {
     currentUser,
-    userLoggedIn,
+    userId: currentUser ? currentUser.uid : null, // Set userId from currentUser's uid
     loading,
   };
 

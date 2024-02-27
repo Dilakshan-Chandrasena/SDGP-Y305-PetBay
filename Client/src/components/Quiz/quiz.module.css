@@ -1,0 +1,81 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+body {
+  height: 100vh;
+  font-family: "Inter", sans-serif;
+  background-color: #f6f6f6;
+}
+
+.container {
+  width: 640px;
+  margin: auto;
+  margin-top: 100px;
+  background-color: #ffffff;
+  color: #262626;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 40px 50px;
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.container h2 {
+  font-size: 22px;
+  font-weight: 500;
+  padding-bottom: 15px;
+}
+
+.container ul li {
+  border: 1px solid #d3cdcd;
+  list-style: none;
+  align-items: center;
+  font-size: 16px;
+  display: flex;
+  height: 50px;
+  background-color: #ffffff;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  padding-left: 15px;
+}
+
+.container ul li:hover {
+  background-color: #d4eafd;
+  border: 2px solid #2293f7;
+}
+.container button {
+  background: none;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: row;
+  gap: 82%;
+}
+
+.container ul li.selected {
+  background-color: #d4eafd;
+  border: 2px solid #2293f7;
+}
+
+.container .finishButton {
+  background-color: #2293f7;
+  width: 100px;
+  padding: 10px;
+  border-radius: 8px;
+  margin-left: 250px;
+  margin-bottom: 20px;
+}
+.container .finishButton:hover {
+  background-color: #64abe9;
+}
+.finishHeading {
+  text-align: center;
+  margin-bottom: 50px;
+}

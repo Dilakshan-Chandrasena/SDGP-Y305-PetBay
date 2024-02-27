@@ -8,11 +8,17 @@ import { useRef, useState, useEffect } from "react";
 import { questionsData } from "../../assets/questionsData";
 
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../contexts/authContext";
+
+import "firebase/auth";
 
 import Options from "./Options";
 import Finish from "./Finish";
-
+import Header from "../Header/Header";
+import Footer from "../Footer/Footer";
 export default function Quiz() {
+  const { userId } = useAuth();
+
   const [index, setIndex] = useState(0);
   const [lock, setLock] = useState(false);
   const [optionId, setOptionId] = useState(0);
@@ -79,16 +85,17 @@ export default function Quiz() {
 
   return (
     <div>
-      <div className={styles.container}>
+      <Header />
+      <div className={styles.quizContainer}>
         {finish ? (
           <>
-            <Finish userPreferences={userPreferences} />
+            <Finish userId={userId} userPreferences={userPreferences} />
           </>
         ) : (
           <>
-            <div>
+            <div className={styles.quizNo}>
               {" "}
-              {index + 1} of {questionsData.length} question
+              {index + 1} of {questionsData.length} Question
             </div>
             <h2>{question.question}</h2>
 
@@ -122,6 +129,7 @@ export default function Quiz() {
           </>
         )}
       </div>
+      <Footer />
     </div>
   );
 }

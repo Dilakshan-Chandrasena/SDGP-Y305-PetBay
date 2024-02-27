@@ -10,6 +10,10 @@ export function useAuth() {
 
 export function AuthProvider({ children }) {
   const [currentUser, setCurrentUser] = useState(null);
+<<<<<<< HEAD
+=======
+  const [userLoggedIn, setUserLoggedIn] = useState(false);
+>>>>>>> 31380f2b522a9cb3e97d9e2dfd5c54404dc9972e
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -19,16 +23,28 @@ export function AuthProvider({ children }) {
 
   async function initializeUser(user) {
     if (user) {
+<<<<<<< HEAD
       setCurrentUser(user); // Set current user
     } else {
       setCurrentUser(null);
+=======
+      setCurrentUser({ ...user });
+      setUserLoggedIn(true);
+    } else {
+      setCurrentUser(null);
+      setUserLoggedIn(false);
+>>>>>>> 31380f2b522a9cb3e97d9e2dfd5c54404dc9972e
     }
     setLoading(false);
   }
 
   const value = {
     currentUser,
+<<<<<<< HEAD
     userId: currentUser ? currentUser.uid : null, // Set userId from currentUser's uid
+=======
+    userLoggedIn,
+>>>>>>> 31380f2b522a9cb3e97d9e2dfd5c54404dc9972e
     loading,
   };
 

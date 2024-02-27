@@ -147,6 +147,10 @@ export default function Footer() {
                   <a href="" className="me-4 text-reset">
                     <FontAwesomeIcon
                       icon={faInstagram}
+<<<<<<< HEAD
+=======
+                      rotation={1}
+>>>>>>> 31380f2b522a9cb3e97d9e2dfd5c54404dc9972e
                       style={{ color: "#d40c95", fontSize: "50px" }}
                     />
                   </a>

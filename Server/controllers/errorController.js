@@ -1,8 +1,8 @@
-module.exports = (error, req, res, next) => {
-  error.statusCode = error.statusCode || 500;
-  res.status(error.statusCode).json({
-    status: error.statusCode,
-    message: error.message,
-    stac: error.stack,
-  });
-};
+module.exports = (error,req,res,next)=>{
+    error.statusCode = error.statusCode || 500
+    res.status(error.statusCode).json({
+        status: error.statusCode,
+        message: error.message,
+        stac : error.stack
+    });
+}

@@ -1,0 +1,105 @@
+.recordsHeader {
+  display: flex;
+  justify-content: space-between;
+  margin: 30px 175px;
+}
+
+.recordsHeader h1 {
+  font-size: 26px;
+  color: #6cabd9;
+  font-weight: 700;
+}
+
+.recordCard {
+  margin: 25px 180px;
+  width: 72%;
+  height: 80px;
+  background-color: #eeeeee;
+  padding: 0px 10px;
+  border: none;
+  box-shadow: rgba(163, 165, 169, 0.25) 0px 1px 4px,
+    rgba(88, 93, 102, 0.13) 0px 0px 1px 1px;
+}
+
+.recordBody {
+  display: flex;
+  /* flex-wrap: wrap; */
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.recordTitle {
+  color: #4a4141;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.recordInfoContainer {
+  width: 50%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.recordDate {
+  color: #4a4141;
+  font-size: 14px;
+  font-weight: 500;
+}
+.btnContainer {
+  display: flex;
+  align-items: baseline;
+}
+.btnContainer Button {
+  margin: 0px 12px;
+}
+.btnContainer Button:nth-child(1) {
+  width: 70px;
+}
+
+@media (max-width: 769px) {
+  .recordsHeader {
+    align-items: center;
+    margin: 0px 50px;
+    margin-top: 30px;
+  }
+  .recordCard {
+    margin: auto;
+    margin-top: 20px;
+    height: max-content;
+  }
+  .recordBody {
+    align-items: center;
+    /* flex-direction: column; */
+  }
+
+  .recordInfoContainer {
+    margin: 10px 0px;
+    align-items: center;
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 426px) {
+  .recordsHeader {
+    align-items: center;
+    margin: auto;
+    margin-top: 30px;
+    flex-direction: column;
+  }
+  .recordCard {
+    margin: auto;
+    margin-top: 20px;
+    height: max-content;
+  }
+  .recordBody {
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .recordInfoContainer {
+    margin: 10px 0px;
+
+    align-items: center;
+    flex-direction: column;
+  }
+}

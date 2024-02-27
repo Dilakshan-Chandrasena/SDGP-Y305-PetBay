@@ -8,6 +8,7 @@ const {  ref,  getDownloadURL,  uploadBytesResumable, deleteObject} = require("f
 
 // initializing used DB collections
 const petsCollection = db.collection("pets");
+const petRecordsCollection = db.collection("pet-records");
 
 
 /**
@@ -51,6 +52,23 @@ exports.getUserOwnedPets = asyncHandler(async(req,res,next) => {
     res.status(200).json([]);
   }
 });
+
+/**
+ * @description: get pet by the pet id
+ * @param: petId
+ * @method: GET
+ * @returns: pet obj
+ */
+exports.getPetProfileById = asyncHandler((async(req,res,next)=>{
+  const petId = req.params.id;
+  const pet = (await petsCollection.doc(petId).get()).data()
+  console.log(pet);
+  if(pet){
+    res.status(200).json(pet);
+  }else{
+    throw new CustomError("Pet Not Found", 404);
+  }
+}))
 
 
 /**
@@ -96,13 +114,14 @@ exports.updatePet = asyncHandler(async (req, res, next) => {
 exports.deletePet = asyncHandler(async(req,res,next) => {
   const petId = req.params.id;
   const petRef = (await petsCollection.doc(petId).get()).data();
-  console.log(petRef);
+
   if(petRef){
     if(petRef.petImageURL){
       const petImageRef = ref(storage, `pet-profile-images/${petId}`)
       await deleteObject(petImageRef);
     }
-  
+    
+    deleteAllRecords(petId);
     await petsCollection.doc(petId).delete();
    
     res.status(200).json({
@@ -119,7 +138,7 @@ exports.deletePet = asyncHandler(async(req,res,next) => {
  * desc: upload any file for firebase cloud storage
  * return : URL for the file
  *  */
-saveFile = asyncHandler(async (storage, path, req) => {
+const saveFile = asyncHandler(async (storage, path, req) => {
   const storageRef = ref(storage, path);
 
   // Create file metadata including the content type
@@ -140,6 +159,20 @@ saveFile = asyncHandler(async (storage, path, req) => {
   console.log("File successfully uploaded.");
   return downloadURL;
 });
+
+// deleting all the pet records of a pet that is going to be deleted from the system
+const deleteAllRecords = asyncHandler(async(petId)=>{
+  const petRecListSnap = await petRecordsCollection.where('petId', '==', petId).get();
+  const petRecList = petRecListSnap.docs.map(doc=>doc.data());
+  if(petRecList.length > 0){
+    for (let i = 0; i < petRecList.length; i++) {
+      const recId = petRecList[i].id;
+      const petRecFileRef = ref(storage, `pet-records/${recId + '-' + petRecList[i].recordName}`)
+      await deleteObject(petRecFileRef);
+      await petRecordsCollection.doc(recId).delete();
+    }
+  }
+})
 
 
 

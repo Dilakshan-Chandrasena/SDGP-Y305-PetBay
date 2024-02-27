@@ -21,6 +21,8 @@ exports.petProfileValidator = [
     body('userId').notEmpty().withMessage("User ID is required"),
     body('name').notEmpty().withMessage("Pet name is required"),
     body('breed').notEmpty().withMessage("Breed is required"),
+    body('gender').notEmpty().withMessage("Gender is required"),
+    body('address').notEmpty().withMessage("Address is required"),
     body('age').notEmpty().withMessage("Age is required"),
     body('height').notEmpty().withMessage("Height is required"),
     body('weight').notEmpty().withMessage("Weight is required"),

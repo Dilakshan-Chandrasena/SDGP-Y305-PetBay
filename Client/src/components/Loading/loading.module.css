@@ -1,0 +1,9 @@
+.spinnerContainer {
+  display: flex;
+  justify-content: center;
+}
+
+.spinner {
+  margin: 0px 4px;
+  color: #6cabd9;
+}

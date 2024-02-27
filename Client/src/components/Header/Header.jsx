@@ -54,7 +54,11 @@ export default function Header() {
               >
                 My Pets
               </Nav.Link>
-              <Nav.Link href="#Preferences" className={`mx-2 ${styles.link}`}>
+              <Nav.Link
+                as={Link}
+                to={"/Quiz"}
+                className={`mx-2 ${styles.link}`}
+              >
                 Preferences
               </Nav.Link>
               <Nav.Link href="#Reminders" className={`mx-2 ${styles.link}`}>

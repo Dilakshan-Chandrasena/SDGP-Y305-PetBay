@@ -6,8 +6,10 @@ import LogIn from "./pages/LogInPage";
 import SignUp from "./pages/SignUpPage";
 import Home from "./pages/HomePage";
 import GetUserDetails from "./pages/GetUserDetailsPage";
+import Quiz from "./components/Quiz/quiz";
 import Pets from "./pages/PetsPage";
 import PetProfile from "./pages/PetProfilePage";
+
 
 function App() {
   return (
@@ -20,6 +22,7 @@ function App() {
             <Route path="/signup" element={<SignUp />} />
             <Route path="/getuserdetails" element={<GetUserDetails />} />
             <Route path="/home" element={<Home />} />
+            <Route path="/quiz" element={<Quiz />} />
             <Route path="/pets/:userId" element={<Pets />} />
             <Route path="/pet-profile/:petId" element={<PetProfile />} />
           </Routes>

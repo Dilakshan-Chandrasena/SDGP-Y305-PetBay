@@ -70,15 +70,18 @@ function AddReminder(){
         backdrop="static"
         keyboard={false}
       >
-        <Modal.Header closeButton>
-        <Button type="submit" className={styles.addButton}>Add</Button>
-          <Modal.Title>Add a Reminder</Modal.Title>
-          <Button className={styles.cancelButton} onClick={handleClose}>
-            Cancel
-          </Button>
-        </Modal.Header>
-        <Modal.Body>
-        <Form noValidate validated={validated} onSubmit={handleSubmit}>
+        <Form onSubmit={handleSubmit(onSubmit)} disabled={isSubmitting}>
+          <Modal.Header className={styles.modalHeader}>
+            <Button variant="secondary" onClick={handleClose}>
+              Cancel
+            </Button>
+            <Modal.Title style={{ fontSize: "18px" }}>New Record</Modal.Title>
+            <Button type="submit" variant="primary">
+              Add
+            </Button>
+          </Modal.Header>
+          <Modal.Body>
+          <Form noValidate validated={validated} onSubmit={handleSubmit}>
       <Row className="mb-3">
         <Form.Group as={Col} md="7" controlId="validationCustom01">
           <Form.Label>Pet's Name</Form.Label>
@@ -129,7 +132,9 @@ function AddReminder(){
       </Row>
       
     </Form>
-        </Modal.Body>
+          </Modal.Body>
+          <Modal.Footer></Modal.Footer>
+        </Form>
       </Modal>
     </>
     )

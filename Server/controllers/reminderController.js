@@ -18,8 +18,8 @@ exports.getReminders = asyncHandler(async(req,res,next) => {
 
 exports.addReminder = asyncHandler(async (req,res,next) =>{
   const reminder = req.body;
-  // const reminderId = uuid.v4();
-  // reminder.id = reminderId;
+  const reminderId = uuid.v4();
+  reminder.id = reminderId;
   try{
     await remindersCollection.add(reminder)
     res.status(201).send("Reminder added successfully");

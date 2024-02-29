@@ -13,3 +13,23 @@
 .hidden{
     visibility: hidden;
 }
+
+.cancelButton{
+    color:#6cabd9;
+    background-color: transparent;
+    border: none;
+    font-weight: 500;
+    margin-right: 0;
+
+}
+
+.cancelButton:hover{
+    
+}
+
+.addButton{
+    color:#6cabd9;
+    background-color: transparent;
+    border: none;
+    font-weight: 500;
+}

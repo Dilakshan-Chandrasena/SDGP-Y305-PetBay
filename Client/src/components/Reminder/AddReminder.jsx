@@ -17,6 +17,7 @@ function AddReminder(){
     const handleShow = () => setShow(true);
     const { userId } = useParams();
     const [values, setValues] = useState({
+        id: '',
         userId: '',
         dogName: '',
         reminderText: '',
@@ -70,7 +71,11 @@ function AddReminder(){
         keyboard={false}
       >
         <Modal.Header closeButton>
+        <Button type="submit" className={styles.addButton}>Add</Button>
           <Modal.Title>Add a Reminder</Modal.Title>
+          <Button className={styles.cancelButton} onClick={handleClose}>
+            Cancel
+          </Button>
         </Modal.Header>
         <Modal.Body>
         <Form noValidate validated={validated} onSubmit={handleSubmit}>
@@ -122,10 +127,7 @@ function AddReminder(){
           </Form.Control.Feedback>
         </Form.Group>
       </Row>
-      <Button type="submit" className="border-0">Add</Button>
-      <Button className="bg-danger border-0" variant="secondary" onClick={handleClose}>
-            Cancel
-          </Button>
+      
     </Form>
         </Modal.Body>
       </Modal>

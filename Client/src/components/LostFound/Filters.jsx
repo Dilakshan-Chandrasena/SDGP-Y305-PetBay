@@ -2,18 +2,22 @@ import Tab from "react-bootstrap/Tab";
 import Tabs from "react-bootstrap/Tabs";
 import styles from "./lostfound.module.css";
 import "./custom.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import { useState } from "react";
 
-import AddPost from "./AddLostFoundModal";
+function Filters({ onFilterChange }) {
+  const [activeFilter, setActiveFilter] = useState("all");
 
-function Filters() {
+  const handleFilterChange = (filter) => {
+    setActiveFilter(filter);
+    onFilterChange(filter); // Notify parent component about the filter change
+  };
+
   return (
     <div className={styles.filterContainer}>
-      <AddPost />
       <div className={styles.tabsContainer}>
         <Tabs
-          defaultActiveKey="all"
+          activeKey={activeFilter}
+          onSelect={handleFilterChange}
           transition={false}
           id="noanim-tab-example"
           className={`mb-3 justify-content-end ${styles.customTabs}`}

@@ -1,10 +1,10 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import styles from "./lostfound.module.css";
-import image1 from "../../assets/images/dogs/dog1.jpg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSackDollar } from "@fortawesome/free-solid-svg-icons";
+import axios from "axios";
 
 import {
   MDBCol,
@@ -22,14 +22,34 @@ import {
   MDBTypography,
 } from "mdb-react-ui-kit";
 
-function ViewDetails() {
+function ViewDetails({ postId }) {
   const [fullscreen, setFullscreen] = useState(true);
   const [show, setShow] = useState(false);
+  const [lostFoundDetails, setLostFoundDetails] = useState({});
 
   function handleShowModal(breakpoint) {
+    0;
     setFullscreen(breakpoint);
     setShow(true);
   }
+
+  useEffect(() => {
+    getPostById(postId);
+  }, []);
+
+  const getPostById = async (postId) => {
+    await axios
+      .get(
+        `http://localhost:8080/petbay/api/v1/lost-found/post-details/${postId}`
+      )
+      .then((res) => {
+        setLostFoundDetails(res.data);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  };
+
   return (
     <div>
       <Button
@@ -47,7 +67,11 @@ function ViewDetails() {
             <MDBContainer className="py-5">
               <MDBRow>
                 <MDBCol>
-                  <h2 className={styles.heading}>MISSING DOG</h2>
+                  <h2 className={styles.heading}>
+                    {lostFoundDetails.status === "lost"
+                      ? "MISSING PET"
+                      : "FOUND PET"}
+                  </h2>
                 </MDBCol>
               </MDBRow>
 
@@ -61,8 +85,14 @@ function ViewDetails() {
                         padding: "22px",
                       }}
                     >
-                      <span style={{ color: "white", fontSize: "25px" }}>
-                        ROBIN
+                      <span
+                        style={{
+                          color: "white",
+                          fontSize: "25px",
+                          textTransform: "uppercase",
+                        }}
+                      >
+                        {lostFoundDetails.name}
                       </span>
                     </MDBCardHeader>
                     <MDBRipple
@@ -71,7 +101,7 @@ function ViewDetails() {
                       className="bg-image hover-overlay"
                     >
                       <MDBCardImage
-                        src={image1}
+                        src={lostFoundDetails.lostFoundImageURL}
                         style={{ width: "100%" }}
                         fluid
                         alt="..."
@@ -96,7 +126,7 @@ function ViewDetails() {
                         </MDBCol>
                         <MDBCol sm="9">
                           <MDBCardText className="text-muted">
-                            Pomsky
+                            {lostFoundDetails.breed}
                           </MDBCardText>
                         </MDBCol>
                       </MDBRow>
@@ -107,7 +137,7 @@ function ViewDetails() {
                         </MDBCol>
                         <MDBCol sm="9">
                           <MDBCardText className="text-muted">
-                            Black + White
+                            {lostFoundDetails.color}
                           </MDBCardText>
                         </MDBCol>
                       </MDBRow>
@@ -118,7 +148,7 @@ function ViewDetails() {
                         </MDBCol>
                         <MDBCol sm="9">
                           <MDBCardText className="text-muted">
-                            24.13cm
+                            {lostFoundDetails.height}
                           </MDBCardText>
                         </MDBCol>
                       </MDBRow>
@@ -129,7 +159,7 @@ function ViewDetails() {
                         </MDBCol>
                         <MDBCol sm="9">
                           <MDBCardText className="text-muted">
-                            28/12/2023 15:44
+                            {lostFoundDetails.date}
                           </MDBCardText>
                         </MDBCol>
                       </MDBRow>
@@ -140,7 +170,7 @@ function ViewDetails() {
                         </MDBCol>
                         <MDBCol sm="9">
                           <MDBCardText className="text-muted">
-                            Bay Area, San Francisco, CA
+                            {lostFoundDetails.area}
                           </MDBCardText>
                         </MDBCol>
                       </MDBRow>
@@ -212,7 +242,9 @@ function ViewDetails() {
                         If you have any information please call
                       </span>
                       <br />
-                      <span style={{ color: "white" }}>+123 456 7890</span>
+                      <span style={{ color: "white" }}>
+                        {lostFoundDetails.contact}
+                      </span>
                     </MDBCardFooter>
                   </MDBCard>
                 </MDBCol>

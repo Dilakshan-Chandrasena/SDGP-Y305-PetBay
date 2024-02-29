@@ -16,7 +16,8 @@ import "firebase/auth";
 function AddLostFoundModal({ reloadLostFoundPosts }) {
   const { userId } = useAuth();
   const [show, setShow] = useState(false);
-  const [status, setStatus] = useState("lost");
+  const [status, setStatus] = useState("");
+  const [gender, setGender] = useState("");
 
   const ACCEPTED_IMAGE_TYPES = [
     "image/jpeg",
@@ -26,14 +27,12 @@ function AddLostFoundModal({ reloadLostFoundPosts }) {
   ];
 
   const formSchema = z.object({
-    status: z.string().min(1, "Status is required"),
     name: z.string().min(1, "Name is required"),
     breed: z.string().min(1, "Breed is required"),
     color: z.string().min(1, "Colour is required"),
-    gender: z.string().min(1, "Gender is required"),
     area: z.string().min(1, "Area is required"),
-    date: z.string().min(1, "Date is required"),
     height: z.string().min(1, "Height is required"),
+    date: z.string().min(1, "Date is required"),
     contact: z.string().min(1, "Contact is required"),
     filename: z
       .any()
@@ -55,6 +54,7 @@ function AddLostFoundModal({ reloadLostFoundPosts }) {
   };
 
   const handleShow = () => setShow(true);
+  const onInvalid = (errors) => console.error(errors);
 
   const onSubmit = async (data) => {
     const addLostFoundData = createFormData(data);
@@ -67,40 +67,34 @@ function AddLostFoundModal({ reloadLostFoundPosts }) {
     formData.append("name", data.name);
     formData.append("breed", data.breed);
     formData.append("color", data.color);
-    formData.append("gender", data.gender);
+    formData.append("gender", gender);
     formData.append("area", data.area);
     formData.append("height", data.height);
-    formData.append("status", status);
+    formData.append("status", status); // Use selected status
+    formData.append("date", data.date);
+    formData.append("contact", data.contact);
     formData.append("filename", data.filename[0]);
     formData.append("lostFoundImageURL", " ");
     formData.append("id", "");
     return formData;
   };
 
-  const addLostFoundPost = async (newLostFoundPost) => {
-    console.log(newLostFoundPost);
+  const addLostFoundPost = async (newLostFoundData) => {
     try {
-      await axios
-        .post(
-          "http://localhost:8080/petbay/api/v1/lost-found/add-lostfound-posts",
-          newLostFoundPost
-        )
-        .then((res) => {
-          console.log(res);
-          if (res.status == 201) {
-            reset();
-            handleClose();
-            reloadLostFoundPosts(userId);
-          } else {
-            throw new Error(res);
-          }
-        })
-        .catch((err) => {
-          console.log(err);
-          alert(err.message);
-        });
+      const res = await axios.post(
+        "http://localhost:8080/petbay/api/v1/lost-found/add-lostfound-posts",
+        newLostFoundData
+      );
+      if (res.status === 201) {
+        reset();
+        handleClose();
+        reloadLostFoundPosts();
+      } else {
+        throw new Error("Failed to add post");
+      }
     } catch (error) {
-      console.log(error);
+      console.error("Error adding post:", error);
+      alert("Failed to add post. Please try again.");
     }
   };
 
@@ -118,12 +112,15 @@ function AddLostFoundModal({ reloadLostFoundPosts }) {
         backdrop="static"
         keyboard={false}
       >
-        <Form onSubmit={handleSubmit(onSubmit)} disabled={isSubmitting}>
+        <Form
+          onSubmit={handleSubmit(onSubmit, onInvalid)}
+          disabled={isSubmitting}
+        >
           <Modal.Header className={styles.modalHeader}>
             <Button variant="secondary" onClick={handleClose}>
               Cancel
             </Button>
-            <Modal.Title style={{ fontSize: "18px" }}>New Pet</Modal.Title>
+            <Modal.Title style={{ fontSize: "18px" }}>New Post</Modal.Title>
             <Button type="submit" variant="primary">
               Add
             </Button>
@@ -149,6 +146,18 @@ function AddLostFoundModal({ reloadLostFoundPosts }) {
                 onChange={() => setStatus("found")}
               />
             </Form.Group>
+            {/* <Form.Group className="mb-3">
+              <Form.Control
+                {...register("status")}
+                type="text"
+                placeholder="Enter Status"
+              />
+              {errors.status && (
+                <span className={styles.errorValidation}>
+                  {errors.status.message}
+                </span>
+              )}
+            </Form.Group> */}
             <Form.Group className="mb-3">
               <Form.Control
                 {...register("name")}
@@ -188,7 +197,7 @@ function AddLostFoundModal({ reloadLostFoundPosts }) {
               )}
             </Form.Group>
 
-            <Form.Group className="mb-3">
+            {/* <Form.Group className="mb-3">
               <Form.Control
                 {...register("gender")}
                 type="text"
@@ -199,6 +208,26 @@ function AddLostFoundModal({ reloadLostFoundPosts }) {
                   {errors.gender.message}
                 </span>
               )}
+            </Form.Group> */}
+
+            <Form.Group className="mb-3">
+              <span style={{ paddingRight: "40px" }}>Gender</span>
+              <Form.Check
+                inline
+                label="Male"
+                type="radio"
+                name="gender"
+                value="Male"
+                onChange={() => setGender("Male")}
+              />
+              <Form.Check
+                inline
+                label="Female"
+                type="radio"
+                name="gender"
+                value="Female"
+                onChange={() => setGender("Female")}
+              />
             </Form.Group>
 
             <Form.Group className="mb-3">

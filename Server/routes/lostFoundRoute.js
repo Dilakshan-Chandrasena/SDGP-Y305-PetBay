@@ -20,4 +20,7 @@ router
   );
 
 router.route("/lost-found-posts").get(lostFoundController.getAllPosts);
+
+router.route("/post-details/:id").get(lostFoundController.getPostById);
+
 module.exports = router;

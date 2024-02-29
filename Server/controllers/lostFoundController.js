@@ -22,13 +22,13 @@ exports.addlostFound = asyncHandler(async (req, res, next) => {
   const newlostFoundPost = req.body;
   newlostFoundPost.id = uuid.v4();
 
-  const petProfImage = req.file;
+  const lostFoundImage = req.file;
   let lostFoundImageURL = "";
-  if (petProfImage) {
+  if (lostFoundImage) {
     const path = `lost-found-images/${newlostFoundPost.id}`;
     // setting the profile image of the new pet
     lostFoundImageURL = await saveFile(storage, path, req);
-    newlostFoundPost.petImageURL = lostFoundImageURL;
+    newlostFoundPost.lostFoundImageURL = lostFoundImageURL;
   }
   const savedLostFoundPost = await lostFoundPostsCollection
     .doc(newlostFoundPost.id)
@@ -52,6 +52,16 @@ exports.getAllPosts = asyncHandler(async (req, res, next) => {
     res.status(200).json(allLostFoundPosts);
   } else {
     res.status(200).json([]);
+  }
+});
+
+exports.getPostById = asyncHandler(async (req, res, next) => {
+  const postId = req.params.id;
+  const post = (await lostFoundPostsCollection.doc(postId).get()).data();
+  if (post) {
+    res.status(200).json(post);
+  } else {
+    throw new CustomError("Post Not Found", 404);
   }
 });
 

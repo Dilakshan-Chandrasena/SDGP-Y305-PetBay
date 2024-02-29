@@ -10,7 +10,7 @@ import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 
-function AddReminder(){
+function AddReminder({loadReminders}){
     const [show, setShow] = useState(false);
     const [data, setData] = useState([]);
     const handleClose = () => setShow(false);
@@ -40,8 +40,8 @@ function AddReminder(){
         await axios.post('http://localhost:8080/petbay/api/v1/reminders/addReminder/', values)
         .then((res) =>{
             console.log(values);
-            navigate('/reminder/' + userId)
-            location.reload();
+            loadReminders;
+            handleClose();
         })
         .catch(err => console.log(err))
         setValidated(true);
@@ -70,12 +70,12 @@ function AddReminder(){
         backdrop="static"
         keyboard={false}
       >
-        <Form onSubmit={handleSubmit(onSubmit)} disabled={isSubmitting}>
+        <Form onSubmit={handleSubmit}>
           <Modal.Header className={styles.modalHeader}>
             <Button variant="secondary" onClick={handleClose}>
               Cancel
             </Button>
-            <Modal.Title style={{ fontSize: "18px" }}>New Record</Modal.Title>
+            <Modal.Title style={{ fontSize: "18px" }}>New Reminder</Modal.Title>
             <Button type="submit" variant="primary">
               Add
             </Button>

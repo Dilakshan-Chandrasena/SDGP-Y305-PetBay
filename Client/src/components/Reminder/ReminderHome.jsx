@@ -41,14 +41,14 @@ function ReminderHome() {
       });
   };
 
-  const deleteReminderHandle = (id) => {
-    axios
-      .delete(
-        "http://localhost:8080/petbay/api/v1/reminders/deleteReminder/" + id
-      )
+  const deleteReminderHandle = async (id) => {
+    await axios
+      .delete(`http://localhost:8080/petbay/api/v1/reminders/deleteReminder/${id}`)
       .then((res) => {
-        alert("Reminder deleted successfully!");
-        getReminders(userId);
+        if (res.status == 200) {
+          alert("Reminder deleted successfully!");
+          getReminders();
+        }
       })
       .catch((err) => console.log(err));
   };
@@ -80,7 +80,7 @@ function ReminderHome() {
       </div>
 
       {data.map((reminder) => (
-        <Card className={styles.reminderCard}>
+        <Card loadReminders={getReminders} className={styles.reminderCard}>
           <Card.Body className={styles.reminderBody}>
           <span>
           <FontAwesomeIcon

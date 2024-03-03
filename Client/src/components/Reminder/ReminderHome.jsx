@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import styles from './reminder.module.css';
@@ -17,7 +17,7 @@ function ReminderHome() {
   const [img, setImage] = useState([]);
   const { userId } = useParams();
   const [showEmptyRecs, setShowEmptyRecs] = useState(false);
-  const navigate = useNavigate();
+
   useEffect(() => {
     getReminders();
   }, []);

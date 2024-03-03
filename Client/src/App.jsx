@@ -7,6 +7,7 @@ import SignUp from "./pages/SignUpPage";
 import Home from "./pages/HomePage";
 import GetUserDetails from "./pages/GetUserDetailsPage";
 import Reminder from './pages/ReminderPage';
+import GoogleCalendar from './pages/GoogleCalendarPage'
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
             <Route path="/getuserdetails" element={<GetUserDetails />} />
             <Route path="/home" element={<Home />} />
             <Route path="/reminder/:userId" element={<Reminder />} />
+            <Route path="/google-calendar" element={<GoogleCalendar />} />
           </Routes>
         </Router>
       </div>

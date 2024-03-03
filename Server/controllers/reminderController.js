@@ -6,19 +6,10 @@ const { google } = require("googleapis");
 
 const remindersCollection = db.collection('reminders');
 
-const calendar = google.calendar({
-  version: "v3",
-  auth: process.env.API_KEY
-})
-
-const scopes = [
-  'https://www.googleapis.com/auth/calendar'
-]
-
 const oauth2Client = new google.auth.OAuth2(
-  process.env.CLIENT_ID,
-  process.env.CLIENT_SECRET,
-  process.env.REDIRECT_URL
+    process.env.CLIENT_ID,
+    process.env.CLIENT_SECRET,
+    process.env.REDIRECT_URL
 )
 
 exports.getReminders = asyncHandler(async(req,res,next) => {
@@ -32,23 +23,17 @@ exports.getReminders = asyncHandler(async(req,res,next) => {
   }
 });
 
-exports.getGoogleAuth = asyncHandler(async (req, res, next) => {
-  const url = oauth2Client.generateAuthUrl({
-    access_type: "offline",
-    scope: scopes,
-});
-console.log(url);
-res.redirect(url);
+
+exports.createTokens = asyncHandler(async (req, res, next) => {
+  try {
+    const { code } = res.body
+    const response = await oauth2Client.getToken(code)
+    res.send(response)
+  } catch (error) {
+    next(error.response.data)
+  }
 })
 
-exports.googleRedirect = asyncHandler(async (req, res, next) => {
-  const code = req.query.code;
-
-  const { tokens } = await oauth2Client.getToken(code);
-  oauth2Client.setCredentials(tokens);
-
-  res.status(201).send("it's working");
-})
 
 exports.scheduleEvent = asyncHandler (async (req, res, next) => {
   const reminder = req.body;

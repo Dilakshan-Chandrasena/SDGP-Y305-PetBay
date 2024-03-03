@@ -38,10 +38,19 @@ function AddReminder({loadReminders}){
         event.preventDefault();
         values.userId = userId;
         await axios.post('http://localhost:8080/petbay/api/v1/reminders/addReminder/', values)
-        .then((res) =>{
+        .then(async (res) =>{
+          await axios.get('http://localhost:8080/petbay/api/v1/reminders/google/')
+          .then(async (res) => {
+            await axios.get('http://localhost:8080/petbay/api/v1/reminders/google/redirect/')
+          })
+          .then(async (res) => {
+            await axios.post("http://localhost:8080/petbay/api/v1/reminders/schedule-event/", values)
+          })
+          .then((res) => {
             console.log(values);
             loadReminders;
             handleClose();
+          })
         })
         .catch(err => console.log(err))
         setValidated(true);

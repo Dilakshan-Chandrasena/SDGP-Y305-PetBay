@@ -5,6 +5,7 @@ const dotenv = require("dotenv").config();
 const cors = require("cors");
 const CustomError = require("./utils/CustomError.js");
 const globalErrorHandler = require("./controllers/errorController.js");
+const { google } = require('googleapis');
 
 const petProfileRoute = require("./routes/petProfileRoute.js");
 const petRecordRoute = require("./routes/petRecordRoute.js");
@@ -34,6 +35,12 @@ app.all("*", (req, res, next) => {
     404
   );
   next(err);
+});
+
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', 'http://localhost:5173');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  next();
 });
 
 

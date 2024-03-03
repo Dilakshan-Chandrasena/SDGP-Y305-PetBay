@@ -12,8 +12,11 @@ import {
 import { auth } from "../../config/firebase";
 import { signOut } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../contexts/authContext";
 
 export default function Header() {
+  const { userId } = useAuth();
+  console.log();
   const navigate = useNavigate();
   const logout = async () => {
     try {
@@ -27,45 +30,65 @@ export default function Header() {
   return (
     <div className={styles.body}>
       {" "}
-      <Navbar expand="lg" className="bg-body-tertiary py-lg-4 py-md-3 py-2">
+      <Navbar bg="dark" data-bs-theme="dark">
         {" "}
         <Container fluid>
-          <Navbar.Toggle aria-controls="navbarScroll" />
+          <Navbar.Toggle
+            aria-controls="navbarScroll"
+            style={{ color: "whitesmoke", background: "whitesmoke" }}
+          />
           <Navbar.Collapse id="navbarScroll">
             <Nav
               className="mx-auto my-2 my-lg-0"
               style={{ maxHeight: "100px" }}
-              navbarScroll
             >
               <Navbar.Brand
-                href="#"
+                href="/home"
                 className="mx-lg-4 mx-md-3 mx-2"
-                style={{ fontWeight: "bolder" }}
+                style={{ fontWeight: "bolder", color: "whitesmoke" }}
               >
                 <FontAwesomeIcon icon={faPaw} /> PetBay
               </Navbar.Brand>
-              <Nav.Link href="#action1" className="mx-lg-3 mx-md-3 mx-2">
+              <Nav.Link
+                href={`/pets/${userId}`}
+                className={`mx-lg-3 mx-md-3 mx-2 ` + styles.link}
+              >
                 {" "}
-                Home
+                My Pets
               </Nav.Link>
 
-              <Nav.Link href="#action2" className="mx-lg-3 mx-md-3 mx-2">
+              <Nav.Link
+                href="#Preferences"
+                className={`mx-lg-3 mx-md-3 mx-2 ` + styles.link}
+              >
                 {" "}
                 Preferences
               </Nav.Link>
-              <Nav.Link href="#action2" className="mx-lg-3 mx-md-2 mx-2">
+              <Nav.Link
+                href="#Reminders"
+                className={`mx-lg-3 mx-md-3 mx-2 ` + styles.link}
+              >
                 {" "}
                 Reminders
               </Nav.Link>
-              <Nav.Link href="#action2" className="mx-lg-3 mx-md-2 mx-2">
+              <Nav.Link
+                href="#Community"
+                className={`mx-lg-3 mx-md-3 mx-2 ` + styles.link}
+              >
                 {" "}
                 Community
               </Nav.Link>
-              <Nav.Link href="#action2" className="mx-lg-3 mx-md-2 mx-2">
+              <Nav.Link
+                href="#LostFound"
+                className={`mx-lg-3 mx-md-3 mx-2 ` + styles.link}
+              >
                 {" "}
                 Lost & Found
               </Nav.Link>
-              <Nav.Link href="#action2" className="mx-lg-3 mx-md-2 mx-2">
+              <Nav.Link
+                href="#Prediction"
+                className={`mx-lg-3 mx-md-3 mx-2 ` + styles.link}
+              >
                 {" "}
                 Pet Prediction
               </Nav.Link>

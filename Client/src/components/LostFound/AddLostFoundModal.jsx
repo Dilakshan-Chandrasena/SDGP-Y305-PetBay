@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styles from "./lostfound.module.css";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { useForm } from "react-hook-form";
-import { z } from "zod";
+import { date, z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
 import Loading from "./Loading";
@@ -61,6 +61,12 @@ function AddLostFoundModal({ reloadLostFoundPosts }) {
     await addLostFoundPost(addLostFoundData);
   };
 
+  const getCurrentDateTime = () => {
+    const now = new Date();
+    const formattedDateTime = now.toISOString();
+    return formattedDateTime;
+  };
+
   const createFormData = (data) => {
     const formData = new FormData();
     formData.append("userId", userId);
@@ -75,6 +81,7 @@ function AddLostFoundModal({ reloadLostFoundPosts }) {
     formData.append("contact", data.contact);
     formData.append("filename", data.filename[0]);
     formData.append("lostFoundImageURL", " ");
+    formData.append("createdDate", getCurrentDateTime());
     formData.append("id", "");
     return formData;
   };

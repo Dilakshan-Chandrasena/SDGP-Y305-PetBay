@@ -8,6 +8,22 @@ export default function NoticeCard({ data }) {
     return status === "lost";
   };
 
+  const getTimeDifference = (createdDate) => {
+    const currentDate = new Date();
+    const diffTime = Math.abs(currentDate - new Date(createdDate));
+    const diffMinutes = Math.ceil(diffTime / (1000 * 60));
+    const diffHours = Math.ceil(diffTime / (1000 * 60 * 60));
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+    if (diffDays > 1) {
+      return `${diffDays} days ago`;
+    } else if (diffHours > 1) {
+      return `${diffHours} hours ago`;
+    } else {
+      return `${diffMinutes} minutes ago`;
+    }
+  };
+
   return (
     <div>
       <Card key={data.id} className={`${styles.card}`}>
@@ -42,7 +58,9 @@ export default function NoticeCard({ data }) {
             <ViewDetails postId={data.id} />
           </div>
         </Card.Body>
-        <Card.Footer className="text-center text-muted">2 days ago</Card.Footer>
+        <Card.Footer className="text-center text-muted">
+          {getTimeDifference(data.createdDate)}
+        </Card.Footer>
       </Card>
     </div>
   );

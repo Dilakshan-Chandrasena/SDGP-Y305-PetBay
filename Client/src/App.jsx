@@ -9,7 +9,7 @@ import GetUserDetails from "./pages/GetUserDetailsPage";
 import Quiz from "./components/Quiz/quiz";
 import Pets from "./pages/PetsPage";
 import PetProfile from "./pages/PetProfilePage";
-
+import UploadBreedImage from "./pages/UploadBreedImage";
 
 function App() {
   return (
@@ -25,6 +25,7 @@ function App() {
             <Route path="/quiz" element={<Quiz />} />
             <Route path="/pets/:userId" element={<Pets />} />
             <Route path="/pet-profile/:petId" element={<PetProfile />} />
+            <Route path="/pet-recommendation" element={<UploadBreedImage />} />
           </Routes>
         </Router>
       </div>

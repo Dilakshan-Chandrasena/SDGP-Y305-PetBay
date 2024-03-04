@@ -15,7 +15,7 @@ export default function AddPetRecord({ reloadRecordsList }) {
   const { petId } = useParams();
   const [show, setShow] = useState(false);
 
-//Declaring accepted file formats for record   
+  //Declaring accepted file formats for record
   const ACCEPTED_MIME_TYPES = [
     "image/gif",
     "image/jpeg",
@@ -25,7 +25,7 @@ export default function AddPetRecord({ reloadRecordsList }) {
     "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
   ];
 
-//defining a zod schema to validate form inputs   
+  //defining a zod schema to validate form inputs
   const formSchema = z.object({
     recordName: z.string().min(1, "Name is required"),
     date: z.string().min(1, "Date is required"),
@@ -37,7 +37,7 @@ export default function AddPetRecord({ reloadRecordsList }) {
       ),
   });
 
-//handling the form   
+  //handling the form
   const {
     register,
     handleSubmit,
@@ -45,21 +45,21 @@ export default function AddPetRecord({ reloadRecordsList }) {
     formState: { errors, isSubmitting },
   } = useForm({ resolver: zodResolver(formSchema) });
 
-//Close pop up form   
+  //Close pop up form
   const handleClose = () => {
     setShow(false);
   };
 
-//Opens pop up form   
+  //Opens pop up form
   const handleShow = () => setShow(true);
 
-//on submitting the form   
+  //on submitting the form
   const onSubmit = async (data) => {
     const addPetRecordFormData = createFormData(data);
     await addPetRecord(addPetRecordFormData);
   };
 
-//creates the form data from the user input   
+  //creates the form data from the user input
   const createFormData = (data) => {
     const formData = new FormData();
     formData.append("petId", petId);
@@ -69,10 +69,11 @@ export default function AddPetRecord({ reloadRecordsList }) {
     formData.append("petRecordURL", " ");
     formData.append("id", "");
 
+
     return formData;
   };
 
-//saves a new pet record in the DB using backend api call:POST   
+  //saves a new pet record in the DB using backend api call:POST
   const addPetRecord = async (newPetRecordData) => {
     console.log(newPetRecordData);
     try {

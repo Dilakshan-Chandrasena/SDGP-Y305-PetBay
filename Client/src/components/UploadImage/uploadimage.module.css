@@ -1,0 +1,188 @@
+.dropzoneContainer {
+  /* width: 200vh; */
+  height: 80vh;
+  background: #499bd271;
+  margin: 20px 40px;
+  border-radius: 20px;
+  border: solid #436985 2px;
+  border-style: dashed;
+  border-width: 6px;
+}
+
+.dropzone {
+  height: 80vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.icon {
+  font-size: 100px;
+  margin-bottom: 20px;
+  color: #314d60;
+}
+
+.uploadIntro {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.dropzone p {
+  font-size: 30px;
+  font-weight: 600;
+  color: #314d60;
+}
+
+.uploadIntro span {
+  margin-top: -20px;
+  font-weight: 600;
+  color: #5381a0;
+}
+
+.postUpload {
+  display: flex;
+  height: 80vh;
+  /* flex-direction: column; */
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.postUpload img {
+  width: fit-content;
+  height: 60vh;
+  border-radius: 10px;
+}
+
+.predContainer {
+  height: 60vh;
+  width: 500px;
+  padding: 20px;
+  background: #e6e5e5cd;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-shadow: rgba(211, 218, 233, 0.25) 0px 1px 4px,
+    rgba(241, 241, 241, 0.13) 0px 0px 1px 1px;
+}
+
+.iconContainer {
+  display: flex;
+}
+
+.iconPaw {
+  font-size: 20px;
+  margin-right: 8px;
+  color: #5381a0;
+}
+
+.predContainer span,
+p {
+  color: #5381a0;
+  font-weight: 600;
+}
+
+.predContainer h1 {
+  color: #4a4141;
+  text-transform: capitalize;
+}
+
+.predContainer span {
+  text-transform: capitalize;
+}
+
+.btnConatiner {
+  width: max-content;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.predContainer div Button {
+  margin: 10px 0px;
+}
+
+@media (max-width: 769px) {
+  .postUpload img {
+    width: 15rem;
+    max-height: 60vh;
+    border-radius: 10px;
+  }
+
+  .predContainer {
+    width: 300px;
+    padding: 140px 20px;
+  }
+  .iconPaw {
+    font-size: 16px;
+  }
+  .predContainer span,
+  p {
+    font-size: 12px;
+  }
+  .predContainer h1 {
+    font-size: 26px;
+  }
+
+  .predContainer div Button {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 426px) {
+  .dropzoneContainer {
+    height: 130vh;
+  }
+
+  .dropzone {
+    height: 130vh;
+    text-align: center;
+  }
+
+  .icon {
+    font-size: 70px;
+  }
+
+  .dropzone p {
+    font-size: 20px;
+  }
+
+  .dropzone span {
+    font-size: 14px;
+  }
+  .postUpload {
+    display: flex;
+    flex-direction: column;
+    height: 80vh;
+  }
+
+  .postUpload img {
+    margin-top: 180px;
+    width: 14rem;
+    max-height: 60vh;
+    border-radius: 10px;
+  }
+
+  .predContainer {
+    width: 260px;
+    padding: 140px 20px;
+    margin-top: 20px;
+  }
+  .iconPaw {
+    font-size: 14px;
+  }
+  .predContainer span,
+  p {
+    font-size: 12px;
+  }
+  .predContainer h1 {
+    font-size: 22px;
+  }
+
+  .predContainer div Button {
+    font-size: 12px;
+  }
+}

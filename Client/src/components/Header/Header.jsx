@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
@@ -49,7 +49,8 @@ export default function Header() {
                 <FontAwesomeIcon icon={faPaw} /> PetBay
               </Navbar.Brand>
               <Nav.Link
-                href={`/pets/${userId}`}
+                as={Link}
+                to={`/pets/${userId}`}
                 className={`mx-2 ${styles.link}`}
               >
                 My Pets
@@ -74,8 +75,12 @@ export default function Header() {
               >
                 Lost & Found
               </Nav.Link>
-              <Nav.Link href="#Prediction" className={`mx-2 ${styles.link}`}>
-                Pet Prediction
+              <Nav.Link
+                as={Link}
+                to={"/pet-recommendation"}
+                className={`mx-2 ${styles.link}`}
+              >
+                Pet Recommendation
               </Nav.Link>
               <Nav.Link href="#user">
                 <FontAwesomeIcon icon={faUser} className={styles.userIcon} />

@@ -19,12 +19,12 @@ jobs:
           node-version: 'v20.11.0'
 
       - name: Install frontend dependencies
-        run: npm install --prefix client
+        run: npm install --prefix Client
 
       - name: Build frontend
-        run: npm run build --prefix client
+        run: npm run build --prefix Client
 
       - name: Install backend dependencies
-        run: npm install --prefix server
+        run: npm install --prefix Server
 
  

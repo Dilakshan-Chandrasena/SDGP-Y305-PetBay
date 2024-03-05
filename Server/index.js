@@ -19,7 +19,9 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(logger("dev"));
-app.use(cors());
+app.use(cors({
+  origin: "http://localhost:5173",
+}));
 
 app.use("/petbay/api/v1/pet-profiles/", petProfileRoute);
 app.use("/petbay/api/v1/pet-records/", petRecordRoute)
@@ -33,13 +35,6 @@ app.all("*", (req, res, next) => {
     404
   );
   next(err);
-});
-
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', 'http://localhost:5173');
-  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-  res.header('Access-Control-Allow-Headers', 'Content-Type');
-  next();
 });
 
 app.use(globalErrorHandler);

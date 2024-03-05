@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams  } from "react-router-dom";
 import Modal from "react-bootstrap/Modal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
@@ -16,6 +16,7 @@ function AddReminder() {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const { userId } = useParams();
+  const [validated, setValidated] = useState(false);
   const [values, setValues] = useState({
     id: "",
     userId: "",
@@ -24,11 +25,11 @@ function AddReminder() {
     time: "",
     date: "",
   });
-  const navigate = useNavigate();
-  const [validated, setValidated] = useState(false);
+
   useEffect(() => {
     getPetNames();
   }, []);
+
   const handleSubmit = async (event) => {
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
@@ -42,13 +43,13 @@ function AddReminder() {
         "http://localhost:8080/petbay/api/v1/reminders/addReminder/",
         values
       )
-      .then((res) => {
-        handleClose();
-        navigate('/google-calendar')
+      .then(async (res) => {
+        handleClose();       
       })
       .catch((err) => console.log(err));
     setValidated(true);
   };
+
   const getPetNames = async () => {
     await axios
       .get(
@@ -62,6 +63,8 @@ function AddReminder() {
         console.log(err.message);
       });
   };
+
+  
 
   return (
     <>

@@ -108,7 +108,6 @@ function ReminderHome() {
           </Card.Body>
         </Card>
       ))}
-
       <div
         style={{
           visibility: showEmptyRecs ? "visible" : "hidden",

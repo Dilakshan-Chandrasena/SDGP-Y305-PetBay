@@ -10,7 +10,7 @@ import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 
-function AddReminder() {
+export default function AddReminder({loadReminders}) {
   const [show, setShow] = useState(false);
   const [data, setData] = useState([]);
   const handleClose = () => setShow(false);
@@ -44,7 +44,9 @@ function AddReminder() {
         values
       )
       .then(async (res) => {
+        alert("Reminder added")
         handleClose();       
+        loadReminders;
       })
       .catch((err) => console.log(err));
     setValidated(true);
@@ -63,8 +65,6 @@ function AddReminder() {
         console.log(err.message);
       });
   };
-
-  
 
   return (
     <>
@@ -173,4 +173,3 @@ function AddReminder() {
   );
 }
 
-export default AddReminder;

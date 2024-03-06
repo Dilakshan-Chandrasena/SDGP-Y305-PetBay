@@ -11,12 +11,44 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPaw, faUser, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { faPenToSquare, faXmark } from "@fortawesome/free-solid-svg-icons";
 
-
 function ReminderHome() {
   const [data, setData] = useState([]);
   const [img, setImage] = useState([]);
   const { userId } = useParams();
+  const [reminders, setReminder] = useState([]);
   const [showEmptyRecs, setShowEmptyRecs] = useState(false);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get("http://localhost:8080/petbay/api/v1/reminders/reminder/" + userId);
+        if (response.data.length === 0) {
+          console.log('No reminders found.');
+          return;
+        }
+        setReminder(response.data);
+        const currentDateTime = new Date();
+        currentDateTime.setSeconds(0);
+        
+        response.data.forEach(reminder => {
+          const reminderDateTime = new Date(reminder.date + 'T' + reminder.time);
+          reminderDateTime.setSeconds(0); 
+          if (currentDateTime.getFullYear() === reminderDateTime.getFullYear() &&
+          currentDateTime.getMonth() === reminderDateTime.getMonth() &&
+          currentDateTime.getDate() === reminderDateTime.getDate() &&
+          currentDateTime.getHours() === reminderDateTime.getHours() &&
+          currentDateTime.getMinutes() === reminderDateTime.getMinutes()) {
+            alert("Reminder works")
+          }
+        });
+      } catch (error) {
+        console.error('Error fetching reminders:', error.message);
+      }
+    };
+    fetchData();
+
+    const intervalId = setInterval(fetchData, 60000); 
+    return () => clearInterval(intervalId);
+  }, []);
 
   useEffect(() => {
     getReminders();
@@ -25,6 +57,7 @@ function ReminderHome() {
   useEffect(() => {
     getPetNames();
   }, []);
+
   const getReminders = async () => {
     await axios
       .get("http://localhost:8080/petbay/api/v1/reminders/reminder/" + userId)
@@ -57,7 +90,8 @@ function ReminderHome() {
     await axios
       .get("http://localhost:8080/petbay/api/v1/pet-profiles/owned-pets/" + userId)
       .then((res) => {
-        const img = res.img;
+        const img = res.data;
+        console.log(img);
         setImage(img);
       })
       .catch((err) => {

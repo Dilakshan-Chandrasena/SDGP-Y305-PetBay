@@ -1,0 +1,65 @@
+.headerContainer {
+  background-color: #6cabd9;
+  padding: 20px;
+  align-items: center;
+  color: white;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  padding-left: 22%;
+  display: flex;
+  flex-direction: row;
+  gap: 100px;
+}
+.heading {
+  align-items: center;
+  margin-top: 10px;
+}
+
+.correctIcon {
+  background-color: rgb(27, 169, 27);
+  padding: 20px 22px;
+  border-radius: 100px;
+}
+
+.details {
+  text-align: justify;
+  line-height: 28px;
+  font-weight: lighter;
+
+  color: #5d5b5b;
+  font-size: 18px;
+}
+
+.breedDetails {
+  background-color: #eeeeee;
+  padding: 20px;
+  border-radius: 10px;
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+.tabContent {
+  background-color: #eeeeee;
+  padding: 20px;
+  margin-top: -15px;
+}
+
+.tableNoBorder {
+  border: none;
+  background-color: #eeeeee;
+  border-collapse: separate;
+  border-spacing: 0 20px;
+}
+.tableNoBorder th {
+  color: #6cabd9;
+}
+.tableNoBorder th,
+.tableNoBorder td {
+  border: none !important; /* Important to override MDBReact UI Kit styles */
+  background-color: #eeeeee;
+}
+
+.ratings {
+  background-color: #ffff;
+  padding: 10px 15px;
+  border-radius: 100px;
+}

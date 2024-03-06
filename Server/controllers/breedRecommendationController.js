@@ -19,11 +19,14 @@ exports.createBreed = asyncHandler(async (req, res, next) => {
 // @route /petbay/api/v1/breed-recommendation/
 exports.generateBreedRecommendation = asyncHandler(async (req, res, next) => {
   //Removing char _ to match breed names with database breed names
-  const breed = req.body.breedName.replace("_", " ");
+  const userId = req.body.userId;
+  const breed = req.body.breedName;
+  console.log(userId);
 
   //fetching breedDetails and User details
   const breedDetails = await db.collection("breeds").doc(breed).get();
-  const user = await db.collection("users").doc(req.params.id).get();
+  const user = await db.collection("users").doc(userId).get();
+  console.log(breedDetails);
 
   if (breedDetails.exists && user.exists) {
     if (isUserBreedPreferencesSet(user.data())) {

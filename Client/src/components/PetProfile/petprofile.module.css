@@ -1,0 +1,107 @@
+.petProfContainer {
+  margin: 40px 120px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.petIdentityContainer {
+  border: none;
+  background: #f4f4f4a2;
+  width: 25rem;
+}
+
+.petName {
+  color: #6cabd9;
+  font-size: 24px;
+  font-weight: 500;
+  background: #212121;
+  padding: 16px 20px;
+  border-radius: 0px 55px 0px 20px;
+  margin: -10px -13px;
+}
+
+.profImage {
+  width: 400px;
+  height: 265px;
+}
+
+.petInfoContainer {
+  margin-top: 20px;
+  width: 24rem;
+  background: #e3e2e2f3;
+  border: #342f2f;
+  box-shadow: rgba(58, 58, 58, 0.35) 0px 5px 15px;
+}
+
+.petDetSubtitle {
+  color: #6cabd9;
+  font-size: 12px;
+}
+
+.petDetText {
+  color: #4a4141;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.petDetSubContainer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.linkConatiner {
+  margin: 25px 0px;
+  display: flex;
+  justify-content: space-between;
+}
+
+@media (max-width: 768px) {
+  .petProfContainer {
+    margin: auto;
+  }
+
+  .petIdentityContainer {
+    width: 300px;
+    margin-top: 20px;
+    margin: 0px 20px;
+  }
+
+  .profImage {
+    width: 18rem;
+  }
+
+  .petInfoContainer {
+    width: 20rem;
+  }
+}
+
+@media (max-width: 426px) {
+  .petProfContainer {
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .petIdentityContainer {
+    text-align: center;
+    width: 300px;
+    margin-top: 20px;
+    margin: 0px 20px;
+  }
+
+  .petName {
+    padding: 10px 12px;
+  }
+
+  .profImage {
+    align-items: center;
+    width: 18rem;
+  }
+
+  .petDetText {
+    font-size: 13px;
+  }
+
+  .cardLink {
+    font-size: 12px;
+  }
+}

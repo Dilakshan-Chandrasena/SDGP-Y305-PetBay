@@ -1,0 +1,27 @@
+.modalHeader {
+  display: flex;
+  justify-content: space-around;
+}
+
+.modalHeader Button {
+  color: #6cabd9;
+  border: none;
+  background-color: white;
+  font-size: 14px;
+}
+
+.modalHeader Button:hover {
+  color: #f7f3f3;
+  background-color: #6cabd9;
+}
+
+.addBtn {
+  background-color: #6cabd9;
+  border: none;
+}
+.errorValidation {
+  color: rgba(255, 0, 0, 0.655);
+  font-size: 12px;
+  margin-left: 6px;
+  font-weight: 500;
+}

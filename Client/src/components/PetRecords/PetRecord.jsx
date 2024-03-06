@@ -7,8 +7,7 @@ import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFile, faFileLines, faPaw } from "@fortawesome/free-solid-svg-icons";
-import { faPenToSquare, faXmark } from "@fortawesome/free-solid-svg-icons";
+import { faFileLines, faPaw, faTrash } from "@fortawesome/free-solid-svg-icons";
 import AddPetRecord from "../AddPetRecord/AddPetRecord";
 import EmptyRecords from "../EmptyRecords/EmptyRecords";
 
@@ -26,8 +25,10 @@ export default function PetRecord() {
       .get(`http://localhost:8080/petbay/api/v1/pet-records/records/${petId}`)
       .then((res) => {
         const data = res.data;
+
+        setPetRecords(data);
         if (data.length > 0) {
-          setPetRecords(data);
+          setShowEmptyRecs(false);
         } else {
           setShowEmptyRecs(true);
         }
@@ -84,7 +85,7 @@ export default function PetRecord() {
                   deletePetRecordByID(record.id);
                 }}
               >
-                <FontAwesomeIcon icon={faXmark} />
+                <FontAwesomeIcon icon={faTrash} />
               </Button>
             </div>
           </Card.Body>
@@ -97,7 +98,7 @@ export default function PetRecord() {
           height: showEmptyRecs ? "fit-content" : "0px",
         }}
       >
-        <EmptyRecords key={""} emptyProperty={"Pet Records"} />
+        <EmptyRecords key={"key"} emptyProperty={"Pet Records"} />
       </div>
     </div>
   );

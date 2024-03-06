@@ -6,11 +6,14 @@ import SignUp from "./pages/SignUpPage";
 import Home from "./pages/HomePage";
 import GetUserDetails from "./pages/GetUserDetailsPage";
 import Reminder from './pages/ReminderPage';
-import { React, useEffect, useState } from "react";
-import axios from 'axios';
+import Quiz from "./components/Quiz/quiz";
+import Pets from "./pages/PetsPage";
+import PetProfile from "./pages/PetProfilePage";
+import UploadBreedImage from "./pages/UploadBreedImage";
+
 
 function App() {
-  const [reminders, setReminder] = useState([]);
+
   const { userId } = useParams();
   
   return (
@@ -23,7 +26,12 @@ function App() {
             <Route path="/signup" element={<SignUp />} />
             <Route path="/getuserdetails" element={<GetUserDetails />} />
             <Route path="/home" element={<Home />} />
-            <Route path="/reminder/:userId" element={<Reminder />} />          </Routes>
+            <Route path="/reminder/:userId" element={<Reminder />} /> 
+            <Route path="/quiz" element={<Quiz />} />
+            <Route path="/pets/:userId" element={<Pets />} />
+            <Route path="/pet-profile/:petId" element={<PetProfile />} />
+            <Route path="/pet-recommendation" element={<UploadBreedImage />} />
+          </Routes>
         </Router>
       </div>
     </AuthProvider>

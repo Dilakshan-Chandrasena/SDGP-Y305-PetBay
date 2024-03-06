@@ -8,12 +8,14 @@ import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import Image from "react-bootstrap/Image";
 import axios from "axios";
+import { useAuth } from "../../contexts/authContext";
 
 export default function UploadImage() {
   const [predictedBreed, setPredictedBreed] = useState("");
   const [uploaded, setUploaded] = useState(false);
   const [imagePreview, setImagePreview] = useState();
   let breedImage = undefined;
+  const { userId } = useAuth();
 
   useEffect(() => {}, []);
 
@@ -25,6 +27,7 @@ export default function UploadImage() {
         let breedName = res.data.pred;
         breedName = breedName.replaceAll("_", " ");
         breedName = breedName.replaceAll("-", " ");
+        breedName = breedName.charAt(0).toUpperCase() + breedName.slice(1);
         breedName = setPredictedBreed(breedName);
         setUploaded(true);
       })
@@ -34,15 +37,8 @@ export default function UploadImage() {
       });
   };
 
-  const createFormData = (data) => {
-    const formData = new FormData();
-    formData.append("image", data);
-
-    return formData;
-  };
 
   // handling drag and drop zone using react-dropzone
-
   const onDrop = useCallback(async (acceptedFiles) => {
     breedImage = acceptedFiles[0];
 
@@ -55,6 +51,8 @@ export default function UploadImage() {
 
     await predict(breedImage);
   }, []);
+
+
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
   return (
@@ -73,7 +71,9 @@ export default function UploadImage() {
               You've uploaded an image of <span>{predictedBreed}</span>
             </p>
             <div className={styles.btnConatiner}>
-              <Button variant="dark">Generate Recommendation</Button>
+              <Button variant="dark">
+                Generate Recommendation
+              </Button>
               <Button
                 variant="dark"
                 onClick={() => {

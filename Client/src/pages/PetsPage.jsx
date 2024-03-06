@@ -37,7 +37,7 @@ export default function PetsPage() {
   };
 
   return (
-    <div >
+    <div>
       <Header />
       <div className={styles.petsHeaderContainer}>
         <div className={styles.petPageHeader}>

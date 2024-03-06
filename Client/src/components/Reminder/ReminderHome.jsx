@@ -52,7 +52,7 @@ function ReminderHome() {
 
   useEffect(() => {
     getReminders();
-  }, []);
+  }, [data]);
 
   useEffect(() => {
     getPetNames();

@@ -5,7 +5,6 @@ const dotenv = require("dotenv").config();
 const cors = require("cors");
 const CustomError = require("./utils/CustomError.js");
 const globalErrorHandler = require("./controllers/errorController.js");
-const { google } = require('googleapis');
 
 const petProfileRoute = require("./routes/petProfileRoute.js");
 const petRecordRoute = require("./routes/petRecordRoute.js");

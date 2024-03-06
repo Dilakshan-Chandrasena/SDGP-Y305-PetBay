@@ -25,6 +25,7 @@ export default function PetRecord() {
       .get(`http://localhost:8080/petbay/api/v1/pet-records/records/${petId}`)
       .then((res) => {
         const data = res.data;
+
         setPetRecords(data);
         if (data.length > 0) {
           setShowEmptyRecs(false);

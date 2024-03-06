@@ -1,0 +1,76 @@
+body {
+    background-color: #f4f4f4a2;
+  }
+
+.reminderHeader {
+    display: flex;
+    justify-content: space-between;
+    margin: 30px 175px;
+  }
+  
+.reminderHeader h1 {
+    font-size: 26px;
+    color: #6cabd9;
+    font-weight: 700;
+  }
+  
+.reminderCard {
+    margin: 30px 180px;
+    width: 72%;
+    height: 130px;
+    background-color: #eeeeee;
+    padding: 0px 10px;
+    border-radius: 20px;
+    border: none;
+    box-shadow: 2px 5px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+.reminderBody {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+.dogName {
+    color: #6cabd9;
+    font-size: 16px;
+    font-weight: 600;
+  }
+.main-reminder{
+  display: block;
+}
+
+.reminder{
+  font-size: 24px;
+}
+
+.reminderInfoContainer {
+    width: 50%;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+.dateAndTime {
+    color: #4a4141;
+    font-size: 18px;
+    font-weight: 400;
+    margin-top: 20px;
+  }
+.btnContainer {
+    display: flex;
+    align-items: baseline;
+  }
+  
+  .btnContainer button {
+    background-color: transparent;
+    color: rgb(204, 42, 42);
+    font-size: 30px;
+    border: none;
+  }
+
+  .btnContainer button:hover {
+    background-color: transparent;
+    color: rgb(124, 0, 0);
+    transition: .3s ease-in;
+  }

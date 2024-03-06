@@ -3,6 +3,7 @@
   flex-direction: column;
   justify-content: center;
   text-align: center;
+
   align-items: center;
 }
 
@@ -26,3 +27,4 @@
     width: 16rem;
   }
 }
+

@@ -82,13 +82,13 @@ function ViewDetails({ postId }) {
                       style={{
                         backgroundColor: "black",
                         textAlign: "center",
-                        padding: "22px",
+                        padding: "17px",
                       }}
                     >
                       <span
                         style={{
                           color: "white",
-                          fontSize: "25px",
+                          fontSize: "23px",
                           textTransform: "uppercase",
                         }}
                       >
@@ -155,11 +155,22 @@ function ViewDetails({ postId }) {
                       <hr />
                       <MDBRow>
                         <MDBCol sm="3">
-                          <MDBCardText>Lost Date & Time:</MDBCardText>
+                          <MDBCardText>Date:</MDBCardText>
                         </MDBCol>
                         <MDBCol sm="9">
                           <MDBCardText className="text-muted">
                             {lostFoundDetails.date}
+                          </MDBCardText>
+                        </MDBCol>
+                      </MDBRow>
+                      <hr />
+                      <MDBRow>
+                        <MDBCol sm="3">
+                          <MDBCardText>Time:</MDBCardText>
+                        </MDBCol>
+                        <MDBCol sm="9">
+                          <MDBCardText className="text-muted">
+                            {lostFoundDetails.time}
                           </MDBCardText>
                         </MDBCol>
                       </MDBRow>
@@ -177,72 +188,24 @@ function ViewDetails({ postId }) {
                       <hr />
                       <MDBRow>
                         <MDBCol sm="3">
-                          <MDBCardText>Other features:</MDBCardText>
+                          <MDBCardText>Other Features:</MDBCardText>
                         </MDBCol>
                         <MDBCol sm="9">
                           <MDBCardText className="text-muted">
-                            <MDBBadge
-                              pill
-                              light
-                              style={{
-                                color: "#1c657d",
-                                backgroundColor: "#def1f7",
-                              }}
-                            >
-                              Male
-                            </MDBBadge>
-                            <MDBBadge
-                              className="mx-2"
-                              pill
-                              light
-                              style={{
-                                color: "#1c657d",
-                                backgroundColor: "#def1f7",
-                              }}
-                            >
-                              Wooden Tag
-                            </MDBBadge>
-                            <MDBBadge
-                              className="mx-2"
-                              pill
-                              light
-                              style={{
-                                color: "#1c657d",
-                                backgroundColor: "#def1f7",
-                              }}
-                            >
-                              Black Collar
-                            </MDBBadge>
+                            {lostFoundDetails.features}
                           </MDBCardText>
                         </MDBCol>
-                        <MDBCardBody className="text-center">
-                          <MDBBadge
-                            className="mx-2"
-                            pill
-                            light
-                            style={{
-                              color: "#4E7E1C",
-                              backgroundColor: "#C4F493",
-                              padding: "10px",
-                              width: "200px",
-                              fontSize: "20px",
-                              marginTop: "20px",
-                            }}
-                          >
-                            <FontAwesomeIcon icon={faSackDollar} /> Reward 50$
-                          </MDBBadge>
-                        </MDBCardBody>
                       </MDBRow>
                     </MDBCardBody>
                     <MDBCardFooter
                       className="text-muted"
                       style={{ backgroundColor: "black", textAlign: "center" }}
                     >
-                      <span style={{ color: "white" }}>
+                      <span style={{ color: "white", fontSize: "22px" }}>
                         If you have any information please call
                       </span>
                       <br />
-                      <span style={{ color: "white" }}>
+                      <span style={{ color: "white", fontSize: "25px" }}>
                         {lostFoundDetails.contact}
                       </span>
                     </MDBCardFooter>

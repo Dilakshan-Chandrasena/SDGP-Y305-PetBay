@@ -49,7 +49,9 @@ exports.lostFoundPostsValidator = [
   body("height").notEmpty().withMessage("Height is required"),
   body("gender").notEmpty().withMessage("Gender is required"),
   body("date").notEmpty().withMessage("Date is required"),
+  body("time").notEmpty().withMessage("Time is required"),
   body("area").notEmpty().withMessage("Area is required"),
+  body("features").notEmpty().withMessage("Features are required"),
   body("contact").notEmpty().withMessage("Conatct is required"),
   body("status").notEmpty().withMessage("Status is required"),
   body("lostFoundImageURL")

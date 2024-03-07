@@ -33,6 +33,8 @@ function AddLostFoundModal({ reloadLostFoundPosts }) {
     area: z.string().min(1, "Area is required"),
     height: z.string().min(1, "Height is required"),
     date: z.string().min(1, "Date is required"),
+    time: z.string().min(1, "Time is required"),
+    features: z.string().min(1, "Features are  required"),
     contact: z.string().min(1, "Contact is required"),
     filename: z
       .any()
@@ -78,6 +80,8 @@ function AddLostFoundModal({ reloadLostFoundPosts }) {
     formData.append("height", data.height);
     formData.append("status", status); // Use selected status
     formData.append("date", data.date);
+    formData.append("time", data.time);
+    formData.append("features", data.features);
     formData.append("contact", data.contact);
     formData.append("filename", data.filename[0]);
     formData.append("lostFoundImageURL", " ");
@@ -153,18 +157,7 @@ function AddLostFoundModal({ reloadLostFoundPosts }) {
                 onChange={() => setStatus("found")}
               />
             </Form.Group>
-            {/* <Form.Group className="mb-3">
-              <Form.Control
-                {...register("status")}
-                type="text"
-                placeholder="Enter Status"
-              />
-              {errors.status && (
-                <span className={styles.errorValidation}>
-                  {errors.status.message}
-                </span>
-              )}
-            </Form.Group> */}
+
             <Form.Group className="mb-3">
               <Form.Control
                 {...register("name")}
@@ -204,19 +197,6 @@ function AddLostFoundModal({ reloadLostFoundPosts }) {
               )}
             </Form.Group>
 
-            {/* <Form.Group className="mb-3">
-              <Form.Control
-                {...register("gender")}
-                type="text"
-                placeholder="Select Gender"
-              />
-              {errors.gender && (
-                <span className={styles.errorValidation}>
-                  {errors.gender.message}
-                </span>
-              )}
-            </Form.Group> */}
-
             <Form.Group className="mb-3">
               <span style={{ paddingRight: "40px" }}>Gender</span>
               <Form.Check
@@ -241,7 +221,7 @@ function AddLostFoundModal({ reloadLostFoundPosts }) {
               <Form.Control
                 {...register("area")}
                 type="text"
-                placeholder="Lost Area"
+                placeholder="Lost or Found Area"
               />
               {errors.area && (
                 <span className={styles.errorValidation}>
@@ -254,7 +234,20 @@ function AddLostFoundModal({ reloadLostFoundPosts }) {
               <Form.Control
                 {...register("date")}
                 type="date"
-                placeholder="Lost Date"
+                placeholder="Lost or Found Date"
+              />
+              {errors.date && (
+                <span className={styles.errorValidation}>
+                  {errors.date.message}
+                </span>
+              )}
+            </Form.Group>
+
+            <Form.Group className="mb-3">
+              <Form.Control
+                {...register("time")}
+                type="time"
+                placeholder="Lost or Found Time"
               />
               {errors.date && (
                 <span className={styles.errorValidation}>
@@ -273,6 +266,19 @@ function AddLostFoundModal({ reloadLostFoundPosts }) {
               {errors.height && (
                 <span className={styles.errorValidation}>
                   {errors.height.message}
+                </span>
+              )}
+            </Form.Group>
+
+            <Form.Group className="mb-3">
+              <Form.Control
+                {...register("features")}
+                type="text"
+                placeholder="Other features"
+              />
+              {errors.contact && (
+                <span className={styles.errorValidation}>
+                  {errors.contact.message}
                 </span>
               )}
             </Form.Group>

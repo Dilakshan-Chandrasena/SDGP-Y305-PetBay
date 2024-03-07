@@ -34,7 +34,7 @@ function AddLostFoundModal({ reloadLostFoundPosts }) {
     height: z.string().min(1, "Height is required"),
     date: z.string().min(1, "Date is required"),
     time: z.string().min(1, "Time is required"),
-    features: z.string().min(1, "Features are  required"),
+    features: z.string().min(1, "Features are required"),
     contact: z.string().min(1, "Contact is required"),
     filename: z
       .any()
@@ -249,9 +249,9 @@ function AddLostFoundModal({ reloadLostFoundPosts }) {
                 type="time"
                 placeholder="Lost or Found Time"
               />
-              {errors.date && (
+              {errors.time && (
                 <span className={styles.errorValidation}>
-                  {errors.date.message}
+                  {errors.time.message}
                 </span>
               )}
             </Form.Group>
@@ -276,9 +276,9 @@ function AddLostFoundModal({ reloadLostFoundPosts }) {
                 type="text"
                 placeholder="Other features"
               />
-              {errors.contact && (
+              {errors.features && (
                 <span className={styles.errorValidation}>
-                  {errors.contact.message}
+                  {errors.features.message}
                 </span>
               )}
             </Form.Group>

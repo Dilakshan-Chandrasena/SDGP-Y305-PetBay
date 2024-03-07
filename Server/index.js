@@ -10,7 +10,7 @@ const petProfileRoute = require("./routes/petProfileRoute.js");
 const petRecordRoute = require("./routes/petRecordRoute.js");
 const breedRecommendationRoute = require("./routes/breedRecommendationRoute.js");
 const usersRouter = require("./routes/usersRouter.js");
-
+const reminderRouter = require("./routes/remindersRouter.js")
 
 const app = express();
 
@@ -18,13 +18,15 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(logger("dev"));
-app.use(cors());
-
+app.use(cors({
+  origin: "http://localhost:5173",
+}));
 
 app.use("/petbay/api/v1/pet-profiles/", petProfileRoute);
 app.use("/petbay/api/v1/pet-records/", petRecordRoute)
 app.use("/petbay/api/v1/breed-recommendation/",breedRecommendationRoute);
 app.use("/petbay/api/v1/users", usersRouter);
+app.use("/petbay/api/v1/reminders", reminderRouter);
 
 app.all("*", (req, res, next) => {
   const err = new CustomError(
@@ -33,7 +35,6 @@ app.all("*", (req, res, next) => {
   );
   next(err);
 });
-
 
 app.use(globalErrorHandler);
 

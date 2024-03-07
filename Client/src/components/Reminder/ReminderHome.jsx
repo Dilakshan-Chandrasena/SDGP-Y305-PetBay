@@ -1,0 +1,157 @@
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { useParams } from "react-router-dom";
+import Button from "react-bootstrap/Button";
+import Card from "react-bootstrap/Card";
+import styles from './reminder.module.css';
+import EmptyRecords from "../EmptyRecords/EmptyRecords";
+import AddReminder from './AddReminder';
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPaw, faUser, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faPenToSquare, faXmark } from "@fortawesome/free-solid-svg-icons";
+
+function ReminderHome() {
+  const [data, setData] = useState([]);
+  const [img, setImage] = useState([]);
+  const { userId } = useParams();
+  const [reminders, setReminder] = useState([]);
+  const [showEmptyRecs, setShowEmptyRecs] = useState(false);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get("http://localhost:8080/petbay/api/v1/reminders/reminder/" + userId);
+        if (response.data.length === 0) {
+          console.log('No reminders found.');
+          return;
+        }
+        setReminder(response.data);
+        const currentDateTime = new Date();
+        currentDateTime.setSeconds(0);
+        
+        response.data.forEach(reminder => {
+          const reminderDateTime = new Date(reminder.date + 'T' + reminder.time);
+          reminderDateTime.setSeconds(0); 
+          if (currentDateTime.getFullYear() === reminderDateTime.getFullYear() &&
+          currentDateTime.getMonth() === reminderDateTime.getMonth() &&
+          currentDateTime.getDate() === reminderDateTime.getDate() &&
+          currentDateTime.getHours() === reminderDateTime.getHours() &&
+          currentDateTime.getMinutes() === reminderDateTime.getMinutes()) {
+            alert("Reminder works")
+          }
+        });
+      } catch (error) {
+        console.error('Error fetching reminders:', error.message);
+      }
+    };
+    fetchData();
+
+    const intervalId = setInterval(fetchData, 60000); 
+    return () => clearInterval(intervalId);
+  }, []);
+
+  useEffect(() => {
+    getReminders();
+  }, [data]);
+
+  useEffect(() => {
+    getPetNames();
+  }, []);
+
+  const getReminders = async () => {
+    await axios
+      .get("http://localhost:8080/petbay/api/v1/reminders/reminder/" + userId)
+      .then((res) => {
+        const data = res.data;
+        if (data.length > 0) {
+          setData(data);
+        } else {
+          setShowEmptyRecs(true);
+        }
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  };
+
+  const deleteReminderHandle = async (id) => {
+    await axios
+      .delete(`http://localhost:8080/petbay/api/v1/reminders/deleteReminder/${id}`)
+      .then((res) => {
+        if (res.status == 200) {
+          alert("Reminder deleted successfully!");
+          getReminders();
+        }
+      })
+      .catch((err) => console.log(err));
+  };
+
+  const getPetNames = async () => {
+    await axios
+      .get("http://localhost:8080/petbay/api/v1/pet-profiles/owned-pets/" + userId)
+      .then((res) => {
+        const img = res.data;
+        console.log(img);
+        setImage(img);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  };
+  return (
+    <div>
+      <div className={styles.reminderHeader}>
+        <h1 id="pet-reminders">
+          <span>
+          <FontAwesomeIcon
+                icon={faPaw}
+                style={{ color: "#6cabd9", fontSize: "34px" }}
+              />
+          </span>{" "}
+          Pet Reminders
+        </h1>
+        <AddReminder reloadReminderList={getReminders} />
+      </div>
+
+      {data.map((reminder) => (
+        <Card loadReminders={getReminders} className={styles.reminderCard}>
+          <Card.Body className={styles.reminderBody}>
+          <span>
+          <FontAwesomeIcon
+                icon={faUser}
+                style={{ color: "#6cabd9", fontSize: "34px", marginLeft: "50px", }}
+              />
+          </span>
+            <div className={styles.reminderInfoContainer}>
+              <div className="main-reminder">
+              <span className={styles.dogName}>{reminder.dogName}</span>
+              <h1 className={styles.reminder}>{reminder.reminderText}</h1>
+              </div>
+              <span className={styles.dateAndTime}>{reminder.date}</span>
+              <span className={styles.dateAndTime}>{reminder.time}</span>
+            </div>
+            <div className={styles.btnContainer}>
+              <Button
+                onClick={() => {
+                  deleteReminderHandle(reminder.id);
+                }}
+              >
+                <FontAwesomeIcon icon={faTrash} />
+              </Button>
+            </div>
+          </Card.Body>
+        </Card>
+      ))}
+      <div
+        style={{
+          visibility: showEmptyRecs ? "visible" : "hidden",
+          height: showEmptyRecs ? "fit-content" : "0px",
+        }}
+      >
+        <EmptyRecords key={""} emptyProperty={"Reminders"} />
+      </div>
+          </div>
+  );
+}
+
+export default ReminderHome;

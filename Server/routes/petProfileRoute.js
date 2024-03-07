@@ -15,6 +15,8 @@ router.route("/add-pet").post(upload.single("filename"),petProfileValidator,petP
 
 router.route("/owned-pets/:id").get(petProfileController.getUserOwnedPets);
 
+router.route("/:id").get(petProfileController.getPetProfileById);
+
 router.route("/:id").delete(petProfileController.deletePet).put(upload.single("filename"),petProfileValidator,petProfileController.updatePet);
 
 

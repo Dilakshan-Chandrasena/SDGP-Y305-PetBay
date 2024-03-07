@@ -1,3 +1,6 @@
+.footer {
+  margin-top: 80px;
+}
 .textreset {
   text-decoration: none; /* Remove underline */
   color: inherit; /* Inherit text color */

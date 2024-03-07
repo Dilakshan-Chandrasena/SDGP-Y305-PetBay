@@ -69,7 +69,7 @@ export default function GetUserDetails() {
         };
 
         await PostUserData(userData);
-
+        window.localStorage.setItem("userId", JSON.stringify(userId));
         navigate("/home");
       } catch (error) {
         console.error(error);

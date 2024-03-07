@@ -1,0 +1,42 @@
+.addBtn {
+  border: none;
+  background-color: transparent;
+}
+
+.addIcon {
+  color: #6cabd9;
+
+  background-color: #d4d0d0d2;
+  padding: 10px 14px;
+  border-radius: 90px;
+  margin-right: 22px;
+}
+
+.addIcon:hover {
+  background-color: #d8d8d8;
+  color: #5e96be;
+}
+
+.modalHeader {
+  display: flex;
+  justify-content: space-around;
+}
+
+.modalHeader Button {
+  color: #6cabd9;
+  border: none;
+  background-color: white;
+  font-size: 14px;
+}
+
+.modalHeader Button:hover {
+  color: #f7f3f3;
+  background-color: #6cabd9;
+}
+
+.errorValidation {
+  color: rgba(255, 0, 0, 0.655);
+  font-size: 12px;
+  margin-left: 6px;
+  font-weight: 500;
+}

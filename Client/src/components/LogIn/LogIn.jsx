@@ -32,7 +32,7 @@ export default function LogIn() {
     if (email !== "" && password !== "") {
       try {
         setIsSigningIn(true);
-        await doSignInWithEmailAndPassword(email, password);
+        const authResult = await doSignInWithEmailAndPassword(email, password);
         setIsSigningIn(false);
         navigate("/home");
       } catch (error) {
@@ -75,10 +75,11 @@ export default function LogIn() {
         const authResult = await doSignInWithGoogle();
         const userEmail = authResult.user.email;
         const userExists = await checkUserExistsInCollection(userEmail);
+        const userId = authResult.user.uid;
         if (userExists) {
+          window.sessionStorage.setItem("userId", userId)
           navigate("/home");
         } else {
-          const userId = authResult.user.uid;
           navigate("/getuserdetails", { state: { userId, email: userEmail } });
         }
       } catch (error) {

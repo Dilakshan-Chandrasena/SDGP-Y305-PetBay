@@ -12,11 +12,10 @@ import Quiz from "./components/Quiz/quiz";
 import Pets from "./pages/PetsPage";
 import PetProfile from "./pages/PetProfilePage";
 import UploadBreedImage from "./pages/UploadBreedImage";
+import Community from './pages/CommunityPage';
 
 
 function App() {
-
-  const { userId } = useParams();
   
   return (
     <AuthProvider>
@@ -31,6 +30,7 @@ function App() {
             <Route path="/recommendation" element={<RecommendationPage />} />
             <Route path="/reminder/:userId" element={<Reminder />} /> 
             <Route path="/quiz" element={<Quiz />} />
+            <Route path="/community/:userId" element={<Community />} />
             <Route path="/pets/:userId" element={<Pets />} />
             <Route path="/pet-profile/:petId" element={<PetProfile />} />
             <Route path="/pet-recommendation" element={<UploadBreedImage />} />

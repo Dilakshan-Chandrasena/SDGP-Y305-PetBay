@@ -1,0 +1,55 @@
+body {
+  background-color: #f4f4f4a2;
+}
+.petsHeaderContainer {
+  margin: 30px 180px;
+}
+.petPageHeader {
+  display: flex;
+  justify-content: space-between;
+}
+
+.petPageHeader h1 {
+  color: #6cabd9;
+  font-size: 20px;
+  background-color: rgb(20, 19, 19);
+  padding: 8px 18px;
+  border-radius: 0px 25px 0px 20px;
+}
+
+.addBtn {
+  border: none;
+  background-color: #f7f3f3;
+}
+
+.addIcon {
+  color: #6cabd9;
+  background-color: #d4d0d0d2;
+  padding: 10px 14px;
+  border-radius: 90px;
+  margin-right: 22px;
+}
+
+.addIcon:hover {
+  background-color: #d8d8d8;
+  color: #5e96be;
+}
+
+@media (max-width: 426px) {
+  .petsHeaderContainer {
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .petsHeaderContainer h1 {
+    margin-bottom: 20px;
+  }
+  .petPageHeader {
+    flex-direction: column;
+
+    text-align: center;
+  }
+
+
+}

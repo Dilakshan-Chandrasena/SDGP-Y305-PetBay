@@ -7,23 +7,28 @@ const CustomError = require("../utils/CustomError");
 exports.createBreed = asyncHandler(async (req, res, next) => {
   const newBreed = req.body;
   if (newBreed) {
-    const savedBreed = await db.collection("breeds").doc(newBreed.breedName).set(newBreed);
+    const savedBreed = await db
+      .collection("breeds")
+      .doc(newBreed.breedName)
+      .set(newBreed);
     res.status(201).json(savedBreed);
   } else {
     throw new CustomError("Invalid Breed Object Sent! Check Again", 400);
   }
 });
 
-
 // @Desc GET generating a breed recommendation
 // @route /petbay/api/v1/breed-recommendation/
 exports.generateBreedRecommendation = asyncHandler(async (req, res, next) => {
   //Removing char _ to match breed names with database breed names
-  const breed = req.body.breedName.replace("_", " ");
+  const userId = req.body.userId;
+  const breed = req.body.breedName;
+  console.log(userId);
 
   //fetching breedDetails and User details
   const breedDetails = await db.collection("breeds").doc(breed).get();
-  const user = await db.collection("users").doc(req.params.id).get();
+  const user = await db.collection("users").doc(userId).get();
+  console.log(breedDetails);
 
   if (breedDetails.exists && user.exists) {
     if (isUserBreedPreferencesSet(user.data())) {
@@ -31,8 +36,13 @@ exports.generateBreedRecommendation = asyncHandler(async (req, res, next) => {
       const breed = breedDetails.data();
       const breedCharacteristics = breed.breedRatings;
 
-      const characsComparisonResults = compareRatings(userBreedPreferences,breedCharacteristics);
-      const overallMatchingPercentage = calOverallMatchingPercentage(characsComparisonResults);
+      const characsComparisonResults = compareRatings(
+        userBreedPreferences,
+        breedCharacteristics
+      );
+      const overallMatchingPercentage = calOverallMatchingPercentage(
+        characsComparisonResults
+      );
 
       const recommendationResult = {
         breedName: breed.breedName,
@@ -42,6 +52,7 @@ exports.generateBreedRecommendation = asyncHandler(async (req, res, next) => {
         avgHeight: breed.avgHeight,
         avgWeight: breed.avgWeight,
         avgLifeSpan: breed.avgLifeSpan,
+        breedGroup: breed.breedGroup,
         overallMatchingPercentage: overallMatchingPercentage,
         comparisonResults: characsComparisonResults,
       };
@@ -73,7 +84,10 @@ compareRatings = (userPreferencesRatings, breedCharacteristicRatings) => {
     const breedCharRating = breedCharacteristicRatings[i].actualRating;
 
     //calculating the difference of the ratings
-    const prefDifference = calculatePrefDifference(userPrefRating,breedCharRating);
+    const prefDifference = calculatePrefDifference(
+      userPrefRating,
+      breedCharRating
+    );
 
     // calculating matching percentage for each characteristic
     const matchingPercentage = Math.round(100 - (prefDifference / 5) * 100);
@@ -107,6 +121,8 @@ calOverallMatchingPercentage = (characsComparisonResults) => {
   for (let i = 0; i < characsComparisonResults.length; i++) {
     totalMatchingPercentage += characsComparisonResults[i].matchingPercentage;
   }
-  const overallMatchingPercentage = Math.round(totalMatchingPercentage / characsComparisonResults.length);
+  const overallMatchingPercentage = Math.round(
+    totalMatchingPercentage / characsComparisonResults.length
+  );
   return overallMatchingPercentage;
 };

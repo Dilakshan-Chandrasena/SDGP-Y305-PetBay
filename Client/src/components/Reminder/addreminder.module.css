@@ -1,0 +1,60 @@
+.addReminder{
+    color: #6cabd9;
+    background-color: #d4d0d0d2;
+    padding: 10px 14px;
+    border-radius: 90px;
+    border: none;
+}
+.addReminder:hover {
+    background-color: #d8d8d8;
+    color:#5e96be;
+  }
+
+.hidden{
+    visibility: hidden;
+}
+
+.cancelButton{
+    color:#6cabd9;
+    background-color: transparent;
+    border: none;
+    font-weight: 500;
+    margin-right: 0;
+
+}
+
+.addButton{
+    color:#6cabd9;
+    background-color: transparent;
+    border: none;
+    font-weight: 500;
+}
+
+.modalHeader {
+    display: flex;
+    justify-content: space-around;
+  }
+  
+  .modalHeader Button {
+    color: #6cabd9;
+    border: none;
+    background-color: white;
+    font-size: 14px;
+  }
+  
+  .modalHeader Button:hover {
+    color: #f7f3f3;
+    background-color: #6cabd9;
+  }
+  
+  .addBtn {
+    background-color: #6cabd9;
+    border: none;
+  }
+  .errorValidation {
+    color: rgba(255, 0, 0, 0.655);
+    font-size: 12px;
+    margin-left: 6px;
+    font-weight: 500;
+  }
+  

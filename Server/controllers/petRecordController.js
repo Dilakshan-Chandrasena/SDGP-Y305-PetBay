@@ -72,8 +72,6 @@ exports.deleteRecord = asyncHandler(async(req,res,next) => {
 });
 
 
-
-
 /**
  * desc: upload any file for firebase cloud storage
  * return : URL for the file

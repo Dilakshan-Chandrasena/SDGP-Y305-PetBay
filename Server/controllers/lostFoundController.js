@@ -40,10 +40,9 @@ exports.addlostFound = asyncHandler(async (req, res, next) => {
 });
 
 /**
- * @description: get all the pets owner by the user
- * @param: userId
+ * @description: get all the posts
  * @method: GET
- * @returns: list of pet objs
+ * @returns: list of posts
  */
 exports.getAllPosts = asyncHandler(async (req, res, next) => {
   const allPosts = await lostFoundPostsCollection.get();

@@ -1,0 +1,12 @@
+* {
+  font-family: "Inter", sans-serif;
+  margin: 0;
+}
+
+.body-background {
+  background-color: #f4f4f4a2;
+}
+
+.auth-background {
+  background-color: #0171d3;
+}

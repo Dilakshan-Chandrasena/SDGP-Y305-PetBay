@@ -1,0 +1,30 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+
+  align-items: center;
+}
+
+.image {
+  /* text-align: center; */
+  width: 24rem;
+}
+
+.container h1 {
+  color: #44414aa5;
+  font-size: 26px;
+}
+
+.container span {
+  color: #6cabd9;
+  font-weight: 500;
+}
+
+@media (max-width: 560px) {
+  .image {
+    width: 16rem;
+  }
+}
+

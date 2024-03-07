@@ -11,11 +11,13 @@ import axios from "axios";
 import { useAuth } from "../../contexts/authContext";
 import "firebase/auth";
 import { useState, useEffect } from "react";
+import { useLocation } from "react-router";
 
 export default function Recommendation({}) {
   const { userId } = useAuth();
   const [breedData, setBreedData] = useState({});
-
+  const { state } = useLocation();
+  const { breed } = state;
   useEffect(() => {
     getBreedRecommendation(userId);
   }, []);
@@ -24,7 +26,7 @@ export default function Recommendation({}) {
     await axios
       .post(`http://localhost:8080/petbay/api/v1/breed-recommendation/`, {
         userId: userId,
-        breedName: "Affenpinscher",
+        breedName: breed,
       })
       .then((res) => {
         setBreedData(res.data);

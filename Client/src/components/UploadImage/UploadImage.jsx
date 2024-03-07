@@ -8,12 +8,14 @@ import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import Image from "react-bootstrap/Image";
 import axios from "axios";
+import { useNavigate } from "react-router";
 
 export default function UploadImage() {
   const [predictedBreed, setPredictedBreed] = useState("");
   const [uploaded, setUploaded] = useState(false);
   const [imagePreview, setImagePreview] = useState();
   let breedImage = undefined;
+  const navigate = useNavigate();
 
   useEffect(() => {}, []);
 
@@ -73,7 +75,12 @@ export default function UploadImage() {
               You've uploaded an image of <span>{predictedBreed}</span>
             </p>
             <div className={styles.btnConatiner}>
-              <Button variant="dark">Generate Recommendation</Button>
+              <Button
+                variant="dark"
+                onClick={()=>navigate("/recommendation", { state:{breed : predictedBreed}})}
+              >
+                Generate Recommendation
+              </Button>
               <Button
                 variant="dark"
                 onClick={() => {

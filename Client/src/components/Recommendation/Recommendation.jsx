@@ -14,6 +14,11 @@ import { useState, useEffect } from "react";
 import { useLocation } from "react-router";
 
 export default function Recommendation({}) {
+  const base_url =
+  import.meta.env.VITE_SERVER_NODE_ENV === "development"
+      ? import.meta.env.VITE_LOCAL_BASE_URL
+      : import.meta.env.VITE_PROD_BASE_URL;
+      
   const { userId } = useAuth();
   const [breedData, setBreedData] = useState({});
   const { state } = useLocation();
@@ -25,7 +30,7 @@ export default function Recommendation({}) {
   const getBreedRecommendation = async (userId) => {
 
     await axios
-      .post(`http://localhost:8080/petbay/api/v1/breed-recommendation/`, {
+      .post(`${base_url}/petbay/api/v1/breed-recommendation/`, {
         userId: userId,
         breedName: breed,
       })

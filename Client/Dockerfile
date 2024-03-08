@@ -1,4 +1,4 @@
-FROM node:alpine-20 as build
+FROM node:alpine3.19 as build
 
 
 ARG VITE_SERVER_NODE_ENV

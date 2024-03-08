@@ -2,9 +2,14 @@ import styles from "./quiz.module.css";
 import axios from "axios";
 
 const PostUserPreferences = async (userPreferences, userId) => {
+  const base_url =
+  import.meta.env.VITE_SERVER_NODE_ENV === "development"
+      ? import.meta.env.VITE_LOCAL_BASE_URL
+      : import.meta.env.VITE_PROD_BASE_URL;
+      
   try {
     const response = await axios.put(
-      `http://localhost:8080/petbay/api/v1/users/preferences/set/${userId}`,
+      `${base_url}/petbay/api/v1/users/preferences/set/${userId}`,
       { breedPreferences: userPreferences }
     );
     console.log("Response:", response);

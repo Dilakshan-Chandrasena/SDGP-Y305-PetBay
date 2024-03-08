@@ -62,7 +62,11 @@ export default function Header() {
               >
                 Preferences
               </Nav.Link>
-              <Nav.Link as={Link} to={`/reminder/${userId}`} className={`mx-2 ${styles.link}`}>
+              <Nav.Link
+                as={Link}
+                to={`/reminder/${userId}`}
+                className={`mx-2 ${styles.link}`}
+              >
                 Reminders
               </Nav.Link>
               <Nav.Link href="#Community" className={`mx-2 ${styles.link}`}>

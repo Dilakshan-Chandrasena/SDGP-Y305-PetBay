@@ -9,7 +9,6 @@ import AddReminder from './AddReminder';
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPaw, faUser, faTrash } from "@fortawesome/free-solid-svg-icons";
-import { faPenToSquare, faXmark } from "@fortawesome/free-solid-svg-icons";
 
 function ReminderHome() {
   const [data, setData] = useState([]);
@@ -52,7 +51,7 @@ function ReminderHome() {
 
   useEffect(() => {
     getReminders();
-  }, [data]);
+  },);
 
   useEffect(() => {
     getPetNames();

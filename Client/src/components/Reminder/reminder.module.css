@@ -2,7 +2,7 @@ body {
     background-color: #f4f4f4a2;
   }
 
-.reminderHeader {
+  .reminderHeader {
     display: flex;
     justify-content: space-between;
     margin: 30px 175px;

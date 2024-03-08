@@ -1,0 +1,100 @@
+.likeButton{
+    border-radius: 50%;
+    margin-top: 20px;
+    background-color: #6cabd9;
+    border: none;
+}
+.likeButton:checked{
+    color: red;
+}
+
+.navLinks{
+    display: flex;
+    flex-direction: column;
+    margin-top: 30px;
+    margin-left: 50px;
+}
+
+.anchors{
+    color:black;
+    margin-bottom: 20px;
+}
+
+.communityPosts{
+    margin-top: 50px;
+    margin-left: 50px;
+}
+
+.communityCard{
+    border-radius: 20px;
+    border: none;
+    box-shadow: 2px 5px 5px rgba(0, 0, 0, 0.1);
+    margin-top: 30px;
+}
+
+.cardBody{
+    padding: 30px;
+}
+
+.createPost{
+    padding: 10px;
+    border-radius: 20px;
+    border: none;
+    box-shadow: 2px 5px 5px rgba(0, 0, 0, 0.1);
+}
+
+.createButtons{
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  margin-top: 20px;
+}
+
+.postField{
+    border: none;
+    background-color: #eeeeee;
+}
+
+.createButtons Button{
+    border-radius: 25px;
+}
+
+.publish{
+    background-color: #6cabd9;
+    border: none;
+    font-size: 14px;
+}
+
+.publish:hover{
+    background-color: #3b8bc4;
+    transition: 0.3s ease-in;
+}
+
+.communityHeader {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 50px;
+    margin-left: 30px;
+  }
+  
+.communityHeader h1 {
+    font-size: 26px;
+    color: #6cabd9;
+    font-weight: 700;
+  }
+
+  .title{
+    color: #3b8bc4;
+  }
+
+  .subtitle{
+    font-size: 14px;
+    color: #424242a2;
+    font-weight: 400;
+    margin-bottom: 10px;
+  }
+
+.postText{
+    color: black;
+    font-size: 24px;
+}

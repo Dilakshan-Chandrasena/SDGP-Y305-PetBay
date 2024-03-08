@@ -30,7 +30,7 @@ function App() {
             <Route path="/recommendation" element={<RecommendationPage />} />
             <Route path="/reminder/:userId" element={<Reminder />} /> 
             <Route path="/quiz" element={<Quiz />} />
-            <Route path="/community/:userId" element={<Community />} />
+            <Route path="/community/feed/:userId" element={<Community />} />
             <Route path="/pets/:userId" element={<Pets />} />
             <Route path="/pet-profile/:petId" element={<PetProfile />} />
             <Route path="/pet-recommendation" element={<UploadBreedImage />} />

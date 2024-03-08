@@ -72,13 +72,17 @@ export default function UploadImage() {
               <span>Predicted</span>
             </div>
             <h1>{predictedBreed}</h1>
-            <p>
+            <p className={styles.para}>
               You've uploaded an image of <span>{predictedBreed}</span>
             </p>
             <div className={styles.btnConatiner}>
               <Button
                 variant="dark"
-                onClick={()=>navigate("/recommendation", { state:{breed : predictedBreed}})}
+                onClick={() =>
+                  navigate("/recommendation", {
+                    state: { breed: predictedBreed },
+                  })
+                }
               >
                 Generate Recommendation
               </Button>

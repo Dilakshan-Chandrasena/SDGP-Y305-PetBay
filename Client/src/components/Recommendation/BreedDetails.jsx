@@ -36,7 +36,6 @@ export default function BreedDetails({ breedData }) {
                       style={{
                         borderRadius: "10px",
                         width: "350px",
-                        marginTop: "-50px",
                       }}
                     />
                   </MDBCol>

@@ -22,7 +22,7 @@ export default function UploadImage() {
   const predict = async (image) => {
     const predictImage = createFormData(image);
     await axios
-      .post("http://13.53.41.52/predict", predictImage)
+      .post("http://13.49.241.62:80/predict", predictImage)
       .then((res) => {
         let breedName = res.data.pred;
         breedName = breedName.replaceAll("_", " ");

@@ -111,11 +111,23 @@ export default function CommunityPage() {
         <Card.Text className={styles.postText}>
         {post.text}
         </Card.Text>
-        <div>
+        <div className="d-flex text-center">
         <Button className={styles.likeButton} onClick={handleLikeClick}>
         <FontAwesomeIcon icon={faThumbsUp} /> 
               </Button>
               {post.likes}
+              <Form.Control required className={styles.commentField} type="text" placeholder="Add your comment here..." onChange={(e) =>
+                      setValues({ ...values, text: e.target.value })
+                    } controlId="validationCustom01"/>
+                    <Button className={styles.commentButton} type="submit"> Comment
+                    </Button>
+        </div>
+
+        <div className={styles.commentBody}>
+          <div className="p-1">
+              <p>{post.username}</p>
+              <p className={styles.commentText}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis facere ipsam, dolorem fugit nobis quaerat. Molestiae earum harum fugit vero nostrum tenetur perspiciatis dolorem, reiciendis, facilis laboriosam mollitia aspernatur doloribus.</p>
+          </div>
         </div>
         
       </Card.Body>

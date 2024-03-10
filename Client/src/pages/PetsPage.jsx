@@ -11,6 +11,11 @@ import AddPetModal from "../components/AddPet/AddPetModal";
 import EmptyRecords from "../components/EmptyRecords/EmptyRecords";
 
 export default function PetsPage() {
+  const base_url =
+    import.meta.env.VITE_SERVER_NODE_ENV === "development"
+      ? import.meta.env.VITE_LOCAL_BASE_URL
+      : import.meta.env.VITE_PROD_BASE_URL;
+
   const { userId } = useParams();
   const [petList, setPetList] = useState([]);
   const [showEmptyRecs, setShowEmptyRecs] = useState(false);
@@ -21,9 +26,7 @@ export default function PetsPage() {
 
   const getPetsByUserId = async (userId) => {
     await axios
-      .get(
-        `http://localhost:8080/petbay/api/v1/pet-profiles/owned-pets/${userId}`
-      )
+      .get(`${base_url}/petbay/api/v1/pet-profiles/owned-pets/${userId}`)
       .then((res) => {
         const data = res.data;
         setPetList(res.data);

@@ -13,6 +13,11 @@ import axios from "axios";
 import Loading from "../Loading/Loading";
 
 function AddPetModal({ reloadPetList }) {
+  const base_url =
+  import.meta.env.VITE_SERVER_NODE_ENV === "development"
+      ? import.meta.env.VITE_LOCAL_BASE_URL
+      : import.meta.env.VITE_PROD_BASE_URL;
+      
   const { userId } = useParams();
   const [show, setShow] = useState(false);
   const ACCEPTED_IMAGE_TYPES = [
@@ -78,7 +83,7 @@ function AddPetModal({ reloadPetList }) {
     try {
       await axios
         .post(
-          "http://localhost:8080/petbay/api/v1/pet-profiles/add-pet",
+          `${base_url}/petbay/api/v1/pet-profiles/add-pet`,
           newPetData
         )
         .then((res) => {

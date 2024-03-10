@@ -9,6 +9,11 @@ import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 
 export default function PetCard({ name, petId, petImageURL, reloadPetList }) {
+  const base_url =
+  import.meta.env.VITE_SERVER_NODE_ENV === "development"
+      ? import.meta.env.VITE_LOCAL_BASE_URL
+      : import.meta.env.VITE_PROD_BASE_URL;
+      
   const navigate = useNavigate();
   const { userId } = useParams();
 
@@ -28,7 +33,7 @@ export default function PetCard({ name, petId, petImageURL, reloadPetList }) {
 
   const deletePetByID = async () => {
     await axios
-      .delete(`http://localhost:8080/petbay/api/v1/pet-profiles/${petID}`)
+      .delete(`${base_url}/petbay/api/v1/pet-profiles/${petID}`)
       .then((res) => {
         if (res.status == 200) {
           alert(`${petName} deleted successfully!`);

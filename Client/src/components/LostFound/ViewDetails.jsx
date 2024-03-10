@@ -23,6 +23,11 @@ import {
 } from "mdb-react-ui-kit";
 
 function ViewDetails({ postId }) {
+  const base_url =
+  import.meta.env.VITE_SERVER_NODE_ENV === "development"
+      ? import.meta.env.VITE_LOCAL_BASE_URL
+      : import.meta.env.VITE_PROD_BASE_URL;
+      
   const [fullscreen, setFullscreen] = useState(true);
   const [show, setShow] = useState(false);
   const [lostFoundDetails, setLostFoundDetails] = useState({});
@@ -40,7 +45,7 @@ function ViewDetails({ postId }) {
   const getPostById = async (postId) => {
     await axios
       .get(
-        `http://localhost:8080/petbay/api/v1/lost-found/post-details/${postId}`
+        `${base_url}/petbay/api/v1/lost-found/post-details/${postId}`
       )
       .then((res) => {
         setLostFoundDetails(res.data);

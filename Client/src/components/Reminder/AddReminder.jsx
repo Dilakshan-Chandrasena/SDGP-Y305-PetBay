@@ -11,6 +11,11 @@ import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 
 export default function AddReminder({loadReminders}) {
+  const base_url =
+  import.meta.env.VITE_SERVER_NODE_ENV === "development"
+      ? import.meta.env.VITE_LOCAL_BASE_URL
+      : import.meta.env.VITE_PROD_BASE_URL;
+      
   const [show, setShow] = useState(false);
   const [data, setData] = useState([]);
   const handleClose = () => setShow(false);
@@ -40,7 +45,7 @@ export default function AddReminder({loadReminders}) {
     values.userId = userId;
     await axios
       .post(
-        "http://localhost:8080/petbay/api/v1/reminders/addReminder/",
+        `${base_url}/petbay/api/v1/reminders/addReminder/`,
         values
       )
       .then(async (res) => {
@@ -55,7 +60,7 @@ export default function AddReminder({loadReminders}) {
   const getPetNames = async () => {
     await axios
       .get(
-        "http://localhost:8080/petbay/api/v1/pet-profiles/owned-pets/" + userId
+        `${base_url}/petbay/api/v1/pet-profiles/owned-pets/${userId}`
       )
       .then((res) => {
         const data = res.data;

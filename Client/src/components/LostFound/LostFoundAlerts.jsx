@@ -8,6 +8,11 @@ import EmptyRecords from "./EmptyRecords/EmptyRecords";
 import Pagination from "react-bootstrap/Pagination";
 
 export default function LostFoundAlerts() {
+  const base_url =
+  import.meta.env.VITE_SERVER_NODE_ENV === "development"
+      ? import.meta.env.VITE_LOCAL_BASE_URL
+      : import.meta.env.VITE_PROD_BASE_URL;
+      
   const [lostFoundDetails, setLostFoundDetails] = useState([]);
   const [filteredPosts, setFilteredPosts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -22,7 +27,7 @@ export default function LostFoundAlerts() {
   const getAllPosts = async () => {
     try {
       const res = await axios.get(
-        `http://localhost:8080/petbay/api/v1/lost-found/lost-found-posts`
+        `${base_url}/petbay/api/v1/lost-found/lost-found-posts`
       );
       const data = res.data;
       if (data.length > 0) {

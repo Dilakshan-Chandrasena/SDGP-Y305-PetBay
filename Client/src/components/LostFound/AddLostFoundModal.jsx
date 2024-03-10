@@ -14,6 +14,10 @@ import { useAuth } from "../../contexts/authContext";
 import "firebase/auth";
 
 function AddLostFoundModal({ reloadLostFoundPosts }) {
+  const base_url =
+  import.meta.env.VITE_SERVER_NODE_ENV === "development"
+      ? import.meta.env.VITE_LOCAL_BASE_URL
+      : import.meta.env.VITE_PROD_BASE_URL;
   const { userId } = useAuth();
   const [show, setShow] = useState(false);
   const [status, setStatus] = useState("");
@@ -93,7 +97,7 @@ function AddLostFoundModal({ reloadLostFoundPosts }) {
   const addLostFoundPost = async (newLostFoundData) => {
     try {
       const res = await axios.post(
-        "http://localhost:8080/petbay/api/v1/lost-found/add-lostfound-posts",
+        `${base_url}/petbay/api/v1/lost-found/add-lostfound-posts`,
         newLostFoundData
       );
       if (res.status === 201) {

@@ -42,7 +42,8 @@ export default function Header() {
               style={{ maxHeight: "400px" }} // Adjusted maxHeight here
             >
               <Navbar.Brand
-                href="/home"
+                as={Link}
+                to={"/home"}
                 className={`mx-2 ${styles.link}`}
                 style={{ fontWeight: "bolder", color: "whitesmoke" }}
               >

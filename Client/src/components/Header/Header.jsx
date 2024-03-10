@@ -34,7 +34,7 @@ export default function Header() {
         <Container fluid>
           <Navbar.Toggle
             aria-controls="navbarScroll"
-            style={{ color: "whitesmoke", background: "whitesmoke" }}
+            className={styles.hamburger}
           />
           <Navbar.Collapse id="navbarScroll">
             <Nav

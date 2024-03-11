@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { Container, Row, Col, Card, Form, Nav, Button } from "react-bootstrap";
+import { Container, Row, Col, Card, Form, Button } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faPaw,
@@ -12,6 +12,7 @@ import axios from "axios";
 
 export default function CommunityPage() {
   const [data, setData] = useState([]);
+  const [commentData, setCommentData] = useState([])
   const [comment, setComment] = useState({
     commentId : "",
     commentText: "",
@@ -24,6 +25,9 @@ export default function CommunityPage() {
     username: "",
     dateTime: "",
     text: "",
+    comments: [{
+      comment
+    }],
   });
 
   const handleLikeClick = () => {
@@ -54,6 +58,7 @@ export default function CommunityPage() {
 
   useEffect(() => {
     getPosts();
+    getComments();
   }, []);
 
   const getPosts = async () => {
@@ -70,13 +75,23 @@ export default function CommunityPage() {
       });
   };
 
-  const handleCommentSubmit = async (event) => {
-    const form = event.currentTarget;
-    if (form.checkValidity() === false) {
-      event.preventDefault();
-      event.stopPropagation();
-    }
-    event.preventDefault();
+  const getComments = async () => {
+    await axios
+      .get("http://localhost:8080/petbay/api/v1/community/getComments")
+      .then((res) => {
+        const data = res.data;
+        if (data.length > 0) {
+          console.log(data)
+          setCommentData(data);
+        }
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  };
+
+  const handleCommentSubmit = async (postId) => {
+    comment.commentId = postId;
     console.log(comment);
     await axios
       .post(
@@ -133,6 +148,7 @@ export default function CommunityPage() {
           {data.map((post) => (
             <Card className={styles.communityCard} loadPosts={getPosts}>
               <Card.Body className={styles.cardBody}>
+                <p hidden>{post.id}</p>
                 <Card.Title className={styles.title}>
                   {post.username}
                 </Card.Title>
@@ -155,24 +171,22 @@ export default function CommunityPage() {
                     onChange={(e) =>
                       setComment({ ...comment, commentText: e.target.value })
                     }
-                    controlId="validationCustom01"
                   />
-                  <Button className={styles.commentButton} type="submit" onClick={handleCommentSubmit}>
+                  <Button className={styles.commentButton} type="submit" onClick={() => handleCommentSubmit(post.id)}>
                     Comment
                   </Button>
                 </div>
-                <div className={styles.commentBody}>
+                {commentData.map((postComments) => (
+                  <div className={styles.commentBody}>
                   <div className="p-1">
-                    <p>{post.username}</p>
+                    <p>{postComments.commentUser}</p>
                     <p className={styles.commentText}>
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                      Perferendis facere ipsam, dolorem fugit nobis quaerat.
-                      Molestiae earum harum fugit vero nostrum tenetur
-                      perspiciatis dolorem, reiciendis, facilis laboriosam
-                      mollitia aspernatur doloribus.
+                     {postComments.commentText}
                     </p>
                   </div>
                 </div>
+                ))}
+                
               </Card.Body>
             </Card>
           ))}

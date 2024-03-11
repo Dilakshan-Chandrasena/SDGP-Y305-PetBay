@@ -40,8 +40,35 @@ exports.feed = asyncHandler(async(req,res,next) => {
       }
   });
 
-exports.addComment = (async(req,res,next) => {
-  const comments = req.body;
+exports.addComment = asyncHandler(async(req,res,next) => {
+  const commentsData = req.body;
   const userId = req.params.id;
-  
+  const post = await communityCollection.where('id', '==', commentsData.commentId).get();
+  const postDoc = post.docs[0];
+  const postData = postDoc.data();
+  const commentArray = postData.comments || [];
+  const usernameList = await userCollection.where("id", "==", userId).get();
+  const userDoc = usernameList.docs[0];
+  const userData = userDoc.data();
+  const username = userData.firstName + " " + userData.lastName;
+  if(username && post){
+    commentsData.commentUser = username;
+    const updatedComments = [...commentArray, commentsData];
+      await communityCollection.doc(postDoc.id).update({
+        comments: updatedComments
+      });
+    res.status(200).json({ reqStatus: "Success" });
+  }else {
+    throw new CustomError("Comments not added. Try Again", 400);
+  }
 });
+
+exports.getComments = asyncHandler (async(req,res,next) => {
+  const commentDoc = await communityCollection.get();
+  const commentRef = commentDoc.docs.map(doc => doc.data().comments)
+  if(commentRef.length != 0){
+    res.status(200).json(commentRef);
+  }else{
+    res.status(500).json([]);
+  }
+})

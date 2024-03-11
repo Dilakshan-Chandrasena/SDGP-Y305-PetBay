@@ -1,148 +1,148 @@
-.likeButton{
-    border-radius: 50%;
-    margin-top: 20px;
-    background-color: #6cabd9;
-    border: none;
-    margin-right: 10px;
+.likeButton {
+  border-radius: 50%;
+  margin-top: 20px;
+  background-color: #6cabd9;
+  border: none;
+  margin-right: 10px;
 }
-.likeButton:checked{
-    color: red;
-}
-
-.navLinks{
-    display: flex;
-    flex-direction: column;
-    margin-top: 30px;
-    margin-left: 50px;
+.likeButton:checked {
+  color: red;
 }
 
-.anchors{
-    color:black;
-    margin-bottom: 20px;
+.navLinks {
+  display: flex;
+  flex-direction: column;
+  margin-top: 30px;
+  margin-left: 50px;
 }
 
-.communityPosts{
-    margin-top: 20px;
-    margin-left: 30px;
+.anchors {
+  color: black;
+  margin-bottom: 20px;
 }
 
-.communityCard{
-    border-radius: 20px;
-    border: none;
-    box-shadow: 2px 5px 5px rgba(0, 0, 0, 0.1);
-    margin-top: 30px;
+.communityPosts {
+  margin-top: 20px;
+  margin-left: 30px;
 }
 
-.cardBody{
-    padding: 30px;
+.communityCard {
+  border-radius: 20px;
+  border: none;
+  box-shadow: 2px 5px 5px rgba(0, 0, 0, 0.1);
+  margin-top: 30px;
 }
 
-.createPost{
-    padding: 10px;
-    border-radius: 20px;
-    border: none;
-    box-shadow: 2px 5px 5px rgba(0, 0, 0, 0.1);
+.cardBody {
+  padding: 30px;
 }
 
-.createButtons{
+.createPost {
+  padding: 10px;
+  border-radius: 20px;
+  border: none;
+  box-shadow: 2px 5px 5px rgba(0, 0, 0, 0.1);
+}
+
+.createButtons {
   display: flex;
   justify-content: space-between;
   position: relative;
   margin-top: 20px;
 }
 
-.postField{
-    border: none;
-    background-color: #eeeeee;
+.postField {
+  border: none;
+  background-color: #eeeeee;
 }
 
-.createButtons Button{
-    border-radius: 25px;
+.createButtons Button {
+  border-radius: 25px;
 }
 
-.publish{
-    background-color: #6cabd9;
-    border: none;
-    font-size: 14px;
+.publish {
+  background-color: #6cabd9;
+  border: none;
+  font-size: 14px;
 }
 
-.publish:hover{
-    background-color: #3b8bc4;
-    transition: 0.3s ease-in;
+.publish:hover {
+  background-color: #3b8bc4;
+  transition: 0.3s ease-in;
 }
 
 .communityHeader {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 30px;
-    margin-left: 30px;
-    margin-bottom: 20px;
-  }
-  
-.communityHeader h1 {
-    font-size: 26px;
-    color: #6cabd9;
-    font-weight: 700;
-  }
-
-  .title{
-    color: #3b8bc4;
-  }
-
-  .subtitle{
-    font-size: 14px;
-    color: #424242a2;
-    font-weight: 400;
-    margin-bottom: 10px;
-  }
-
-.postText{
-    color: black;
-    font-size: 24px;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 30px;
+  margin-left: 30px;
+  margin-bottom: 20px;
 }
 
-.commentBody{
-    border: none;
-    padding: 5px;
-    background-color: #e2e2e2a2;
-    border-radius: 25px;
-    margin-top: 15px;
-    width: 70%;
+.communityHeader h1 {
+  font-size: 26px;
+  color: #6cabd9;
+  font-weight: 700;
+}
+
+.title {
+  color: #3b8bc4;
+}
+
+.subtitle {
+  font-size: 14px;
+  color: #424242a2;
+  font-weight: 400;
+  margin-bottom: 10px;
+}
+
+.postText {
+  color: black;
+  font-size: 24px;
+}
+
+.commentBody {
+  border: none;
+  padding: 5px;
+  background-color: #e2e2e2a2;
+  border-radius: 25px;
+  margin-top: 15px;
+  width: 70%;
+  
 }
 
 .commentUser {
-    margin-left: 10px;
-    font-size: 14px;
-    color: #3b8bc4;
-    font-weight: 500;
+  margin-left: 10px;
+  font-size: 14px;
+  color: #3b8bc4;
+  font-weight: 500;
 }
 
-.commentText{
-    color: rgb(49, 49, 49);
-    font-size: 14px;
-    font-weight: 400;
-
+.commentText {
+  color: rgb(49, 49, 49);
+  font-size: 14px;
+  font-weight: 400;
 }
 
-.commentField{
-    height: 60%;
-    width: 65%;
-    margin-top: 20px;
-    border: none;
-    background-color: #eeeeee;
+.commentField {
+  height: 60%;
+  width: 65%;
+  margin-top: 20px;
+  border: none;
+  background-color: #eeeeee;
 }
 
-.commentButton{
-    margin-left: 10px;
-    border-radius: 25px;
-    height: 50%;
-    margin-top: 17px;
-    background-color: #6cabd9;
-    border: none;
-    font-weight: 500;
+.commentButton {
+  margin-left: 10px;
+  border-radius: 25px;
+  height: 50%;
+  margin-top: 17px;
+  background-color: #6cabd9;
+  border: none;
+  font-weight: 500;
 }
 
-.commentButton:hover{
-    background-color: #3b8bc4;
-    transition: 0.3s ease-in;
+.commentButton:hover {
+  background-color: #3b8bc4;
+  transition: 0.3s ease-in;
 }

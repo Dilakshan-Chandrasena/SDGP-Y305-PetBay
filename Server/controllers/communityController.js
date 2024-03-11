@@ -8,13 +8,11 @@ const userCollection = db.collection('users');
 exports.addCommunityPost = asyncHandler(async(req, res, next) => {
     const communityPost = req.body;
     const userId = req.params.id;
-    console.log(userId)
     const postId = uuid.v4();
 
     const currentDate = new Date();
-
     const year = currentDate.getFullYear();
-    const month = currentDate.getMonth() + 1; 
+    const month = currentDate.getMonth() + 1;
     const day = currentDate.getDate();
 
     const formattedDate = `${year}-${month < 10 ? '0' + month : month}-${day < 10 ? '0' + day : day}`;
@@ -30,7 +28,7 @@ exports.addCommunityPost = asyncHandler(async(req, res, next) => {
     }catch {
         throw new CustomError("Failed to add reminder", 400);
     }
-})
+});
 
 exports.feed = asyncHandler(async(req,res,next) => {
     const posts = await communityCollection.get();
@@ -41,3 +39,9 @@ exports.feed = asyncHandler(async(req,res,next) => {
         res.status(200).json([]);
       }
   });
+
+exports.addComment = (async(req,res,next) => {
+  const comments = req.body;
+  const userId = req.params.id;
+  
+});

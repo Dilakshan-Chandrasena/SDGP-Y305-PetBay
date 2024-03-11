@@ -72,8 +72,3 @@ exports.getComments = asyncHandler (async(req,res,next) => {
     res.status(500).json([]);
   }
 })
-
-
-exports.getCommentByPost = asyncHandler(async(req,res,next)=>{
-  
-})

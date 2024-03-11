@@ -88,7 +88,6 @@ export default function CommunityPage() {
       .then((res) => {
         const data = res.data;
         if (data.length > 0) {
-          // console.log(data);
           setCommentData(data);
         }
       })
@@ -99,7 +98,6 @@ export default function CommunityPage() {
 
   const handleCommentSubmit = async (postId) => {
     comment.commentId = postId;
-    // console.log(comment);
     await axios
       .post(
         "http://localhost:8080/petbay/api/v1/community/addComment/" + userId,

@@ -70,12 +70,37 @@
   }
 }
 
-@media (max-width: 426px) {
+@media (max-width: 431px) {
   .cardContainer {
     margin: 0px 40px;
   }
   .planCard {
     width: 20rem;
+  }
+
+  .planTitle {
+    font-size: 16px;
+    width: 100px;
+    border-radius: 0px 25px 0px 15px;
+  }
+
+  .feature {
+    font-size: 12px;
+  }
+
+  .priceBadge {
+    font-size: 12px;
+    padding: 8px;
+  }
+}
+
+@media (max-width: 376px) {
+  .cardContainer {
+    margin: 0px 20px;
+    align-items: center;
+  }
+  .planCard {
+    width: 16rem;
   }
 
   .planTitle {

@@ -71,7 +71,7 @@
   } */
 }
 
-@media (max-width: 426px) {
+@media (max-width: 431px) {
   .detailsContainer {
     align-items: center;
     flex-direction: column;

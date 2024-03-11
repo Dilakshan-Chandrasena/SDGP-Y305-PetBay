@@ -8,9 +8,17 @@ import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import Image from "react-bootstrap/Image";
 import axios from "axios";
-import { useNavigate } from "react-router";
+import { useNavigate, useParams } from "react-router";
+import { useAuth } from "../../contexts/authContext";
 
 export default function UploadImage() {
+  const base_url =
+    import.meta.env.VITE_SERVER_NODE_ENV === "development"
+      ? import.meta.env.VITE_LOCAL_BASE_URL
+      : import.meta.env.VITE_PROD_BASE_URL;
+
+  const { userId } = useAuth();
+  const { petId } = useParams();
   const [predictedBreed, setPredictedBreed] = useState("");
   const [uploaded, setUploaded] = useState(false);
   const [imagePreview, setImagePreview] = useState();
@@ -59,6 +67,22 @@ export default function UploadImage() {
     await predict(breedImage);
   }, []);
 
+  const generateRecommendation = async () => {
+    axios
+      .get(`${base_url}/petbay/api/v1/breed-recommendation/${userId}`)
+      .then((res) => {
+        const preferenceStatus = res.data.preferenceStatus;
+        if (preferenceStatus == true) {
+          navigate("/recommendation", {
+            state: { breed: predictedBreed },
+          });
+        } else {
+          alert("Please set your breed preferences by taking the quiz");
+          navigate("/Quiz");
+        }
+      });
+  };
+
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
   return (
     <div className={styles.dropzoneContainer}>
@@ -76,14 +100,7 @@ export default function UploadImage() {
               You've uploaded an image of <span>{predictedBreed}</span>
             </p>
             <div className={styles.btnConatiner}>
-              <Button
-                variant="dark"
-                onClick={() =>
-                  navigate("/recommendation", {
-                    state: { breed: predictedBreed },
-                  })
-                }
-              >
+              <Button variant="dark" onClick={generateRecommendation}>
                 Generate Recommendation
               </Button>
               <Button

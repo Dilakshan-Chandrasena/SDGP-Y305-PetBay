@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPaw } from "@fortawesome/free-solid-svg-icons";
 import breedRecImg from "../../../assets/images/breedrec.png";
 import petProfImg from "../../../assets/images/petprof.png";
-import petRemImg from "../../../assets/images/petRem.png";
+import petRemImg from "../../../assets/images/petrem.png";
 import petComImg from "../../../assets/images/petcom.png";
 import petLostFoundImg from "../../../assets/images/petlostfound.png";
 

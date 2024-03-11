@@ -18,6 +18,7 @@ import Quiz from "./components/Quiz/quiz";
 import Pets from "./pages/PetsPage";
 import PetProfile from "./pages/PetProfilePage";
 import UploadBreedImage from "./pages/UploadBreedImage";
+import UserAccountPage from "./pages/UserAccountPage";
 
 function App() {
   const { userId } = useParams();
@@ -54,6 +55,7 @@ function App() {
             <Route path="/pets/:userId" element={<Pets />} />
             <Route path="/pet-profile/:petId" element={<PetProfile />} />
             <Route path="/pet-recommendation" element={<UploadBreedImage />} />
+            <Route path="/user" element={<UserAccountPage />} />
           </Routes>
         </Router>
       </div>

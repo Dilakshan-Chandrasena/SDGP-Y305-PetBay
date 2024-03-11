@@ -11,12 +11,13 @@ import styles from "./community.module.css";
 import axios from "axios";
 
 export default function CommunityPage() {
+  const [point, setPoint] = useState(0);
   const [data, setData] = useState([]);
-  const [commentData, setCommentData] = useState([])
+  const [commentData, setCommentData] = useState([]);
   const [comment, setComment] = useState({
-    commentId : "",
+    commentId: "",
     commentText: "",
-    commentUser: ""
+    commentUser: "",
   });
   const { userId } = useParams();
   const [validated, setValidated] = useState(false);
@@ -25,9 +26,11 @@ export default function CommunityPage() {
     username: "",
     dateTime: "",
     text: "",
-    comments: [{
-      comment
-    }],
+    comments: [
+      {
+        comment,
+      },
+    ],
   });
 
   const handleLikeClick = () => {
@@ -50,6 +53,7 @@ export default function CommunityPage() {
         values
       )
       .then(async (res) => {
+        await getPosts();
         alert("Post Published");
       })
       .catch((err) => console.log(err));
@@ -59,7 +63,7 @@ export default function CommunityPage() {
   useEffect(() => {
     getPosts();
     getComments();
-  }, []);
+  }, [point]);
 
   const getPosts = async () => {
     await axios
@@ -67,7 +71,10 @@ export default function CommunityPage() {
       .then((res) => {
         const data = res.data;
         if (data.length > 0) {
+          console.log(data);
+
           setData(data);
+          setPoint(point++);
         }
       })
       .catch((err) => {
@@ -81,7 +88,7 @@ export default function CommunityPage() {
       .then((res) => {
         const data = res.data;
         if (data.length > 0) {
-          console.log(data)
+          // console.log(data);
           setCommentData(data);
         }
       })
@@ -92,13 +99,14 @@ export default function CommunityPage() {
 
   const handleCommentSubmit = async (postId) => {
     comment.commentId = postId;
-    console.log(comment);
+    // console.log(comment);
     await axios
       .post(
         "http://localhost:8080/petbay/api/v1/community/addComment/" + userId,
         comment
       )
       .then(async (res) => {
+        await getPosts();
         alert("Comment added");
       })
       .catch((err) => console.log(err));
@@ -172,21 +180,26 @@ export default function CommunityPage() {
                       setComment({ ...comment, commentText: e.target.value })
                     }
                   />
-                  <Button className={styles.commentButton} type="submit" onClick={() => handleCommentSubmit(post.id)}>
+                  <Button
+                    className={styles.commentButton}
+                    type="submit"
+                    onClick={() => handleCommentSubmit(post.id)}
+                  >
                     Comment
                   </Button>
                 </div>
-                {commentData.map((postComments) => (
+                {post.comments.map((postComments) => (
                   <div className={styles.commentBody}>
-                  <div className="p-1">
-                    <p>{postComments.commentUser}</p>
-                    <p className={styles.commentText}>
-                     {postComments.commentText}
-                    </p>
+                    <div className="p-1">
+                      <p className={styles.commentUser}>
+                        {postComments.commentUser}
+                      </p>
+                      <p className={styles.commentText}>
+                        {postComments.commentText}
+                      </p>
+                    </div>
                   </div>
-                </div>
                 ))}
-                
               </Card.Body>
             </Card>
           ))}

@@ -25,22 +25,31 @@
     border-color: #4A4141;
   }
   
-  .userAccountDetails.user-info-item {
+  .userAccountDetails.userInfoItem {        /*user-info-item*/
     text-align: center;
     
   }
   
-  .user-info-item {
+  .userInfoItem {                 /*user-info-item*/
     font-size: medium;
     
   }
   
-  .user-info-fullName {
+  .userImage img {
+    border-radius: 50%;
+    max-width: auto;
+    height: 120px;
+    float: left;
+    margin-left: 70px;
+    margin-top: -10px;
+  }
+
+  .userInfofullName {
     font-size: xxx-large;
     font-weight: bold;
     color: #6CABD9;
     text-align: center;
-    position: relative; margin-left: 100px;
+    position: relative; margin-left: 300px;
     margin-top: 50px;
   }
   
@@ -48,11 +57,30 @@
     color: #4A4141;
     font-size: x-large;
     font-weight: bold;
-    text-align: right;
+    /* text-align: right; */
     margin-bottom: 50px;
     margin-top: -10px;
-    text-align: center;
-    
+    /* text-align: center; */
+    position: relative; margin-left: 300px;
+  }
+
+  .editImage {
+    display: flex;
+    float: right;
+    margin-top: 40px;
+    margin-right: 50px;
+  }
+
+  .editImage button {
+    border: none;
+    cursor: pointer;
+    appearance: none;
+    background-color: inherit;
+  }
+
+  .editImage img {
+    width: auto;
+    height: 35px;
   }
   
   .userInfoDate {
@@ -60,7 +88,7 @@
     font-size: larger;
     font-weight: bold;
     text-align: left;
-    position: relative; margin-left: 20px;
+    position: relative; margin-left: 60px;
   }
   
   .dateText {
@@ -74,7 +102,7 @@
     font-size: larger;
     font-weight: bold;
     text-align: left;
-    position: relative; margin-left: 590px;
+    position: relative; margin-left: 490px;
   }
   
   .planText {
@@ -88,7 +116,7 @@
     font-size: larger;
     font-weight: bold;
     text-align: left;
-    position: relative; margin-left: 20px; 
+    position: relative; margin-left: 60px; 
   }
   
   .contactText {
@@ -102,7 +130,7 @@
     font-size: larger;
     font-weight: bold;
     text-align: left;
-    position: relative; margin-left: 570px;
+    position: relative; margin-left: 470px;
   }
   
   .paymentText {
@@ -112,15 +140,28 @@
   }
   
   .userInfo {
-    margin-top: 20px;
-    
+    margin-top: 20px; 
   }
   
   .detailBar {
     margin-top: 30px;
     display: flex; flex-direction: row;
   }
+
+  .visa img {
+    height: 70px;
+    float: right;
+    margin-right: 55px;
+    margin-top: 7px;
+  }
   
+  .mastercard img {
+    height: 40px;
+    float: right;
+    margin-right: 80px;
+    margin-top: 20px;
+  }
+
   /* .user-info-item {
     margin-bottom: 10px;
   } */
@@ -128,5 +169,3 @@
   .userInfoItem strong {
     margin-right: 5px;
   }
-  
-  

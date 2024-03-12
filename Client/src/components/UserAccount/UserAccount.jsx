@@ -30,8 +30,15 @@ const UserAccount = () => {
       
       <div className={styles.userInfo}>
         
+        <div className={styles.userImage}>
+            <img src="src\assets\images\userImage.jpg" alt="" />
+        </div>
+        <div className={styles.editImage}>
+            <button type='edit'> <img src="src\assets\images\editIcon.jpg" alt="" border="0" /> </button>
+        </div>
+
         <div className={styles.userAccountDetails}>
-           {userDetails.fullName}  {/*<strong></strong>  */}
+           {userDetails.fullName}
         </div>
         <div className={styles.userInfoEmail}>
            {userDetails.email}
@@ -58,6 +65,14 @@ const UserAccount = () => {
             <div className={styles.userInfoPaymentInfo}>
             <p className={styles.paymentText}>Payment Info</p> {userDetails.paymentinfo}
             </div>  
+        </div>
+
+        <div className={styles.masterCard}>
+            <img src="src\assets\images\mastercardIcon.png" alt="" />
+        </div>
+
+        <div className={styles.visa}>
+            <img src="src\assets\images\visaIcon.jpg" alt="" />
         </div>
       </div>
     </div>

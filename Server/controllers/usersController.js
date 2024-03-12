@@ -40,7 +40,6 @@ exports.getOwnedPets = asyncHandler(async (req, res, next) => {
   const user = await getUserById(req.params.id);
   if (user) {
     const ownedPets = user.pets;
-    console.log(ownedPets);
     res.status(200).json({ pets: ownedPets });
   } else {
     const error = new CustomError("User Not Found", 400);

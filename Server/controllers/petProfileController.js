@@ -44,9 +44,9 @@ exports.addPet = asyncHandler(async (req, res, next) => {
 exports.getUserOwnedPets = asyncHandler(async(req,res,next) => {
   const userId = req.params.id;
   
-  const userOwnedPetsSnap = await petsCollection.where('userId', '==', userId).get();
-  const userOwnedPets = userOwnedPetsSnap.docs.map(doc => doc.data())
-  if(userOwnedPets.length !== 0){
+  const userOwnedPetsSnap = await petsCollection?.where('userId', '==', userId).get();
+  const userOwnedPets = userOwnedPetsSnap?.docs.map(doc => doc.data())
+  if(userOwnedPets?.length !== 0){
     res.status(200).json(userOwnedPets);
   }else{
     res.status(200).json([]);

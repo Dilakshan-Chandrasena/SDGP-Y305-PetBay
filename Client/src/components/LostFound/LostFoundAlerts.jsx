@@ -9,10 +9,10 @@ import Pagination from "react-bootstrap/Pagination";
 
 export default function LostFoundAlerts() {
   const base_url =
-  import.meta.env.VITE_SERVER_NODE_ENV === "development"
+    import.meta.env.VITE_SERVER_NODE_ENV === "development"
       ? import.meta.env.VITE_LOCAL_BASE_URL
       : import.meta.env.VITE_PROD_BASE_URL;
-      
+
   const [lostFoundDetails, setLostFoundDetails] = useState([]);
   const [filteredPosts, setFilteredPosts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -68,7 +68,9 @@ export default function LostFoundAlerts() {
     <div className={styles.container}>
       <div className="container">
         <div className="row justify-content-center">
-          <div className="col-md-9">
+          <div className="col-md-9 col-sm-3">
+            {" "}
+            {/* Adjusted column size for small screens */}
             <Filters onFilterChange={handleFilterChange} />
             <AddPost reloadLostFoundPosts={getAllPosts} />
             <div>

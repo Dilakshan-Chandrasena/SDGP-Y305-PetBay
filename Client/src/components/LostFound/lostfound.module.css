@@ -19,15 +19,11 @@
   margin-top: 30px;
 }
 
-.container {
-  margin-top: 50px;
-}
-
 .image {
-  margin-left: 30%;
+  margin: 0 auto; /* Center the image */
   width: 250px;
 }
-/* custom.css */
+
 .customTabs {
   transition: height 1.4s ease-in-out;
 }
@@ -36,6 +32,7 @@
   font-size: 25px;
   margin-bottom: 20px;
 }
+
 .span {
   color: rgb(30, 134, 252);
 }
@@ -47,6 +44,7 @@
   color: rgb(105, 166, 236);
   border-color: rgb(105, 166, 236);
 }
+
 .viewButton:hover {
   background-color: rgb(105, 166, 236);
   border-color: rgb(105, 166, 236);
@@ -57,7 +55,6 @@
   background-color: #d4d0d0d2;
   padding: 10px 13px;
   border-radius: 90px;
-  margin-right: 22px;
   cursor: pointer;
   margin-top: 100px;
 }
@@ -76,25 +73,6 @@
   text-align: right;
 }
 
-@media (max-width: 768px) {
-  .image {
-    margin-left: auto;
-    margin-right: auto;
-    display: block;
-    width: 70%;
-  }
-
-  .flex-grow-1 {
-    flex: 1 !important;
-    margin-top: 10px;
-  }
-
-  .viewButton {
-    width: 100%;
-    margin-top: 20px;
-  }
-}
-
 .heading {
   background-color: #6cabd9;
   padding: 20px;
@@ -108,6 +86,7 @@
   border-radius: 10px;
   background-color: #eee;
 }
+
 .addBtn {
   border: none;
   background-color: transparent;
@@ -152,40 +131,23 @@
   color: #6cabd9;
 }
 
-@media (max-width: 1000px) {
-  .image {
-    margin-left: auto;
-    margin-right: auto;
-    display: block;
-    width: 60%;
+/* Responsive adjustments */
+@media (max-width: 320px) {
+  .form {
+    /* Set max-width to 100% to fix to the screen width */
+    max-width: 100%;
+    width: 280px; /* Adjust form width to fit smaller screens */
   }
 
-  .flex-grow-1 {
-    flex: 1 !important;
-    margin-top: 10px;
+  .image {
+    width: 90%; /* Make image 90% width on smaller devices */
+    margin-top: 20px; /* Adjust margin */
+    margin-bottom: 20px;
   }
 
   .viewButton {
-    width: 100%;
-    margin-top: 20px;
-  }
-}
-
-@media (max-width: 1200px) {
-  .image {
-    margin-left: auto;
-    margin-right: auto;
-    display: block;
-    width: 250px;
-  }
-
-  .flex-grow-1 {
-    flex: 1 !important;
-    margin-top: 10px;
-  }
-
-  .viewButton {
-    width: 100%;
-    margin-top: 20px;
+    width: 90%; /* Make button 90% width on smaller devices */
+    margin-top: 20px; /* Adjust margin */
+    margin-bottom: 20px;
   }
 }

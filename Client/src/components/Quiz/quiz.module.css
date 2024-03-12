@@ -77,3 +77,66 @@
   margin-bottom: 50px;
   font-size: 30px;
 }
+
+@media only screen and (max-width: 768px) {
+  /* Styles for screens up to 600px wide */
+  .quizContainer {
+    width: 500px;
+  }
+  .quizContainer h2 {
+    font-size: 20px;
+  }
+  .quizContainer ul li {
+    font-size: 16px;
+    width: 400px;
+  }
+  .buttons {
+    gap: 260px;
+  }
+  .quizContainer .finishButton {
+    margin-left: 55px;
+  }
+  /* Adjust other styles as needed */
+}
+
+@media only screen and (max-width: 426px) {
+  /* Styles for screens up to 600px wide */
+  .quizContainer {
+    width: 400px;
+  }
+  .quizContainer h2 {
+    font-size: 20px;
+  }
+  .quizContainer ul li {
+    font-size: 16px;
+    width: 300px;
+  }
+  .buttons {
+    gap: 160px;
+  }
+  .quizContainer .finishButton {
+    margin-left: 55px;
+  }
+  /* Adjust other styles as needed */
+}
+
+@media only screen and (max-width: 400px) {
+  /* Styles for screens up to 600px wide */
+  .quizContainer {
+    width: 300px;
+  }
+  .quizContainer h2 {
+    font-size: 18px;
+  }
+  .quizContainer ul li {
+    font-size: 14px;
+    width: 220px;
+  }
+  .buttons {
+    gap: 70px;
+  }
+  .quizContainer .finishButton {
+    margin-left: 55px;
+  }
+  /* Adjust other styles as needed */
+}

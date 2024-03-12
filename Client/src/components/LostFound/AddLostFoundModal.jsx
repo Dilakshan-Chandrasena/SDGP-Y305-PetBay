@@ -15,7 +15,7 @@ import "firebase/auth";
 
 function AddLostFoundModal({ reloadLostFoundPosts }) {
   const base_url =
-  import.meta.env.VITE_SERVER_NODE_ENV === "development"
+    import.meta.env.VITE_SERVER_NODE_ENV === "development"
       ? import.meta.env.VITE_LOCAL_BASE_URL
       : import.meta.env.VITE_PROD_BASE_URL;
   const { userId } = useAuth();
@@ -128,6 +128,7 @@ function AddLostFoundModal({ reloadLostFoundPosts }) {
         keyboard={false}
       >
         <Form
+          className={styles.form}
           onSubmit={handleSubmit(onSubmit, onInvalid)}
           disabled={isSubmitting}
         >

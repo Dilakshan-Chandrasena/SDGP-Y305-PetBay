@@ -9,37 +9,61 @@ import BreedDetails from "./BreedDetails";
 import Tabs from "./Tabs";
 import axios from "axios";
 import { useAuth } from "../../contexts/authContext";
-import "firebase/auth";
 import { useState, useEffect } from "react";
 import { useLocation } from "react-router";
+import { useNavigate } from "react-router-dom";
 
-export default function Recommendation({}) {
+export default function Recommendation() {
   const base_url =
-  import.meta.env.VITE_SERVER_NODE_ENV === "development"
+    import.meta.env.VITE_SERVER_NODE_ENV === "development"
       ? import.meta.env.VITE_LOCAL_BASE_URL
       : import.meta.env.VITE_PROD_BASE_URL;
-      
+
   const { userId } = useAuth();
   const [breedData, setBreedData] = useState({});
   const { state } = useLocation();
-  const { breed } = state;
+  const breed = state?.breed; // Destructuring the breed property safely
+
+  const [result, setResult] = useState("");
+  const [preferencesSet, setPreferencesSet] = useState(false);
+  const navigate = useNavigate();
+
   useEffect(() => {
-    getBreedRecommendation(userId);
-  }, []);
+    if (breed) {
+      // Check if breed exists
+      getBreedRecommendation(userId);
+    }
+  }, [breed]); // Trigger useEffect when breed changes
 
+  const setPreferenceClick = async () => {
+    navigate("/quiz");
+  };
   const getBreedRecommendation = async (userId) => {
+    try {
+      const response = await axios.post(
+        `${base_url}/petbay/api/v1/breed-recommendation/`,
+        {
+          userId: userId,
+          breedName: breed,
+        }
+      );
+      setBreedData(response.data);
+      setResult(getResult(response.data.overallMatchingPercentage));
+      setPreferencesSet(true);
+    } catch (error) {
+      console.log(error.message);
+      setPreferencesSet(false);
+    }
+  };
 
-    await axios
-      .post(`${base_url}/petbay/api/v1/breed-recommendation/`, {
-        userId: userId,
-        breedName: breed,
-      })
-      .then((res) => {
-        setBreedData(res.data);
-      })
-      .catch((err) => {
-        console.log(err.message);
-      });
+  const getResult = (matchingPercentage) => {
+    if (matchingPercentage >= 80) {
+      return "Perfect";
+    } else if (matchingPercentage >= 40) {
+      return "Good";
+    } else {
+      return "Bad";
+    }
   };
 
   const renderIcon = (matchingPercentage) => {
@@ -50,7 +74,7 @@ export default function Recommendation({}) {
           style={{ color: "green", fontSize: "95px", marginLeft: "10px" }}
         />
       );
-    } else if (matchingPercentage >= 60 || matchingPercentage >= 40) {
+    } else if (matchingPercentage >= 40) {
       return (
         <FontAwesomeIcon
           icon={faCircleCheck}
@@ -73,27 +97,54 @@ export default function Recommendation({}) {
         <MDBRow>
           <MDBCol>
             <div className={styles.headerContainer}>
-              <div>{renderIcon(breedData.overallMatchingPercentage)}</div>
               <div className={styles.heading}>
-                <h2>
-                  {breedData.overallMatchingPercentage}% Overall Matching
-                  Percentage
-                </h2>
-                <p
-                  style={{
-                    fontWeight: "bold",
-                    wordSpacing: "2px",
-                    fontSize: "20px",
-                  }}
-                >
-                  {breedData.breedName} is a perfect match for you
-                </p>
+                {breed && preferencesSet ? (
+                  <>
+                    <div>
+                      {renderIcon(breedData.overallMatchingPercentage)}
+                      <h2>
+                        {breedData.overallMatchingPercentage}% Overall Matching
+                        Percentage
+                      </h2>
+                    </div>
+                    <p
+                      style={{
+                        fontWeight: "bold",
+                        wordSpacing: "2px",
+                        fontSize: "20px",
+                      }}
+                    >
+                      {breedData.breedName &&
+                        `${breedData.breedName} is a ${result} match for you`}
+                    </p>
+                  </>
+                ) : (
+                  <>
+                    <p
+                      style={{
+                        fontWeight: "bold",
+                        wordSpacing: "2px",
+                        fontSize: "20px",
+                      }}
+                    >
+                      Please set preferences before
+                    </p>
+                    <br />
+                    <button
+                      className={styles.setButton}
+                      onClick={setPreferenceClick}
+                      style={{ marginTop: "10px" }}
+                    >
+                      Set Preferences
+                    </button>
+                  </>
+                )}
               </div>
             </div>
           </MDBCol>
         </MDBRow>
-        <BreedDetails breedData={breedData} />
-        <Tabs breedData={breedData} />
+        {breed && preferencesSet && <BreedDetails breedData={breedData} />}
+        {breed && preferencesSet && <Tabs breedData={breedData} />}
       </MDBContainer>
     </div>
   );

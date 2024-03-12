@@ -122,13 +122,13 @@ function AddLostFoundModal({ reloadLostFoundPosts }) {
       </button>
 
       <Modal
+        className={styles.form}
         show={show}
         onHide={handleClose}
         backdrop="static"
         keyboard={false}
       >
         <Form
-          className={styles.form}
           onSubmit={handleSubmit(onSubmit, onInvalid)}
           disabled={isSubmitting}
         >

@@ -62,6 +62,7 @@
 .filterContainer {
   display: flex;
   align-items: center;
+  margin-top: 30px;
 }
 
 .iconContainer {
@@ -134,20 +135,19 @@
 /* Responsive adjustments */
 @media (max-width: 320px) {
   .form {
-    /* Set max-width to 100% to fix to the screen width */
     max-width: 100%;
-    width: 280px; /* Adjust form width to fit smaller screens */
+    width: 320px;
   }
 
   .image {
-    width: 90%; /* Make image 90% width on smaller devices */
-    margin-top: 20px; /* Adjust margin */
+    width: 90%;
+    margin-top: 20px;
     margin-bottom: 20px;
   }
 
   .viewButton {
-    width: 90%; /* Make button 90% width on smaller devices */
-    margin-top: 20px; /* Adjust margin */
+    width: 90%;
+    margin-top: 20px;
     margin-bottom: 20px;
   }
 }

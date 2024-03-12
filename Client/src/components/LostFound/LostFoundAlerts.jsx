@@ -68,7 +68,7 @@ export default function LostFoundAlerts() {
     <div className={styles.container}>
       <div className="container">
         <div className="row justify-content-center">
-          <div className="col-md-9 col-sm-3">
+          <div className="col-md-9 col-sm-12">
             {" "}
             {/* Adjusted column size for small screens */}
             <Filters onFilterChange={handleFilterChange} />
@@ -114,14 +114,6 @@ export default function LostFoundAlerts() {
             </div>
           </div>
         </div>
-      </div>
-      <div
-        style={{
-          visibility: showEmptyRecs ? "visible" : "hidden",
-          height: showEmptyRecs ? "fit-content" : "0px",
-        }}
-      >
-        <EmptyRecords key={""} emptyProperty={"Pets"} />
       </div>
     </div>
   );

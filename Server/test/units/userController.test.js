@@ -49,9 +49,7 @@ describe("HTTP Endpoint Tests", () => {
       .send();
 
     // Assertions
-    // console.log(response.);
     expect(response.status).toBe(400);
-    // Add more assertions here as needed
   });
 
 //M01-T03
@@ -128,7 +126,7 @@ it("should return status 200 when update user breed preferences", async () => {
     }
     );
 
-    // Assertions
+
     expect(response.status).toBe(200);
   });
 
@@ -146,7 +144,6 @@ it("should return status 200 when update user breed preferences", async () => {
         set: jest.fn().mockResolvedValueOnce(),
       });
 
-    // Make HTTP POST request retrieve pets ownded by a user
     const response = await request(app)
       .get("/petbay/api/v1/users/owned-pets/f7M5mXWPlKXo3gnyVdI7hkyOHXZ2")
       .send();
@@ -155,6 +152,6 @@ it("should return status 200 when update user breed preferences", async () => {
     expect(response.status).toBe(200);
   });
   afterAll((done) => {
-    server.close(done); // Close the server and call done when complete
+    server.close(done);
   });
 });

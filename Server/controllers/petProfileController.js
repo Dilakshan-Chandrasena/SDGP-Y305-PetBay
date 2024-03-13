@@ -29,8 +29,8 @@ exports.addPet = asyncHandler(async (req, res, next) => {
     newPetProfile.petImageURL = petImageURL;
    
   }
-  const savedPetProfile = await petsCollection.doc(newPetProfile.id).set(newPetProfile);
-  const petProfile = (await petsCollection.doc(newPetProfile.id).get()).data();
+  const savedPetProfile = await petsCollection?.doc(newPetProfile.id).set(newPetProfile);
+  const petProfile = (await petsCollection?.doc(newPetProfile.id).get())?.data();
   res.status(201).json(petProfile);
 });
 
@@ -61,8 +61,7 @@ exports.getUserOwnedPets = asyncHandler(async(req,res,next) => {
  */
 exports.getPetProfileById = asyncHandler((async(req,res,next)=>{
   const petId = req.params.id;
-  const pet = (await petsCollection.doc(petId).get()).data()
-  console.log(pet);
+  const pet = (await petsCollection?.doc(petId).get())?.data()
   if(pet){
     res.status(200).json(pet);
   }else{

@@ -11,6 +11,13 @@ import styles from "./community.module.css";
 import axios from "axios";
 
 export default function CommunityPage() {
+
+  const base_url =
+  import.meta.env.VITE_SERVER_NODE_ENV === "development"
+      ? import.meta.env.VITE_LOCAL_BASE_URL
+      : import.meta.env.VITE_PROD_BASE_URL;
+
+
   const [point, setPoint] = useState(0);
   const [data, setData] = useState([]);
   const [commentData, setCommentData] = useState([]);
@@ -44,8 +51,7 @@ export default function CommunityPage() {
     event.preventDefault();
     await axios
       .post(
-        "http://localhost:8080/petbay/api/v1/community/addCommunityPost/" +
-          userId,
+        `${base_url}/petbay/api/v1/community/addCommunityPost/${userId}`,
         values
       )
       .then(async (res) => {
@@ -62,8 +68,9 @@ export default function CommunityPage() {
   }, [point]);
 
   const getPosts = async () => {
+    
     await axios
-      .get("http://localhost:8080/petbay/api/v1/community/feed")
+      .get(`${base_url}/petbay/api/v1/community/feed`)
       .then((res) => {
         const data = res.data;
         if (data.length > 0) {
@@ -81,7 +88,7 @@ export default function CommunityPage() {
 
   const getComments = async () => {
     await axios
-      .get("http://localhost:8080/petbay/api/v1/community/getComments")
+      .get(`${base_url}/petbay/api/v1/community/getComments`)
       .then((res) => {
         const data = res.data;
         if (data.length > 0) {
@@ -97,7 +104,7 @@ export default function CommunityPage() {
     comment.commentId = postId;
     await axios
       .post(
-        "http://localhost:8080/petbay/api/v1/community/addComment/" + userId,
+        `${base_url}/petbay/api/v1/community/addComment/${userId}`,
         comment
       )
       .then(async (res) => {

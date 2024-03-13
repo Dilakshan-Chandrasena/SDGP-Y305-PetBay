@@ -65,7 +65,7 @@ export default function CommunityPage() {
   useEffect(() => {
     getPosts();
     getComments();
-  }, [point]);
+  }, []);
 
   const getPosts = async () => {
     

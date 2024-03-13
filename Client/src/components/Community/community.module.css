@@ -108,20 +108,21 @@
   border-radius: 25px;
   margin-top: 15px;
   width: 70%;
-  
+  height: fit-content;
 }
 
 .commentUser {
   margin-left: 10px;
-  font-size: 14px;
+  font-size: 16px;
   color: #3b8bc4;
   font-weight: 500;
 }
 
 .commentText {
-  color: rgb(49, 49, 49);
-  font-size: 14px;
-  font-weight: 400;
+  color: rgb(107, 107, 107);
+  font-size: 16px;
+  font-weight: 500;
+  margin-left: 10px;
 }
 
 .commentField {

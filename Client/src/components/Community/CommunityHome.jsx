@@ -44,20 +44,21 @@ export default function CommunityPage() {
     if (form.checkValidity() === false) {
       event.preventDefault();
       event.stopPropagation();
+    } else {
+      event.preventDefault();
+      await axios
+        .post(
+          "http://localhost:8080/petbay/api/v1/community/addCommunityPost/" +
+            userId,
+          values
+        )
+        .then(async (res) => {
+          await getPosts();
+          alert("Post Published");
+        })
+        .catch((err) => console.log(err));
+      setValidated(true);
     }
-    event.preventDefault();
-    await axios
-      .post(
-        "http://localhost:8080/petbay/api/v1/community/addCommunityPost/" +
-          userId,
-        values
-      )
-      .then(async (res) => {
-        await getPosts();
-        alert("Post Published");
-      })
-      .catch((err) => console.log(err));
-    setValidated(true);
   };
 
   useEffect(() => {
@@ -97,18 +98,23 @@ export default function CommunityPage() {
   };
 
   const handleCommentSubmit = async (postId) => {
-    comment.commentId = postId;
-    await axios
-      .post(
-        "http://localhost:8080/petbay/api/v1/community/addComment/" + userId,
-        comment
-      )
-      .then(async (res) => {
-        await getPosts();
-        alert("Comment added");
-      })
-      .catch((err) => console.log(err));
-    setValidated(true);
+    console.log(comment)
+    if (comment.commentText == "") {
+      alert("Please add a comment")
+    }else{
+      comment.commentId = postId;
+      await axios
+        .post(
+          "http://localhost:8080/petbay/api/v1/community/addComment/" + userId,
+          comment
+        )
+        .then(async (res) => {
+          await getPosts();
+          alert("Comment added");
+        })
+        .catch((err) => console.log(err));
+      setValidated(true);
+    }
   };
 
   return (
@@ -142,6 +148,10 @@ export default function CommunityPage() {
                     }
                     controlId="validationCustom01"
                   />
+                  <Form.Control.Feedback type="invalid">
+                    This field can't be empty
+                  </Form.Control.Feedback>
+                  <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
                 </Form.Group>
                 <div className={styles.createButtons}>
                   <Button className={styles.publish} type="submit">
@@ -169,22 +179,19 @@ export default function CommunityPage() {
                   >
                     <FontAwesomeIcon icon={faThumbsUp} />
                   </Button>
-                  <Form.Control
-                    required
-                    className={styles.commentField}
-                    type="text"
-                    placeholder="Add your comment here..."
-                    onChange={(e) =>
-                      setComment({ ...comment, commentText: e.target.value })
-                    }
-                  />
-                  <Button
-                    className={styles.commentButton}
-                    type="submit"
-                    onClick={() => handleCommentSubmit(post.id)}
-                  >
-                    Comment
-                  </Button>
+                    <Form.Control
+                      required
+                      className={styles.commentField}
+                      type="text"
+                      placeholder="Add your comment here..."
+                      onChange={(e) =>
+                        setComment({ ...comment, commentText: e.target.value })
+                      }
+                    />
+                    <Button className={styles.commentButton} type="submit"
+                     onClick={() => handleCommentSubmit(post.id)}> 
+                      Comment
+                    </Button>
                 </div>
                 {post.comments.map((postComments) => (
                   <div className={styles.commentBody}>

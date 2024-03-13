@@ -91,7 +91,6 @@ exports.updatePet = asyncHandler(async (req, res, next) => {
       updatePet.petImageURL = petImageURL;
      
     }
-    console.log(updatePet);
     await petRef.update(updatePet);
     const updatedPetDet = (await petsCollection.doc(petId).get()).data();
     res.status(200).json(updatedPetDet);
@@ -155,7 +154,6 @@ const saveFile = asyncHandler(async (storage, path, req) => {
 
   // Grab the public url
   const downloadURL = await getDownloadURL(snapshot.ref);
-  console.log("File successfully uploaded.");
   return downloadURL;
 });
 

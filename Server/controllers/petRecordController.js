@@ -41,10 +41,8 @@ exports.addRecord = asyncHandler(async (req,res,next) =>{
  */
 exports.getPetRecordsById = asyncHandler(async(req,res,next) => {
     const petId = req.params.id;
-    console.log(petId);
     const petRecordsSnap = await petRecordsCollection.where('petId', '==', petId).get();
     const petsRecordsList = petRecordsSnap.docs.map(doc => doc.data());
-    console.log(petsRecordsList);
     if(petsRecordsList.length !== 0){
         res.status(200).json(petsRecordsList);
       }else{
@@ -94,6 +92,5 @@ saveFile = asyncHandler(async (storage, path, req) => {
   
     // Grab the public URL and return
     const downloadURL = await getDownloadURL(snapshot.ref);
-    console.log("File successfully uploaded.");
     return downloadURL;
   });

@@ -44,7 +44,6 @@ const PORT = process.env.PORT|| 8081;
 
 const server = app.listen(PORT, () => {
   console.log(`Server is running on PORT ${PORT}`);
-  console.log(process.env.NODE_ENV);
 });
 
 

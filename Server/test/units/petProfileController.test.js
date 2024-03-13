@@ -28,14 +28,13 @@ describe("HTTP Endpoint Tests for Pet Profiles", () => {
       id: "",
     };
 
-    const imageContent = fs.readFileSync('./test/test-assets/Cloe1.jpg');
+    const imageContent = fs.readFileSync('./test/test-assets/test.jpeg');
     const res = await request(app)
       .post("/petbay/api/v1/pet-profiles/add-pet")
       .attach('filename', imageContent, 'image.jpg')
       .field(reqData);
     
     petId = res.body.id;
-    console.log(res);
     expect(res.body.id).not.toBe("")  
     expect(res.status).toBe(201);
   },10000);

@@ -6,7 +6,6 @@ const serviceAccount = require("./firebase-key.json");
 const serviceAccountTest = require("./firebase-key-test.json");
 
 const nodeEnv = process.env.NODE_ENV;
-console.log(nodeEnv);
 if (nodeEnv == "test") {
   initializeApp({
     credential: cert(serviceAccountTest),

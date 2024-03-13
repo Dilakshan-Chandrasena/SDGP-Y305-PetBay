@@ -1,6 +1,7 @@
 const { initializeApp } = require("firebase/app");
 const { getStorage,  } = require("firebase/storage");
 const dotenv = require("dotenv").config();
+
 const firebaseConfig = {
   apiKey: "AIzaSyDtxrgz7k4G7wThBKy6EQ-WCescAqOl01w",
   authDomain: "sdgp-y3-05-petbay.firebaseapp.com",

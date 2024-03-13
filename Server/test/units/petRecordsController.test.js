@@ -10,19 +10,20 @@ describe("HTTP Endpoint Tests for Pet Profiles", () => {
     jest.clearAllMocks();
   });
 
-  //M0-T01
+  //M04-T01
   it("should return status code 201 when adding a pet correctly - M02-01", async () => {
     // Mock Cloud Storage methods
 
     const reqData = {
-      petId: "userId",
+      petId: "90a61707-7450-42a0-a42a-ed880ef73c3a",
       recordName: "name",
       date: "date",
       petRecordURL: "",
       id: "",
     };
 
-    const imageContent = fs.readFileSync("./test/test-assets/Cloe1.jpg");
+    const imageContent = fs.readFileSync("./test/test-assets/test.jpeg");
+// Make HTTP POST request to add a pet record
     const res = await request(app)
       .post("/petbay/api/v1/pet-records/add-record")
       .attach("filename", imageContent, "image.jpg")
@@ -34,37 +35,49 @@ describe("HTTP Endpoint Tests for Pet Profiles", () => {
     expect(res.status).toBe(201);
   }, 10000);
 
+  //M04-T02
+  it("should return status 200 and array length should > 0 when sending valid petId that has recs to retrieve petrecs", async () => {
+    // Make HTTP GET request retrieve pet records of a pet
+    const res = await request(app)
+      .get(
+        "/petbay/api/v1/pet-records/records/90a61707-7450-42a0-a42a-ed880ef73c3a"
+      )
+      .send();
 
-  
-    //M02-T06
-    it("should return status 200 and array length should > 0 when sending valid userId to retrieve pets owned by the user - M02-T02", async () => {
+    // Assertions
+    expect(res.status).toBe(200);
+    expect(res.body.length).toBeGreaterThan(0);
+  });
 
-        // Make HTTP POST request retrieve pets ownded by a user
-        const res = await request(app)
-          .get(
-            "/petbay/api/v1/pet-profiles/owned-pets/lopxSRJzlieIOU6ajN1iaDRmFsD2"
-          )
-          .send();
+  //M04-T03
+  it("should return status 200 and array length should == 0 when sending valid petId that has no recs to retrieve petrecs", async () => {
+    // Make HTTP GER request retrieve pet records of a pet
+    const res = await request(app)
+      .get(
+        "/petbay/api/v1/pet-records/records/8001a59d-0c58-4036-bd96-5cad301d50c6"
+      )
+      .send();
+
+    // Assertions
+    expect(res.status).toBe(200);
+    expect(res.body.length).toEqual(0);
+  });
+
+  it("should return status 200 and array length should == 0 when sending valid petId that has no recs to retrieve petrecs", async () => {
+    // Make HTTP DELETE request to delete a pet by id
+    const res = await request(app)
+      .delete(
+        `/petbay/api/v1/pet-records/${recId}`
+      )
+      .send();
+
+    // Assertions
+    const deleteRecordId = res.body.recordId;
+    expect(res.status).toBe(200);
+    expect(deleteRecordId).toEqual(recId)
     
-        // Assertions
-        expect(res.status).toBe(200);
-        expect(res.body.length).toBeGreaterThan(0);
-      });
-    
-      //M02-T07
-      it("should return status 200 and array length should == 0 when sending valid userId to retrieve pets owned by the user - M02-T02", async () => {
-  
-        // Make HTTP POST request retrieve pets ownded by a user
-        const res = await request(app)
-          .get(
-            "/petbay/api/v1/pet-profiles/owned-pets/E6b6MPyMi2TgiR23S3HeTNXFhdq2"
-          )
-          .send();
-    
-        // Assertions
-        expect(res.status).toBe(200);
-        expect(res.body.length).toEqual(0);
-      });
+
+  });
 
   afterAll((done) => {
     server.close(done);

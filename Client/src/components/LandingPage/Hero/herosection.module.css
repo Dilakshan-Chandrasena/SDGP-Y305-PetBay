@@ -1,0 +1,246 @@
+.heroContainer {
+  height: 90vh;
+  background: #212529;
+  display: flex;
+  justify-content: space-around;
+  padding: 0px 100px;
+}
+
+.introContainer {
+  height: 90vh;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+
+  color: #f3f3f3;
+}
+.introContainer h1 {
+  font-size: 50px;
+  font-weight: 600;
+  animation: fadeIn 2s;
+}
+
+.introContainer p {
+  color: #6cabd9;
+  font-size: 28px;
+  font-weight: 600;
+  animation: fadeIn 3s;
+}
+.paws1 {
+  margin-top: 25px;
+}
+.paws2 {
+  margin-left: 40px;
+}
+
+.icon {
+  margin-right: 60px;
+  color: #6cabd9;
+  opacity: 0;
+  animation: pawAppear 12s linear infinite;
+  animation: pawDisappear 10s linear infinite;
+  font-size: 1.3rem;
+}
+
+.paws1 .icon:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.paws1 .icon:nth-child(2) {
+  animation-delay: 2s;
+}
+
+.paws1 .icon:nth-child(3) {
+  animation-delay: 4s;
+}
+
+.paws1 .icon:nth-child(4) {
+  animation-delay: 6s;
+}
+
+.paws2 .icon:nth-child(1) {
+  animation-delay: 1s;
+}
+
+.paws2 .icon:nth-child(2) {
+  animation-delay: 3s;
+}
+
+.paws2 .icon:nth-child(3) {
+  animation-delay: 5s;
+}
+
+.imgContainer img {
+  animation: popUp 4.75s;
+  margin-top: 30px;
+  width: 26rem;
+}
+.btnContainer {
+  margin: 20px 0px;
+  display: flex;
+}
+.servicesBtn {
+  margin-right: 20px;
+  animation: fadeIn 4.75s;
+  border: solid 2px rgba(255, 255, 255, 0);
+  font-weight: 600;
+}
+.subscribtionsBtn {
+  animation: fadeIn 4s;
+  border: solid 2px rgba(255, 255, 255, 0);
+  font-weight: 600;
+}
+.servicesBtn:hover {
+  background: none;
+  border: solid 2px #6cabd9;
+  color: #6cabd9;
+}
+.subscribtionsBtn:hover {
+  background: none;
+  border: solid 2px #6cabd9;
+  color: #6cabd9;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes popUp {
+  0% {
+    width: 20rem;
+  }
+  60% {
+    width: 28rem;
+  }
+  100% {
+    width: 26rem;
+  }
+}
+
+@keyframes pawAppear {
+  0% {
+    opacity: 0;
+  }
+  17% {
+    opacity: 0;
+  }
+  33% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  67% {
+    opacity: 1;
+  }
+  83% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes pawDisappear {
+  0% {
+    opacity: 1;
+  }
+  17% {
+    opacity: 1;
+  }
+  33% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 1;
+  }
+  67% {
+    opacity: 1;
+  }
+  83% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@media (max-width: 769px) {
+  .imgContainer img {
+    animation: none;
+
+    width: 15rem;
+  }
+
+  .introContainer {
+    align-items: center;
+  }
+
+  .introContainer h1 {
+    font-size: 28px;
+    font-weight: 600;
+    animation: fadeIn 2s;
+  }
+
+  .introContainer p {
+    color: #6cabd9;
+    font-size: 14px;
+    font-weight: 600;
+    animation: fadeIn 3s;
+  }
+
+  .btnContainer Button {
+    border: solid 2px rgba(0, 0, 255, 0);
+    font-weight: 600;
+    font-size: 14px;
+  }
+  .icon {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 431px) {
+  .heroContainer {
+    padding-top: 160px;
+    padding-bottom: 90px;
+    flex-direction: column-reverse;
+    align-items: center;
+  }
+
+  .imgContainer img {
+    animation: none;
+    width: 11.5rem;
+  }
+
+  .introContainer h1 {
+    text-align: center;
+    font-size: 23px;
+    font-weight: 600;
+    animation: fadeIn 2s;
+    justify-content: center;
+  }
+
+  .introContainer p {
+    color: #6cabd9;
+    font-size: 12px;
+    font-weight: 600;
+    animation: fadeIn 3s;
+    text-align: center;
+  }
+  .btnContainer {
+    margin: 0px;
+  }
+  .btnContainer Button {
+    border: solid 2px rgba(0, 0, 255, 0);
+    font-weight: 600;
+    font-size: 11px;
+  }
+  .icon {
+    visibility: hidden;
+  }
+}

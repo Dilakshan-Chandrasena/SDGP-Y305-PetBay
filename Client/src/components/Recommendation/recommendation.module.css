@@ -5,38 +5,31 @@
   color: white;
   border-radius: 10px;
   margin-bottom: 20px;
-  padding-left: 22%;
   display: flex;
-  flex-direction: row;
-  gap: 100px;
+  flex-direction: column; /* Change to column for smaller screens */
+  gap: 20px; /* Reduce the gap for smaller screens */
+  text-align: center; /* Center the content */
 }
-.heading {
+
+.headerContainer > div {
+  display: flex;
+  flex-direction: column;
   align-items: center;
-  margin-top: 10px;
 }
 
 .correctIcon {
   background-color: rgb(27, 169, 27);
-  padding: 20px 22px;
+  padding: 20px;
   border-radius: 100px;
-}
-
-.details {
-  text-align: justify;
-  line-height: 28px;
-  font-weight: lighter;
-
-  color: #5d5b5b;
-  font-size: 18px;
 }
 
 .breedDetails {
   background-color: #eeeeee;
   padding: 20px;
   border-radius: 10px;
-  padding-top: 40px;
-  padding-bottom: 40px;
+  margin-bottom: 20px;
 }
+
 .tabContent {
   background-color: #eeeeee;
   padding: 20px;
@@ -49,12 +42,14 @@
   border-collapse: separate;
   border-spacing: 0 20px;
 }
+
 .tableNoBorder th {
   color: #6cabd9;
 }
+
 .tableNoBorder th,
 .tableNoBorder td {
-  border: none !important; /* Important to override MDBReact UI Kit styles */
+  border: none !important;
   background-color: #eeeeee;
 }
 
@@ -62,4 +57,22 @@
   background-color: #ffff;
   padding: 10px 15px;
   border-radius: 100px;
+}
+
+.setButton {
+  background-color: #fefefe;
+  font-size: 16px;
+  border: none;
+  width: 200px;
+  padding: 10px;
+  border-radius: 8px;
+  margin-left: 10px;
+  margin-bottom: 20px;
+}
+
+@media (max-width: 320px) {
+  .setButton {
+    font-size: 14px;
+    margin-left: 10px;
+  }
 }

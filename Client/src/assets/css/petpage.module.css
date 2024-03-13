@@ -35,7 +35,7 @@ body {
   color: #5e96be;
 }
 
-@media (max-width: 426px) {
+@media (max-width: 431px) {
   .petsHeaderContainer {
     width: fit-content;
     margin-left: auto;
@@ -50,6 +50,4 @@ body {
 
     text-align: center;
   }
-
-
 }

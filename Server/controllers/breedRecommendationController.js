@@ -17,21 +17,31 @@ exports.createBreed = asyncHandler(async (req, res, next) => {
   }
 });
 
+
+//checking if user preferences are set
+exports.isUserBreedPreferencesSet = asyncHandler(async(req,res,next)=>{
+  const userId = req.params.userId;
+  const user = (await db.collection("users").doc(userId).get()).data();
+  if (user.breedPreferences.length !== 0) {
+    res.status(200).json({"preferenceStatus": true});
+  } else {
+    res.status(200).json({"preferenceStatus": false});
+  }
+
+}); 
+
 // @Desc GET generating a breed recommendation
 // @route /petbay/api/v1/breed-recommendation/
 exports.generateBreedRecommendation = asyncHandler(async (req, res, next) => {
   //Removing char _ to match breed names with database breed names
   const userId = req.body.userId;
   const breed = req.body.breedName;
-  console.log(userId);
 
   //fetching breedDetails and User details
   const breedDetails = await db.collection("breeds").doc(breed).get();
   const user = await db.collection("users").doc(userId).get();
-  console.log(breedDetails);
 
   if (breedDetails.exists && user.exists) {
-    if (isUserBreedPreferencesSet(user.data())) {
       const userBreedPreferences = user.data().breedPreferences;
       const breed = breedDetails.data();
       const breedCharacteristics = breed.breedRatings;
@@ -61,19 +71,10 @@ exports.generateBreedRecommendation = asyncHandler(async (req, res, next) => {
     } else {
       throw new CustomError("User Preferences Not Set", 404);
     }
-  } else {
-    throw new CustomError("Failed to generate recommendation. Try again", 400);
-  }
+  
 });
 
-//checking if user preferences are set
-isUserBreedPreferencesSet = (user) => {
-  if (user.breedPreferences.length !== 0) {
-    return true;
-  } else {
-    return false;
-  }
-};
+
 
 // compares user preference rating and actual breed rating and generate matching percentages for each characteristic
 compareRatings = (userPreferencesRatings, breedCharacteristicRatings) => {

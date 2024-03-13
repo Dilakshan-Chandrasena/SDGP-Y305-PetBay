@@ -34,7 +34,7 @@ export default function Header() {
         <Container fluid>
           <Navbar.Toggle
             aria-controls="navbarScroll"
-            style={{ color: "whitesmoke", background: "whitesmoke" }}
+            className={styles.hamburger}
           />
           <Navbar.Collapse id="navbarScroll">
             <Nav
@@ -42,7 +42,8 @@ export default function Header() {
               style={{ maxHeight: "400px" }} // Adjusted maxHeight here
             >
               <Navbar.Brand
-                href="/home"
+                as={Link}
+                to={"/home"}
                 className={`mx-2 ${styles.link}`}
                 style={{ fontWeight: "bolder", color: "whitesmoke" }}
               >
@@ -62,7 +63,11 @@ export default function Header() {
               >
                 Preferences
               </Nav.Link>
-              <Nav.Link href="#Reminders" className={`mx-2 ${styles.link}`}>
+              <Nav.Link
+                as={Link}
+                to={`/reminder/${userId}`}
+                className={`mx-2 ${styles.link}`}
+              >
                 Reminders
               </Nav.Link>
               <Nav.Link

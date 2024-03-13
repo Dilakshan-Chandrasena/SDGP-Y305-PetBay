@@ -4,7 +4,12 @@
   position: sticky;
   top: 0;
   z-index: 100;
-  background-color: #212121;
+  background-color: #212529;
+}
+
+.hamburger {
+  color: #212529;
+  border: 2px solid #86888a;
 }
 
 .link:hover {

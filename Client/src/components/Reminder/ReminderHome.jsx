@@ -11,6 +11,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPaw, faUser, faTrash } from "@fortawesome/free-solid-svg-icons";
 
 function ReminderHome() {
+  const base_url =
+  import.meta.env.VITE_SERVER_NODE_ENV === "development"
+      ? import.meta.env.VITE_LOCAL_BASE_URL
+      : import.meta.env.VITE_PROD_BASE_URL;
+      
   const [data, setData] = useState([]);
   const [img, setImage] = useState([]);
   const { userId } = useParams();
@@ -19,7 +24,7 @@ function ReminderHome() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:8080/petbay/api/v1/reminders/reminder/" + userId);
+        const response = await axios.get(`${base_url}/petbay/api/v1/reminders/reminder/${userId}`);
         if (response.data.length === 0) {
           console.log('No reminders found.');
           return;
@@ -51,7 +56,9 @@ function ReminderHome() {
 
   useEffect(() => {
     getReminders();
-  },);
+  });
+
+
 
   useEffect(() => {
     getPetNames();
@@ -59,7 +66,7 @@ function ReminderHome() {
 
   const getReminders = async () => {
     await axios
-      .get("http://localhost:8080/petbay/api/v1/reminders/reminder/" + userId)
+      .get(`${base_url}/petbay/api/v1/reminders/reminder/${userId}`)
       .then((res) => {
         const data = res.data;
         if (data.length > 0) {
@@ -75,7 +82,7 @@ function ReminderHome() {
 
   const deleteReminderHandle = async (id) => {
     await axios
-      .delete(`http://localhost:8080/petbay/api/v1/reminders/deleteReminder/${id}`)
+      .delete(`${base_url}/petbay/api/v1/reminders/deleteReminder/${id}`)
       .then((res) => {
         if (res.status == 200) {
           alert("Reminder deleted successfully!");
@@ -87,7 +94,7 @@ function ReminderHome() {
 
   const getPetNames = async () => {
     await axios
-      .get("http://localhost:8080/petbay/api/v1/pet-profiles/owned-pets/" + userId)
+      .get(`${base_url}/petbay/api/v1/pet-profiles/owned-pets/${userId}`)
       .then((res) => {
         const img = res.data;
         console.log(img);

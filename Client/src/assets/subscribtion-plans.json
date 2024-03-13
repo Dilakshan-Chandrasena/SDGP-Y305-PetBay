@@ -1,0 +1,37 @@
+{
+  "plans": [
+    {
+      "name": "Free",
+      "features": [
+        "Pet Breed Recommendation (5 Per Month)",
+        "Pet Community",
+        "Lost & Found Feed",
+        "Maintain Pet Profile (1 Profile)",
+        "Maintain Pet Records (10 Recs)"
+      ],
+      "price": "0.00$/month"
+    },
+    {
+      "name": "Standard",
+      "features": [
+        "Pet Breed Recommendation (Unlimited)",
+        "Pet Community",
+        "Lost & Found Feed",
+        "Maintain Pet Profile (5 Profiles)",
+        "Maintain Pet Records (50 Recs)"
+      ],
+      "price": "14.99$/month"
+    },
+    {
+      "name": "Pro",
+      "features": [
+        "Pet Breed Recommendation (Unlimited)",
+        "Pet Community",
+        "Lost & Found Feed",
+        "Maintain Pet Profile (Unlimited)",
+        "Maintain Pet Records (Unlimited)"
+      ],
+      "price": "29.99$/month"
+    }
+  ]
+}

@@ -6,6 +6,11 @@ import axios from "axios";
 import { useLocation, useNavigate } from "react-router-dom";
 
 export default function GetUserDetails() {
+  const base_url =
+  import.meta.env.VITE_SERVER_NODE_ENV === "development"
+      ? import.meta.env.VITE_LOCAL_BASE_URL
+      : import.meta.env.VITE_PROD_BASE_URL;
+      
   useEffect(() => {
     document.body.classList.add("auth-background");
     return () => {
@@ -35,7 +40,7 @@ export default function GetUserDetails() {
   const PostUserData = async (userData) => {
     try {
       const response = await axios.post(
-        "http://localhost:8080/petbay/api/v1/users/create",
+        `${base_url}/petbay/api/v1/users/create`,
         userData
       );
       console.log("Response:", response);

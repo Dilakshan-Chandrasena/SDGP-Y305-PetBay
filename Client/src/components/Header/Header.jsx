@@ -70,7 +70,11 @@ export default function Header() {
               >
                 Reminders
               </Nav.Link>
-              <Nav.Link href="#Community" className={`mx-2 ${styles.link}`}>
+              <Nav.Link
+                as={Link}
+                to={`/community/feed/${userId}`}
+                className={`mx-2 ${styles.link}`}
+              >
                 Community
               </Nav.Link>
               <Nav.Link

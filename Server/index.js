@@ -12,6 +12,7 @@ const breedRecommendationRoute = require("./routes/breedRecommendationRoute.js")
 const usersRouter = require("./routes/usersRouter.js");
 const lostFoundRoute = require("./routes/lostFoundRoute.js");
 const reminderRouter = require("./routes/remindersRouter.js")
+const communityRouter = require("./routes/communityRoute.js")
 
 
 const app = express();
@@ -27,8 +28,9 @@ app.use("/petbay/api/v1/pet-profiles/", petProfileRoute);
 app.use("/petbay/api/v1/pet-records/", petRecordRoute);
 app.use("/petbay/api/v1/breed-recommendation/", breedRecommendationRoute);
 app.use("/petbay/api/v1/users", usersRouter);
+app.use("/petbay/api/v1/reminders/", reminderRouter);
+app.use("/petbay/api/v1/community/", communityRouter);
 app.use("/petbay/api/v1/lost-found/", lostFoundRoute);
-app.use("/petbay/api/v1/reminders", reminderRouter);
 
 app.all("*", (req, res, next) => {
   const err = new CustomError(
@@ -40,8 +42,11 @@ app.all("*", (req, res, next) => {
 
 app.use(globalErrorHandler);
 
-const PORT = process.env.PORT || 8081;
+const PORT = process.env.PORT|| 8081;
 
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
   console.log(`Server is running on PORT ${PORT}`);
 });
+
+
+module.exports = {app, server}

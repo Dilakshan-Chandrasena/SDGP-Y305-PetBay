@@ -86,6 +86,5 @@ saveFile = asyncHandler(async (storage, path, req) => {
 
   // Grab the public url
   const downloadURL = await getDownloadURL(snapshot.ref);
-  console.log("File successfully uploaded.");
   return downloadURL;
 });

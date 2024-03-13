@@ -21,9 +21,21 @@ jobs:
         run: docker build -t dilakshanchandrasena/petbay-client --build-arg VITE_SERVER_NODE_ENV='production' --build-arg VITE_PROD_BASE_URL='${{ secrets.VITE_PROD_BASE_URL }}'  ./Client
       - name: Push Server docker image to dockerhub
         run: docker push dilakshanchandrasena/petbay-client:latest
-
+  
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Source
+        uses: actions/checkout@v4
+      - name: Install dependencies for server
+        working-directory: ./server
+        run: npm install
+      - name: Run tests for server
+        working-directory: ./server
+        run: npm test
+        
   deploy:
-    needs: build
+    needs: [build,test]
     runs-on: self-hosted
     steps:
       - name: Pull Server image from docker hub

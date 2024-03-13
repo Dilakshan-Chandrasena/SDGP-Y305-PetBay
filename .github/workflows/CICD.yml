@@ -28,10 +28,10 @@ jobs:
       - name: Checkout Source
         uses: actions/checkout@v4
       - name: Install dependencies for server
-        working-directory: ./server
+        working-directory: ./Server
         run: npm install
       - name: Run tests for server
-        working-directory: ./server
+        working-directory: ./Server
         run: npm test
         
   deploy:

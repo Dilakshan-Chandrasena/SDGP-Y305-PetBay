@@ -4,9 +4,13 @@
   background-color: #6cabd9;
   border: none;
   margin-right: 10px;
+  cursor: pointer;
 }
-.likeButton:checked {
-  color: red;
+
+.likeButton:focus {
+  background-color: #ce3333; /* Change to desired color */
+  color: #fff; /* Change to desired text color */
+  transform: scale(1.1); /* Add a scaling effect */
 }
 
 .navLinks {

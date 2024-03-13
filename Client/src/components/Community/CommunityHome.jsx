@@ -8,6 +8,7 @@ import {
   faThumbsUp,
 } from "@fortawesome/free-solid-svg-icons";
 import styles from "./community.module.css";
+import "./community.module.css";
 import axios from "axios";
 
 export default function CommunityPage() {
@@ -26,18 +27,8 @@ export default function CommunityPage() {
     username: "",
     dateTime: "",
     text: "",
-    comments: [
-      {
-        comment,
-      },
-    ],
+    comments: [],
   });
-
-  const handleLikeClick = () => {
-    const countLikes = values.likes + 1;
-    setValues(countLikes);
-    console.log(values.likes);
-  };
 
   const handleSubmit = async (event) => {
     const form = event.currentTarget;
@@ -54,7 +45,7 @@ export default function CommunityPage() {
         )
         .then(async (res) => {
           await getPosts();
-          alert("Post Published");
+          setValues({ ...values, text: '' });
         })
         .catch((err) => console.log(err));
       setValidated(true);
@@ -72,8 +63,6 @@ export default function CommunityPage() {
       .then((res) => {
         const data = res.data;
         if (data.length > 0) {
-          console.log(data);
-
           setData(data);
           setPoint(point++);
         }
@@ -110,12 +99,13 @@ export default function CommunityPage() {
         )
         .then(async (res) => {
           await getPosts();
-          alert("Comment added");
+          setComment({ ...comment, commentText: '' });
         })
         .catch((err) => console.log(err));
       setValidated(true);
     }
   };
+
 
   return (
     <Container fluid>
@@ -174,8 +164,7 @@ export default function CommunityPage() {
                 <Card.Text className={styles.postText}>{post.text}</Card.Text>
                 <div className="d-flex text-center">
                   <Button
-                    className={styles.likeButton}
-                    onClick={handleLikeClick}
+                   className={styles.likeButton}
                   >
                     <FontAwesomeIcon icon={faThumbsUp} />
                   </Button>
@@ -184,6 +173,7 @@ export default function CommunityPage() {
                       className={styles.commentField}
                       type="text"
                       placeholder="Add your comment here..."
+                      id = "comment"
                       onChange={(e) =>
                         setComment({ ...comment, commentText: e.target.value })
                       }

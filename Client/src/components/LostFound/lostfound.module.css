@@ -1,0 +1,153 @@
+.lostStatus,
+.foundStatus {
+  width: 100px;
+  margin-left: auto;
+  color: white;
+  text-align: center;
+  font-weight: bold;
+}
+
+.lostStatus {
+  background-color: rgb(243, 91, 91);
+}
+
+.foundStatus {
+  background-color: rgb(117, 185, 115);
+}
+
+.card {
+  margin-top: 30px;
+}
+
+.image {
+  margin: 0 auto; /* Center the image */
+  width: 250px;
+}
+
+.customTabs {
+  transition: height 1.4s ease-in-out;
+}
+
+.title {
+  font-size: 25px;
+  margin-bottom: 20px;
+}
+
+.span {
+  color: rgb(30, 134, 252);
+}
+
+.viewButton {
+  width: 200px;
+  margin-bottom: 10px;
+  margin-top: 40px;
+  color: rgb(105, 166, 236);
+  border-color: rgb(105, 166, 236);
+}
+
+.viewButton:hover {
+  background-color: rgb(105, 166, 236);
+  border-color: rgb(105, 166, 236);
+}
+
+.addIcon {
+  color: #6cabd9;
+  background-color: #d4d0d0d2;
+  padding: 10px 13px;
+  border-radius: 90px;
+  cursor: pointer;
+  margin-top: 100px;
+}
+
+.filterContainer {
+  display: flex;
+  align-items: center;
+  margin-top: 30px;
+}
+
+.iconContainer {
+  margin-right: 10px;
+}
+
+.tabsContainer {
+  flex-grow: 1;
+  text-align: right;
+}
+
+.heading {
+  background-color: #6cabd9;
+  padding: 20px;
+  text-align: center;
+  color: white;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.section {
+  border-radius: 10px;
+  background-color: #eee;
+}
+
+.addBtn {
+  border: none;
+  background-color: transparent;
+}
+
+.addIcon:hover {
+  background-color: #d8d8d8;
+  color: #5e96be;
+}
+
+.modalHeader {
+  display: flex;
+  justify-content: space-around;
+}
+
+.modalHeader Button {
+  color: #6cabd9;
+  border: none;
+  background-color: white;
+  font-size: 14px;
+}
+
+.modalHeader Button:hover {
+  color: #f7f3f3;
+  background-color: #6cabd9;
+}
+
+.errorValidation {
+  color: rgba(255, 0, 0, 0.655);
+  font-size: 12px;
+  margin-left: 6px;
+  font-weight: 500;
+}
+
+.spinnerContainer {
+  display: flex;
+  justify-content: center;
+}
+
+.spinner {
+  margin: 0px 4px;
+  color: #6cabd9;
+}
+
+/* Responsive adjustments */
+@media (max-width: 320px) {
+  .form {
+    max-width: 100%;
+    width: 320px;
+  }
+
+  .image {
+    width: 90%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+
+  .viewButton {
+    width: 90%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+}

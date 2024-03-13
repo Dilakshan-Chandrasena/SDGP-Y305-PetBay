@@ -80,7 +80,7 @@
 }
 
 .predContainer span,
-p {
+.para {
   color: #5381a0;
   font-weight: 600;
 }
@@ -132,7 +132,7 @@ p {
   }
 }
 
-@media (max-width: 426px) {
+@media (max-width: 431px) {
   .dropzoneContainer {
     height: 130vh;
   }

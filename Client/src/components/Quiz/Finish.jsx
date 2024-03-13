@@ -1,10 +1,16 @@
 import styles from "./quiz.module.css";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const PostUserPreferences = async (userPreferences, userId) => {
+  const base_url =
+    import.meta.env.VITE_SERVER_NODE_ENV === "development"
+      ? import.meta.env.VITE_LOCAL_BASE_URL
+      : import.meta.env.VITE_PROD_BASE_URL;
+
   try {
     const response = await axios.put(
-      `http://localhost:8080/petbay/api/v1/users/preferences/set/${userId}`,
+      `${base_url}/petbay/api/v1/users/preferences/set/${userId}`,
       { breedPreferences: userPreferences }
     );
     console.log("Response:", response);
@@ -15,10 +21,11 @@ const PostUserPreferences = async (userPreferences, userId) => {
 };
 
 function Finish({ userId, userPreferences }) {
-  const finishButtonClick = () => {
-    console.log(userPreferences);
-    console.log(userId);
-    PostUserPreferences(userPreferences, userId);
+  const navigate = useNavigate(); // Define navigate function
+
+  const finishButtonClick = async () => {
+    await PostUserPreferences(userPreferences, userId);
+    navigate("/pet-recommendation"); // Navigate to the home page
   };
 
   return (

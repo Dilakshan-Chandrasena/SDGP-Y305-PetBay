@@ -12,6 +12,11 @@ import axios from "axios";
 import Loading from "../Loading/Loading";
 
 export default function AddPetRecord({ reloadRecordsList }) {
+  const base_url =
+  import.meta.env.VITE_SERVER_NODE_ENV === "development"
+      ? import.meta.env.VITE_LOCAL_BASE_URL
+      : import.meta.env.VITE_PROD_BASE_URL;
+      
   const { petId } = useParams();
   const [show, setShow] = useState(false);
 
@@ -79,7 +84,7 @@ export default function AddPetRecord({ reloadRecordsList }) {
     try {
       await axios
         .post(
-          "http://localhost:8080/petbay/api/v1/pet-records/add-record",
+          `${base_url}/petbay/api/v1/pet-records/add-record`,
           newPetRecordData
         )
         .then((res) => {

@@ -5,6 +5,6 @@ const breedRecommendationController = require("../controllers/breedRecommendatio
 
 router.route("/create-breed").post(breedRecommendationController.createBreed);
 router.route("/").post(breedRecommendationController.generateBreedRecommendation);
-
+router.route("/:userId").get(breedRecommendationController.isUserBreedPreferencesSet);
 
 module.exports = router;

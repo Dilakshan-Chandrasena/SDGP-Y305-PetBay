@@ -174,3 +174,12 @@
   color: #999; /* Gray out the text */
   pointer-events: none; /* Disable mouse events */
 }
+
+@media only screen and (max-width: 400px) {
+  /* Styles for screens up to 600px wide */
+  .formContainer {
+    width: 300px;
+  }
+
+  /* Adjust other styles as needed */
+}

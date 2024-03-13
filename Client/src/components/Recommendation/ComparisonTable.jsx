@@ -73,9 +73,11 @@ export default function ComparisonTable({ comparisonResults }) {
                     {result.breedCharacteristicRating}
                   </span>
                 </td>
-                <td style={{ textAlign: "right" }}>
-                  {result.matchingPercentage}
-                  {renderIcon(result.matchingPercentage)}
+                <td style={{ textAlign: "right" }} className="text-xl-end">
+                  <div className="d-flex justify-content-xl-end align-items-center">
+                    {result.matchingPercentage}
+                    {renderIcon(result.matchingPercentage)}
+                  </div>
                 </td>
               </tr>
             ))}

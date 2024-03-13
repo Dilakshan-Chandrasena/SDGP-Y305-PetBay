@@ -26,11 +26,7 @@ export default function CommunityPage() {
     username: "",
     dateTime: "",
     text: "",
-    comments: [
-      {
-        comment,
-      },
-    ],
+    comments: [],
   });
 
   const handleLikeClick = () => {
@@ -74,7 +70,8 @@ export default function CommunityPage() {
           console.log(data);
 
           setData(data);
-          setPoint(point++);
+          const pointPlus = point + 1;
+          setPoint(pointPlus);
         }
       })
       .catch((err) => {

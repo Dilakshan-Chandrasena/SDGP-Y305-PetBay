@@ -30,6 +30,7 @@ export default function AddReminder({loadReminders}) {
 
   useEffect(() => {
     getPetNames();
+    loadReminders
   }, []);
 
   const handleSubmit = async (event) => {
@@ -49,7 +50,7 @@ export default function AddReminder({loadReminders}) {
         alert("Reminder added")
         reset();
         handleClose();       
-        loadReminders;
+        await loadReminders;
       })
       .catch((err) => console.log(err));
     setValidated(true);

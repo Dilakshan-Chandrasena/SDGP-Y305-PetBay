@@ -114,7 +114,7 @@ function ReminderHome() {
       </div>
 
       {data.map((reminder) => (
-        <Card loadReminders={getReminders} className={styles.reminderCard}>
+        <Card className={styles.reminderCard}>
           <Card.Body className={styles.reminderBody}>
           <span>
           <FontAwesomeIcon

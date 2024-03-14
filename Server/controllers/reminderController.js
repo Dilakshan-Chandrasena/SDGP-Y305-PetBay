@@ -11,7 +11,7 @@ exports.getReminders = asyncHandler(async(req,res,next) => {
     if(reminderList.length !== 0){
       res.status(200).json(reminderList);
     }else{
-      res.status(200).json([]);
+      res.status(404).json([]);
     }
 });
 

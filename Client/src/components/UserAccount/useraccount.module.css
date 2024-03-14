@@ -149,13 +149,15 @@
   }
 
   .visa img {
+    /* width: 10rem; */
     height: 70px;
     float: right;
     margin-right: 55px;
     margin-top: 7px;
   }
   
-  .mastercard img {
+  .masterCard {
+    /* width: 1rem; */
     height: 40px;
     float: right;
     margin-right: 80px;

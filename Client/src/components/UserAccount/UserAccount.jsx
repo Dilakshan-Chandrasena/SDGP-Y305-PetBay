@@ -67,8 +67,8 @@ const UserAccount = () => {
             </div>  
         </div>
 
-        <div className={styles.masterCard}>
-            <img src="src\assets\images\mastercardIcon.png" alt="" />
+        <div className={styles.masterCard} >
+            <img  src="src\assets\images\mastercardIcon.png" alt=""  />
         </div>
 
         <div className={styles.visa}>

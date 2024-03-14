@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate, useParams  } from "react-router-dom";
+import { useForm } from "react-hook-form";
 import Modal from "react-bootstrap/Modal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
@@ -17,6 +18,7 @@ export default function AddReminder({loadReminders}) {
   const handleShow = () => setShow(true);
   const { userId } = useParams();
   const [validated, setValidated] = useState(false);
+  const { reset } = useForm([]);
   const [values, setValues] = useState({
     id: "",
     userId: "",
@@ -45,6 +47,7 @@ export default function AddReminder({loadReminders}) {
       )
       .then(async (res) => {
         alert("Reminder added")
+        reset();
         handleClose();       
         loadReminders;
       })

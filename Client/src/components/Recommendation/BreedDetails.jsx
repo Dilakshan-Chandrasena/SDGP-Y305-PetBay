@@ -45,7 +45,7 @@ export default function BreedDetails({ breedData }) {
                           </MDBCardTitle>
                           <MDBCardText
                             className="mb-3"
-                            style={{ fontSize: "20px",textTransform:"capitalize" }}
+                            style={{ fontSize: "20px" }}
                           >
                             {breedData.breedName}
                           </MDBCardText>

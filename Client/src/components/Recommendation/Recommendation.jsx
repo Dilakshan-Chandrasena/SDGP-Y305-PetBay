@@ -98,47 +98,26 @@ export default function Recommendation() {
           <MDBCol>
             <div className={styles.headerContainer}>
               <div className={styles.heading}>
-                {breed && preferencesSet ? (
-                  <>
-                    <div>
-                      {renderIcon(breedData.overallMatchingPercentage)}
-                      <h2>
-                        {breedData.overallMatchingPercentage}% Overall Matching
-                        Percentage
-                      </h2>
-                    </div>
-                    <p
-                      style={{
-                        fontWeight: "bold",
-                        wordSpacing: "2px",
-                        fontSize: "20px",
-                      }}
-                    >
-                      {breedData.breedName &&
-                        `${breedData.breedName} is a ${result} match for you`}
-                    </p>
-                  </>
-                ) : (
-                  <>
-                    <p
-                      style={{
-                        fontWeight: "bold",
-                        wordSpacing: "2px",
-                        fontSize: "20px",
-                      }}
-                    >
-                      Please set preferences before
-                    </p>
-                    <br />
-                    <button
-                      className={styles.setButton}
-                      onClick={setPreferenceClick}
-                      style={{ marginTop: "10px" }}
-                    >
-                      Set Preferences
-                    </button>
-                  </>
-                )}
+                <>
+                  <div>
+                    {renderIcon(breedData.overallMatchingPercentage)}
+                    <h2>
+                      {breedData.overallMatchingPercentage}% Overall Matching
+                      Percentage
+                    </h2>
+                  </div>
+                  <p
+                    style={{
+                      fontWeight: "bold",
+                      wordSpacing: "2px",
+                      fontSize: "20px",
+                      textTransform: "capitalize",
+                    }}
+                  >
+                    {breedData.breedName &&
+                      `${breedData.breedName} is a ${result} match for you`}
+                  </p>
+                </>
               </div>
             </div>
           </MDBCol>

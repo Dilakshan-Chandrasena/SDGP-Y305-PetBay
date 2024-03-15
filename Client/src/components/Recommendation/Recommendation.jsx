@@ -112,7 +112,6 @@ export default function Recommendation() {
                         fontWeight: "bold",
                         wordSpacing: "2px",
                         fontSize: "20px",
-                        textTransform:"capitalize"
                       }}
                     >
                       {breedData.breedName &&

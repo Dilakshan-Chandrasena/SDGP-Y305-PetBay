@@ -22,7 +22,7 @@ export default function Recommendation() {
   const { userId } = useAuth();
   const [breedData, setBreedData] = useState({});
   const { state } = useLocation();
-  const breed = state?.breed; // Destructuring the breed property safely
+  const breed = state.breed; // Destructuring the breed property safely
 
   const [result, setResult] = useState("");
   const [preferencesSet, setPreferencesSet] = useState(false);

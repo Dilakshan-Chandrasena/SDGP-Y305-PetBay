@@ -5,16 +5,22 @@ const CustomError = require("../utils/CustomError");
 // @Desc POST add breed details
 // @route /petbay/api/v1/breed-recommendation/
 exports.createBreed = asyncHandler(async (req, res, next) => {
+  let count = 0;
   const newBreed = req.body;
-  if (newBreed) {
-    const savedBreed = await db
-      .collection("breeds")
-      .doc(newBreed.breedName)
-      .set(newBreed);
-    res.status(201).json(savedBreed);
-  } else {
-    throw new CustomError("Invalid Breed Object Sent! Check Again", 400);
-  }
+  newBreed.map(async(breed)=>{
+    if (newBreed) {
+      const savedBreed = await db
+        .collection("breeds")
+        .doc(breed.breedName)
+        .set(breed);
+      count++;
+    } else {
+      throw new CustomError("Invalid Breed Object Sent! Check Again", 400);
+    }
+
+  })
+  res.status(201).json({msg:count});
+
 });
 
 

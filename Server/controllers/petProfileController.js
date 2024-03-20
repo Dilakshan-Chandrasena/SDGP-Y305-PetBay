@@ -86,7 +86,6 @@ exports.updatePet = asyncHandler(async (req, res, next) => {
     let petImageURL = "";
     if (petProfImage) {
       const path = `pet-profile-images/${petId}`;
-      // setting the profile image of the new pet
       petImageURL = await saveFile(storage, path, req);
       updatePet.petImageURL = petImageURL;
      

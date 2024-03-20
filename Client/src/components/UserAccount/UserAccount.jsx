@@ -37,7 +37,7 @@ const UserAccount = () => {
 
         <div className={styles.userAccountDetails}>
           <h3>
-            {userDetails.firstName} {userDetails.lastname}
+            {userDetails.firstName} {userDetails.lastName}
           </h3>
           <span
             style={{
@@ -55,8 +55,10 @@ const UserAccount = () => {
 
         <div className={styles.detailBar}>
           <div className={styles.userInfoDate}>
-            <p className={styles.dateText}>Full Name</p> {userDetails.firstName}{" "}
-            {userDetails.lastname}
+            <p className={styles.dateText}>Full Name</p>{" "}
+            <span>
+              {userDetails.firstName} {userDetails.lastName}
+            </span>
           </div>
 
           <div className={styles.userInfoPlan}>

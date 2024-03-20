@@ -91,7 +91,7 @@ export default function Header() {
               >
                 Pet Recommendation
               </Nav.Link>
-              <Nav.Link href="#user">
+              <Nav.Link as={Link} to={"/user"}>
                 <FontAwesomeIcon icon={faUser} className={styles.userIcon} />
               </Nav.Link>
               <Nav.Link href="#signout">

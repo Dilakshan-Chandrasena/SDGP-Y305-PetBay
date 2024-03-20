@@ -23,16 +23,16 @@ jobs:
         run: docker push dilakshanchandrasena/petbay-react-app:latest
   
   
-  # test:
-  #   needs: build
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: Checkout Source
-  #       uses: actions/checkout@v4
-  #     - name: Pull Server image from docker hub
-  #       run: docker pull dilakshanchandrasena/petbay-node-app:latest
-  #     - name: Run tests on the built server Docker image
-  #       run: docker run --rm dilakshanchandrasena/petbay-node-app npm test
+  test:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Source
+        uses: actions/checkout@v4
+      - name: Pull Server image from docker hub
+        run: docker pull dilakshanchandrasena/petbay-node-app:latest
+      - name: Run tests on the built server Docker image
+        run: docker run --rm dilakshanchandrasena/petbay-node-app npm test
         
   deploy:
     needs: build

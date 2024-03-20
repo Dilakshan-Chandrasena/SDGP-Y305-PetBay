@@ -139,20 +139,19 @@ exports.deletePet = asyncHandler(async(req,res,next) => {
 const saveFile = asyncHandler(async (storage, path, req) => {
   const storageRef = ref(storage, path);
 
-  // Create file metadata including the content type
+  // Create file metadata 
   const metadata = {
     contentType: req.file.mimetype,
   };
 
-  // Upload the file in the bucket storage
+  // Upload the file to cloud storage
   const snapshot = await uploadBytesResumable(
     storageRef,
     req.file.buffer,
     metadata
   );
-  //by using uploadBytesResumable we can control the progress of uploading like pause, resume, cancel
 
-  // Grab the public url
+  // Gettinf the url for the file
   const downloadURL = await getDownloadURL(snapshot.ref);
   return downloadURL;
 });

@@ -9,6 +9,7 @@ import AddReminder from './AddReminder';
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPaw, faUser, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { useAuth } from "../../contexts/authContext";
 
 function ReminderHome() {
   const base_url =
@@ -18,7 +19,7 @@ function ReminderHome() {
       
   const [data, setData] = useState([]);
   const [img, setImage] = useState([]);
-  const { userId } = useParams();
+  const { userId } = useAuth();
   const [reminders, setReminder] = useState([]);
   const [showEmptyRecs, setShowEmptyRecs] = useState(false);
   useEffect(() => {

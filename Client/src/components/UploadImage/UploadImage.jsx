@@ -35,7 +35,7 @@ export default function UploadImage() {
         let breedName = res.data.pred;
         breedName = breedName.replaceAll("_", " ");
         breedName = breedName.replaceAll("-", " ");
-        breedName = breedName.charAt(0).toUpperCase() + breedName.slice(1);
+        breedName = breedName.toLowerCase();
         breedName = setPredictedBreed(breedName);
         setUploaded(true);
       })

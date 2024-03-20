@@ -1,0 +1,14 @@
+{
+    "type": "service_account",
+    "project_id": "petbay-test",
+    "private_key_id": "8d6028e609e2c051942a3394dcdca95f4b77c1b9",
+    "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDUpo6RgDgkxdqH\n5t/1+ffC6kme7UJosHmSPWonhlYZ4f8KM1aP23FYgCRk5ORsrnscKJHT+aY6aeH6\nsIasqulixPdZggVcAtG+o5qgLvkD9++uJW/7agC/Tk6PJVyI39+sKFbdqQIMGvL0\n4h0cbI7uEayENOMuudnA6Qe5iUkV+7HxGc+h5AsXwj069h/VuhM2fWBk7nIjCpuw\n8n0tgXakqUFvR8P6H7FT/5wuxScNWgdXo5nryLfHLJU1jW00QMZJr+meLXkoou2x\nu6csoOqlsCNZjeEYTxaU3PzM7X0LKFV33CdjE+/xWEIN4wcM6kRrKP0+Z5oufdTP\na/irwjY5AgMBAAECggEAG7fcJIYYi16I1icXcUoUbAE6+G7HtbqvFgtQT3eYuIX3\nRv6bHWRGuXj2hXo6dhomLOzy2TUU4E9V5+XjoBUlF71B2pZymWQ6r8VGjfOhfM1w\nHfx+RMCz+Tu9TLZbgfHgh2G4tOrnO+m1WoswrThPRyPhn1f/duM9yYH2gk4tSyKH\nXWFq7/PzYTiuv0d1NbrFI2f2txYIFj7RBZz7dUPb0sR1/L6DJ0wFmo2x6BGZryxp\nKatUngAE4y9GnVjfgLSjBvGPPC2im8sQEvC3Qs2nKJfPof/FPFsl0lOVj6hFfLNe\nMMubw9deQvjCxNkOIEu/d0tITVQH3vvmc222LSbHkwKBgQDv2brHtpypPXhMFIYO\n84yp9P1/HaLk3QMCo0cjSlvPBFq4M4kFPef/A0Ju42jtgkhSd6xMFdh1+KvIHtLO\nZ3Hxst1wdRdJIXhuLvTm9TK6On/2YsUDJDPQOgK1G+UsxlQwWTOKkkobO3ZrfBKg\nLoF0AgZQ8p+IdkIDuNwiZl8vFwKBgQDi9/yIPr4W+RQyF27HFQiKK5M0oekOthE1\noyYNW2nUMxShcPP0ulqzsQ/BIfWjK+skk9VAhSQmUe/iAKxM2cehlN8k8Z7B3lRp\nfAKLqtqg+G1oeISnOoEhTOuigHHXQnsGJKSrhCv1GHIUvAtCZwV+MVfJwEV6gGzr\nw72vQc6XLwKBgGBEQ3NlF/vVcDMZCbV2iz6r1hLvEjJJgqvMXQENF0w/sym7hYNV\nFYiFBmT7YWHyqJRw8/aVzguLg2cO+A1f95vK7pX0aSQxCuUuc50/TNzyHeoGOozI\nOwOYRP3r9E/ESoYdR1KW5KeJdj4tzkv8XnjxVxemSeG7lUNpLvGfpRSBAoGBAJeT\nE2QNurbu2szlF0b+xfg4R5OzuUfo0S9n6EatUMy03EdAfrtmJKKyUZoiSsAQ2XVR\nAO6Yu96Xg8MDvg2Itygymp86eVJxXyAfADgz/tPXdIF7UuO3T3tkukyIyP3/2Nbu\na8Zbe1uwWqd8OWy8DlALNdx3ei7oS1VcIHZFVWljAoGBAJMfS/iEv9E4DuVn/I4a\n4g8jWKr5IFLtkNb//kxTlrBc32cthc//V8sSmfchwhcemMbyVH5hdxkq2YklHhmw\nZ/D6Trqu/FExFohguScUDibiYsGbA/mAtPspZpTIhc+w3nyQXd+BbjK4wbgESVXD\nZJP7RttUIWEdcIbxt2/Umjtk\n-----END PRIVATE KEY-----\n",
+    "client_email": "firebase-adminsdk-2is66@petbay-test.iam.gserviceaccount.com",
+    "client_id": "109619208139393781035",
+    "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+    "token_uri": "https://oauth2.googleapis.com/token",
+    "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+    "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-2is66%40petbay-test.iam.gserviceaccount.com",
+    "universe_domain": "googleapis.com"
+  }
+  

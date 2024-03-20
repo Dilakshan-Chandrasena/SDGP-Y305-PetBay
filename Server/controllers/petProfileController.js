@@ -29,8 +29,8 @@ exports.addPet = asyncHandler(async (req, res, next) => {
     newPetProfile.petImageURL = petImageURL;
    
   }
-  const savedPetProfile = await petsCollection.doc(newPetProfile.id).set(newPetProfile);
-  const petProfile = (await petsCollection.doc(newPetProfile.id).get()).data();
+  const savedPetProfile = await petsCollection?.doc(newPetProfile.id).set(newPetProfile);
+  const petProfile = (await petsCollection?.doc(newPetProfile.id).get())?.data();
   res.status(201).json(petProfile);
 });
 
@@ -44,9 +44,9 @@ exports.addPet = asyncHandler(async (req, res, next) => {
 exports.getUserOwnedPets = asyncHandler(async(req,res,next) => {
   const userId = req.params.id;
   
-  const userOwnedPetsSnap = await petsCollection.where('userId', '==', userId).get();
-  const userOwnedPets = userOwnedPetsSnap.docs.map(doc => doc.data())
-  if(userOwnedPets.length !== 0){
+  const userOwnedPetsSnap = await petsCollection?.where('userId', '==', userId).get();
+  const userOwnedPets = userOwnedPetsSnap?.docs.map(doc => doc.data())
+  if(userOwnedPets?.length !== 0){
     res.status(200).json(userOwnedPets);
   }else{
     res.status(200).json([]);
@@ -61,8 +61,7 @@ exports.getUserOwnedPets = asyncHandler(async(req,res,next) => {
  */
 exports.getPetProfileById = asyncHandler((async(req,res,next)=>{
   const petId = req.params.id;
-  const pet = (await petsCollection.doc(petId).get()).data()
-  console.log(pet);
+  const pet = (await petsCollection?.doc(petId).get())?.data()
   if(pet){
     res.status(200).json(pet);
   }else{
@@ -92,7 +91,6 @@ exports.updatePet = asyncHandler(async (req, res, next) => {
       updatePet.petImageURL = petImageURL;
      
     }
-    console.log(updatePet);
     await petRef.update(updatePet);
     const updatedPetDet = (await petsCollection.doc(petId).get()).data();
     res.status(200).json(updatedPetDet);
@@ -156,7 +154,6 @@ const saveFile = asyncHandler(async (storage, path, req) => {
 
   // Grab the public url
   const downloadURL = await getDownloadURL(snapshot.ref);
-  console.log("File successfully uploaded.");
   return downloadURL;
 });
 

@@ -14,13 +14,13 @@ jobs:
       - name: Login to docker hub
         run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
       - name: Create docker image for server
-        run: docker build -t dilakshanchandrasena/petbay-backend ./Server
+        run: docker build -t dilakshanchandrasena/petbay-node-app ./Server
       - name: Push Server docker image to dockerhub
-        run: docker push dilakshanchandrasena/petbay-backend:latest
+        run: docker push dilakshanchandrasena/petbay-node-app:latest
       - name: Create docker image for client
-        run: docker build -t dilakshanchandrasena/petbay-frontend --build-arg VITE_SERVER_NODE_ENV='production' --build-arg VITE_PROD_BASE_URL='${{ secrets.VITE_PROD_BASE_URL }}'  ./Client
+        run: docker build -t dilakshanchandrasena/petbay-react-app --build-arg VITE_SERVER_NODE_ENV='production' --build-arg VITE_PROD_BASE_URL='${{ secrets.VITE_PROD_BASE_URL }}'  ./Client
       - name: Push Server docker image to dockerhub
-        run: docker push dilakshanchandrasena/petbay-frontend:latest
+        run: docker push dilakshanchandrasena/petbay-react-app:latest
   
   
   test:
@@ -30,23 +30,23 @@ jobs:
       - name: Checkout Source
         uses: actions/checkout@v4
       - name: Pull Server image from docker hub
-        run: docker pull dilakshanchandrasena/petbay-backend:latest
+        run: docker pull dilakshanchandrasena/petbay-node-app:latest
       - name: Run tests on the built server Docker image
-        run: docker run --rm dilakshanchandrasena/petbay-backend npm test
+        run: docker run --rm dilakshanchandrasena/petbay-node-app npm test
         
   deploy:
-    needs: [build,test]
+    needs: [build, test]
     runs-on: self-hosted
     steps:
       - name: Pull Server image from docker hub
-        run: docker pull dilakshanchandrasena/petbay-backend:latest
+        run: docker pull dilakshanchandrasena/petbay-node-app:latest
       - name: Pull Client from docker hub
-        run: docker pull dilakshanchandrasena/petbay-frontend:latest
+        run: docker pull dilakshanchandrasena/petbay-react-app:latest
       - name: Delete old container
-        run: docker rm -f petbay-backend-container
+        run: docker rm -f petbay-node-app-container
       - name: Delete old container
-        run: docker rm -f petbay-frontend-container
+        run: docker rm -f petbay-react-app-container
       - name: Run Docker Container
-        run: docker run -d -p 8080:8080 --name petbay-backend-container dilakshanchandrasena/petbay-backend
+        run: docker run -d -p 8080:8080 --name petbay-node-app-container dilakshanchandrasena/petbay-node-app
       - name: Run Docker Container
-        run: docker run -d -p 5173:80 --name petbay-frontend-container dilakshanchandrasena/petbay-frontend
+        run: docker run -d -p 5173:80 --name petbay-react-app-container dilakshanchandrasena/petbay-react-app

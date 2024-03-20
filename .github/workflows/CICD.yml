@@ -35,7 +35,7 @@ jobs:
         run: docker run --rm dilakshanchandrasena/petbay-node-app npm test
         
   deploy:
-    needs: build
+    needs: [build, test]
     runs-on: self-hosted
     steps:
       - name: Pull Server image from docker hub

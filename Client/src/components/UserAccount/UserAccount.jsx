@@ -5,6 +5,10 @@ import axios from "axios";
 import { useAuth } from "../../contexts/authContext";
 
 const UserAccount = () => {
+  const base_url =
+  import.meta.env.VITE_SERVER_NODE_ENV === "development"
+    ? import.meta.env.VITE_LOCAL_BASE_URL
+    : import.meta.env.VITE_PROD_BASE_URL;
   const { userId } = useAuth();
   const [userDetails, setUserDetails] = useState({});
 
@@ -14,7 +18,7 @@ const UserAccount = () => {
 
   const getUserDetails = async (userId) => {
     axios
-      .get(`http://localhost:8080/petbay/api/v1/users/${userId}`)
+      .get(`${base_url}/petbay/api/v1/users/${userId}`)
       .then((res) => {
         setUserDetails(res.data);
       });

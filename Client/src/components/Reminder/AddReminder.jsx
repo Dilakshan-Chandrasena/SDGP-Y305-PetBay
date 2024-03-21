@@ -39,22 +39,28 @@ export default function AddReminder({loadReminders}) {
       event.preventDefault();
       event.stopPropagation();
     }
-    event.preventDefault();
-    values.userId = userId;
-    await axios
-      .post(
-        "http://localhost:8080/petbay/api/v1/reminders/addReminder/",
-        values
-      )
-      .then(async (res) => {
-        alert("Reminder added")
-        reset();
-        handleClose();       
-        await loadReminders;
-      })
-      .catch((err) => console.log(err));
-    setValidated(true);
+      values.userId = userId;
+      try {
+        await axios.post(
+          "http://localhost:8080/petbay/api/v1/reminders/addReminder/",
+          values
+        ).then(async(res) => {
+          if(res.status != 201){
+            alert("Cannot add reminder")
+          }else{
+            alert("Reminder added");
+            reset();
+            handleClose();
+            await loadReminders(); 
+          }
+        })
+        setValidated(true);
+      } catch (err) {
+        console.log(err);
+      }
+      
   };
+  
 
   const getPetNames = async () => {
     await axios
@@ -86,7 +92,7 @@ export default function AddReminder({loadReminders}) {
         backdrop="static"
         keyboard={false}
       >
-        <Form onSubmit={handleSubmit}>
+        <Form validated={validated} onSubmit={handleSubmit}>
           <Modal.Header className={styles.modalHeader}>
             <Button variant="secondary" onClick={handleClose}>
               Cancel
@@ -97,7 +103,6 @@ export default function AddReminder({loadReminders}) {
             </Button>
           </Modal.Header>
           <Modal.Body>
-            <Form noValidate validated={validated} onSubmit={handleSubmit}>
               <Row className="mb-3">
                 <Form.Group as={Col} md="7" controlId="validationCustom01">
                   <Form.Label>Pet's Name</Form.Label>
@@ -168,7 +173,6 @@ export default function AddReminder({loadReminders}) {
                   </Form.Control.Feedback>
                 </Form.Group>
               </Row>
-            </Form>
           </Modal.Body>
           <Modal.Footer></Modal.Footer>
         </Form>

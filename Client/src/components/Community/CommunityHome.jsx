@@ -126,7 +126,7 @@ export default function CommunityPage() {
           <Card className={styles.createPost}>
             <Card.Body className={styles.postBody}>
               <Card.Title className="mb-3">Create Post</Card.Title>
-              <Form noValidate validated={validated} onSubmit={handleSubmit}>
+              <Form validated={validated} onSubmit={handleSubmit}>
                 <Form.Group className="mb-3" controlId="createPostForm">
                   <Form.Control
                     required

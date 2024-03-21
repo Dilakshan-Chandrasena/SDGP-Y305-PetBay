@@ -30,21 +30,31 @@ function AddLostFoundModal({ reloadLostFoundPosts }) {
     "image/webp",
   ];
 
+  const today = new Date().toISOString().split("T")[0]; // Get today's date in YYYY-MM-DD format
+
   const formSchema = z.object({
     name: z.string().min(1, "Name is required"),
     breed: z.string().min(1, "Breed is required"),
     color: z.string().min(1, "Colour is required"),
     area: z.string().min(1, "Area is required"),
     height: z.string().min(1, "Height is required"),
-    date: z.string().min(1, "Date is required"),
+    date: z
+      .string()
+      .min(1, "Date is required")
+      .refine((value) => value <= today, {
+        message: "Date must be less than or equal to today's date",
+      }),
     time: z.string().min(1, "Time is required"),
     features: z.string().min(1, "Features are required"),
-    contact: z.string().min(1, "Contact is required"),
+    contact: z
+      .string()
+      .length(10, "Contact must be exactly 10 characters")
+      .regex(/^\d+$/, "Contact must contain only numbers"),
     filename: z
       .any()
       .refine(
         (files) => ACCEPTED_IMAGE_TYPES.includes(files?.[0]?.type),
-        "Invalid file format(Images Only) "
+        "Invalid file format (Images Only)"
       ),
   });
 

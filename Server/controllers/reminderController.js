@@ -11,7 +11,7 @@ exports.getReminders = asyncHandler(async(req,res,next) => {
     if(reminderList.length !== 0){
       res.status(200).json(reminderList);
     }else{
-      res.status(200).json([]);
+      res.status(404).json([]);
     }
 });
 
@@ -20,8 +20,13 @@ exports.addReminder = asyncHandler(async (req,res,next) =>{
   const reminderId = uuid.v4();
   reminder.id = reminderId;
   try{
-    await remindersCollection.doc(reminderId).set(reminder);
-    res.status(201).send("Reminder added successfully");
+    if(reminder.userId == "" || !reminder.remderText == ""){
+      res.status(400).json({ error: 'Missing required fields' });
+    }else{
+      await remindersCollection.doc(reminderId).set(reminder);
+      res.status(201).send("Reminder added successfully");
+    }
+    
   }catch {
       throw new CustomError("Failed to add reminder", 400);
   }

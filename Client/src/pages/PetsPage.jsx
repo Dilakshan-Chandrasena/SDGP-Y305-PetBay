@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import AddPetModal from "../components/AddPet/AddPetModal";
 import EmptyRecords from "../components/EmptyRecords/EmptyRecords";
+import { useAuth } from "../contexts/authContext";
 
 export default function PetsPage() {
   const base_url =
@@ -16,7 +17,7 @@ export default function PetsPage() {
       ? import.meta.env.VITE_LOCAL_BASE_URL
       : import.meta.env.VITE_PROD_BASE_URL;
 
-  const { userId } = useParams();
+  const { userId } = useAuth();
   const [petList, setPetList] = useState([]);
   const [showEmptyRecs, setShowEmptyRecs] = useState(false);
 

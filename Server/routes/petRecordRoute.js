@@ -14,10 +14,4 @@ router.route("/add-record").post(upload.single("filename"), petRecordController.
 router.route("/records/:id").get(petRecordController.getPetRecordsById);
 router.route("/:id").delete(petRecordController.deleteRecord);
 
-
-
-
-
-
-
 module.exports = router;

@@ -8,16 +8,10 @@ import {
   faThumbsUp,
 } from "@fortawesome/free-solid-svg-icons";
 import styles from "./community.module.css";
+import "./community.module.css";
 import axios from "axios";
 
 export default function CommunityPage() {
-
-  const base_url =
-  import.meta.env.VITE_SERVER_NODE_ENV === "development"
-      ? import.meta.env.VITE_LOCAL_BASE_URL
-      : import.meta.env.VITE_PROD_BASE_URL;
-
-
   const [point, setPoint] = useState(0);
   const [data, setData] = useState([]);
   const [commentData, setCommentData] = useState([]);
@@ -36,30 +30,26 @@ export default function CommunityPage() {
     comments: [],
   });
 
-  const handleLikeClick = () => {
-    const countLikes = values.likes + 1;
-    setValues(countLikes);
-    console.log(values.likes);
-  };
-
   const handleSubmit = async (event) => {
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
       event.preventDefault();
       event.stopPropagation();
+    } else {
+      event.preventDefault();
+      await axios
+        .post(
+          "http://localhost:8080/petbay/api/v1/community/addCommunityPost/" +
+            userId,
+          values
+        )
+        .then(async (res) => {
+          await getPosts();
+          setValues({ ...values, text: '' });
+        })
+        .catch((err) => console.log(err));
+      setValidated(true);
     }
-    event.preventDefault();
-    await axios
-      .post(
-        `${base_url}/petbay/api/v1/community/addCommunityPost/${userId}`,
-        values
-      )
-      .then(async (res) => {
-        await getPosts();
-        alert("Post Published");
-      })
-      .catch((err) => console.log(err));
-    setValidated(true);
   };
 
   useEffect(() => {
@@ -68,17 +58,13 @@ export default function CommunityPage() {
   }, []);
 
   const getPosts = async () => {
-    
     await axios
-      .get(`${base_url}/petbay/api/v1/community/feed`)
+      .get("http://localhost:8080/petbay/api/v1/community/feed")
       .then((res) => {
         const data = res.data;
         if (data.length > 0) {
-          console.log(data);
-
           setData(data);
-          const pointPlus = point + 1;
-          setPoint(pointPlus);
+          setPoint(point++);
         }
       })
       .catch((err) => {
@@ -88,7 +74,7 @@ export default function CommunityPage() {
 
   const getComments = async () => {
     await axios
-      .get(`${base_url}/petbay/api/v1/community/getComments`)
+      .get("http://localhost:8080/petbay/api/v1/community/getComments")
       .then((res) => {
         const data = res.data;
         if (data.length > 0) {
@@ -101,19 +87,25 @@ export default function CommunityPage() {
   };
 
   const handleCommentSubmit = async (postId) => {
-    comment.commentId = postId;
-    await axios
-      .post(
-        `${base_url}/petbay/api/v1/community/addComment/${userId}`,
-        comment
-      )
-      .then(async (res) => {
-        await getPosts();
-        alert("Comment added");
-      })
-      .catch((err) => console.log(err));
-    setValidated(true);
+    console.log(comment)
+    if (comment.commentText == "") {
+      alert("Please add a comment")
+    }else{
+      comment.commentId = postId;
+      await axios
+        .post(
+          "http://localhost:8080/petbay/api/v1/community/addComment/" + userId,
+          comment
+        )
+        .then(async (res) => {
+          await getPosts();
+          setComment({ ...comment, commentText: '' });
+        })
+        .catch((err) => console.log(err));
+      setValidated(true);
+    }
   };
+
 
   return (
     <Container fluid>
@@ -134,7 +126,7 @@ export default function CommunityPage() {
           <Card className={styles.createPost}>
             <Card.Body className={styles.postBody}>
               <Card.Title className="mb-3">Create Post</Card.Title>
-              <Form noValidate validated={validated} onSubmit={handleSubmit}>
+              <Form validated={validated} onSubmit={handleSubmit}>
                 <Form.Group className="mb-3" controlId="createPostForm">
                   <Form.Control
                     required
@@ -146,6 +138,10 @@ export default function CommunityPage() {
                     }
                     controlId="validationCustom01"
                   />
+                  <Form.Control.Feedback type="invalid">
+                    This field can't be empty
+                  </Form.Control.Feedback>
+                  <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
                 </Form.Group>
                 <div className={styles.createButtons}>
                   <Button className={styles.publish} type="submit">
@@ -168,27 +164,24 @@ export default function CommunityPage() {
                 <Card.Text className={styles.postText}>{post.text}</Card.Text>
                 <div className="d-flex text-center">
                   <Button
-                    className={styles.likeButton}
-                    onClick={handleLikeClick}
+                   className={styles.likeButton}
                   >
                     <FontAwesomeIcon icon={faThumbsUp} />
                   </Button>
-                  <Form.Control
-                    required
-                    className={styles.commentField}
-                    type="text"
-                    placeholder="Add your comment here..."
-                    onChange={(e) =>
-                      setComment({ ...comment, commentText: e.target.value })
-                    }
-                  />
-                  <Button
-                    className={styles.commentButton}
-                    type="submit"
-                    onClick={() => handleCommentSubmit(post.id)}
-                  >
-                    Comment
-                  </Button>
+                    <Form.Control
+                      required
+                      className={styles.commentField}
+                      type="text"
+                      placeholder="Add your comment here..."
+                      id = "comment"
+                      onChange={(e) =>
+                        setComment({ ...comment, commentText: e.target.value })
+                      }
+                    />
+                    <Button className={styles.commentButton} type="submit"
+                     onClick={() => handleCommentSubmit(post.id)}> 
+                      Comment
+                    </Button>
                 </div>
                 {post.comments.map((postComments) => (
                   <div className={styles.commentBody}>

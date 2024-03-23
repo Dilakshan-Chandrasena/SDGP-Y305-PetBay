@@ -8,11 +8,12 @@ import ListGroup from "react-bootstrap/ListGroup";
 import Badge from "react-bootstrap/Badge";
 
 export default function SubscribtionPlans() {
+  // fetching plan details from json file
   const plans = plansData.plans;
   return (
     <div id="subscribtions">
       <div className={styles.titleContianer}>
-        <h1>Subscribtion Plans</h1>
+        <h1>Subscription Plans</h1>
         <p>
           <span>
             <FontAwesomeIcon icon={faPaw} />
@@ -27,7 +28,6 @@ export default function SubscribtionPlans() {
       <div className={styles.cardContainer}>
         {plans.map((plan) => (
           <Card className={styles.planCard}>
-            {/* <Card.Img variant="top" src="holder.js/100px180" /> */}
             <Card.Body>
               <Card.Title className={styles.planTitle}>{plan.name}</Card.Title>
               <Card.Text>

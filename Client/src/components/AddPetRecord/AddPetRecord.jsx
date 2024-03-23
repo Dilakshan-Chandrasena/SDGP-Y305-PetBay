@@ -110,10 +110,11 @@ export default function AddPetRecord({ reloadRecordsList }) {
 
   return (
     <div>
+      {/* btn for adding record */}
       <Button onClick={handleShow} className={styles.addBtn} variant="primary">
         Add Record
       </Button>
-
+      {/* react modal and hook form adding a pet record */}
       <Modal
         show={show}
         onHide={handleClose}

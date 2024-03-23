@@ -17,9 +17,10 @@ export default function HeroSection() {
             Services
           </Button>
           <Button className={styles.subscribtionsBtn} variant="primary" href="#subscribtions">
-            Subscribtions
+            Subscriptions
           </Button>
         </div>
+        {/* paw prints animation */}
         <div className={styles.pawContainer}>
           <div className={styles.paws1}>
             <FontAwesomeIcon

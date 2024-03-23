@@ -72,7 +72,7 @@ export default function PetRecord() {
         </h1>
         <AddPetRecord reloadRecordsList={getPetRecordsById} />
       </div>
-
+      {/*dynamically adding pet records to react cards  */}
       {petRecords.map((record) => (
         <Card className={styles.recordCard}>
           <Card.Body className={styles.recordBody}>
@@ -102,7 +102,7 @@ export default function PetRecord() {
           </Card.Body>
         </Card>
       ))}
-
+      {/*rendering empty recs component if no records available  */}
       <div
         style={{
           visibility: showEmptyRecs ? "visible" : "hidden",

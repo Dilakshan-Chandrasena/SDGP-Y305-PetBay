@@ -22,17 +22,7 @@ import UserAccountPage from "./pages/UserAccountPage";
 import Community from './pages/CommunityPage';
 
 function App() {
-  const { userId } = useParams();
 
-
-  console.log(
-    "process.env.REACT_APP_NODE_ENV:",
-    import.meta.env.VITE_SERVER_NODE_ENV
-  );
-  console.log(
-    "process.env.REACT_APP_SERVER_BASE_URL:",
-    import.meta.env.VITE_PROD_BASE_URL
-  );
   const base_url =
   import.meta.env.VITE_SERVER_NODE_ENV === "development"
       ? import.meta.env.VITE_LOCAL_BASE_URL

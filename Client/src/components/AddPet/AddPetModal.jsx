@@ -119,12 +119,13 @@ function AddPetModal({ reloadPetList }) {
 
   return (
     <>
+    {/* add button for adding pet  */}
       <button onClick={handleShow} className={styles.addBtn}>
         <span className={styles.addIcon}>
           <FontAwesomeIcon icon={faPlus} />
         </span>
       </button>
-
+      {/*Pop up form using react-bootrap modal- add Pet  */}
       <Modal
         show={show}
         onHide={handleClose}

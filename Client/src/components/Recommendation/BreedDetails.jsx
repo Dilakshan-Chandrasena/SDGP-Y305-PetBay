@@ -29,7 +29,7 @@ export default function BreedDetails({ breedData }) {
                     style={{
                       borderRadius: "10px",
                       width: "100%",
-                      maxWidth: "350px",
+                      height: "330px",
                     }}
                   />
                 </MDBCol>

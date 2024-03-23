@@ -5,18 +5,20 @@ import axios from "axios";
 import { useAuth } from "../../contexts/authContext";
 
 const UserAccount = () => {
+  // Setting the base URL based on the running environment
   const base_url =
   import.meta.env.VITE_SERVER_NODE_ENV === "development"
     ? import.meta.env.VITE_LOCAL_BASE_URL
     : import.meta.env.VITE_PROD_BASE_URL;
   const { userId } = useAuth();
+  // Declaring the use states for user details
   const [userDetails, setUserDetails] = useState({});
-
+  // Loading user details while loading the component
   useEffect(() => {
     getUserDetails(userId);
   }, []);
-
-  const getUserDetails = async (userId) => {
+  // Getting the user details by userId - Database
+  const getUserDetails = async (userId) => {  
     axios
       .get(`${base_url}/petbay/api/v1/users/${userId}`)
       .then((res) => {
@@ -30,7 +32,7 @@ const UserAccount = () => {
 
       <div className={styles.userInfo}>
         <div className={styles.userImage}>
-          <img src="src\assets\images\userImage.jpg" alt="" />
+          <img src="src\assets\images\userImage.jpg" alt="" />  
         </div>
         <div className={styles.editImage}>
           <button type="edit">

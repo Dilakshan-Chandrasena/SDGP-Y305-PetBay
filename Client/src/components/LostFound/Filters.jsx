@@ -7,6 +7,7 @@ import { useState } from "react";
 function Filters({ onFilterChange }) {
   const [activeFilter, setActiveFilter] = useState("all");
 
+  // Handle filter
   const handleFilterChange = (filter) => {
     setActiveFilter(filter);
     onFilterChange(filter); // Notify parent component about the filter change

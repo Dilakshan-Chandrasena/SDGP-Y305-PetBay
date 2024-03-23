@@ -14,6 +14,7 @@ import { collection, query, where, getDocs } from "firebase/firestore";
 import { db } from "../../config/firebase";
 
 export default function LogIn() {
+  //Change the background color when mounting and unmounting the login page
   useEffect(() => {
     document.body.classList.add("auth-background");
     return () => {
@@ -28,6 +29,7 @@ export default function LogIn() {
   const [isSigningIn, setIsSigningIn] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
+  //Sign in with email and password function
   const signIn = async () => {
     if (email !== "" && password !== "") {
       try {
@@ -56,6 +58,7 @@ export default function LogIn() {
     }
   };
 
+  //Check if the user is available or not
   const checkUserExistsInCollection = async (email) => {
     try {
       const userRef = collection(db, "users");
@@ -68,6 +71,7 @@ export default function LogIn() {
     }
   };
 
+  //Sign in with Google function
   const signInGoogle = async () => {
     if (!isSigningIn) {
       setIsSigningIn(true);
@@ -77,7 +81,7 @@ export default function LogIn() {
         const userExists = await checkUserExistsInCollection(userEmail);
         const userId = authResult.user.uid;
         if (userExists) {
-          window.sessionStorage.setItem("userId", userId)
+          window.sessionStorage.setItem("userId", userId);
           navigate("/home");
         } else {
           navigate("/getuserdetails", { state: { userId, email: userEmail } });

@@ -13,23 +13,26 @@ import {
 } from "mdb-react-ui-kit";
 
 export default function Tabs({ breedData }) {
+  // State to manage active tab
   const [iconsActive, setIconsActive] = useState("tab1");
 
+  // Function to handle tab click
   const handleIconsClick = (value) => {
     if (value === iconsActive) {
       return;
     }
-
     setIconsActive(value);
   };
 
   return (
     <div>
+      {/* Render tabs */}
       <MDBContainer>
         <MDBRow className="justify-content-center">
           <MDBCol md="9" lg="7" xl="12" className="mt-5">
             <MDBTabs className="mb-3">
               <MDBTabsItem>
+                {/* Details Tab */}
                 <MDBTabsLink
                   onClick={() => handleIconsClick("tab1")}
                   active={iconsActive === "tab1"}
@@ -43,6 +46,7 @@ export default function Tabs({ breedData }) {
                 </MDBTabsLink>
               </MDBTabsItem>
               <MDBTabsItem>
+                {/* Comparison Tab */}
                 <MDBTabsLink
                   onClick={() => handleIconsClick("tab2")}
                   active={iconsActive === "tab2"}
@@ -57,13 +61,16 @@ export default function Tabs({ breedData }) {
               </MDBTabsItem>
             </MDBTabs>
 
+            {/* Render tab content */}
             <MDBTabsContent>
               <MDBTabsPane open={iconsActive === "tab1"}>
+                {/* Details Tab Content */}
                 <div className={styles.tabContent}>
                   <p className={styles.details}>{breedData.description}</p>
                 </div>
               </MDBTabsPane>
               <MDBTabsPane open={iconsActive === "tab2"}>
+                {/* Comparison Tab Content */}
                 <ComparisonTable
                   comparisonResults={breedData.comparisonResults}
                 />

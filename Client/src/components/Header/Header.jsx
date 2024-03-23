@@ -18,10 +18,11 @@ export default function Header() {
   const { userId } = useAuth();
   const navigate = useNavigate();
 
+  // Function to handle user logout
   const logout = async () => {
     try {
       await signOut(auth);
-      navigate("/login");
+      navigate("/login"); // Navigate to login page after logout
       console.log("sign out");
     } catch (err) {
       console.error(err);
@@ -30,6 +31,7 @@ export default function Header() {
 
   return (
     <div className={styles.body}>
+      {/* Bootstrap Navbar */}
       <Navbar bg="dark" data-bs-theme="dark" expand="lg">
         <Container fluid>
           <Navbar.Toggle
@@ -37,6 +39,7 @@ export default function Header() {
             className={styles.hamburger}
           />
           <Navbar.Collapse id="navbarScroll">
+            {/* Navigation Links */}
             <Nav
               className="mx-auto my-2 my-lg-0"
               style={{ maxHeight: "400px" }} // Adjusted maxHeight here
@@ -91,6 +94,7 @@ export default function Header() {
               >
                 Pet Recommendation
               </Nav.Link>
+              {/* User Profile and Logout */}
               <Nav.Link as={Link} to={"/user"}>
                 <FontAwesomeIcon icon={faUser} className={styles.userIcon} />
               </Nav.Link>

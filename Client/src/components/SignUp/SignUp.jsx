@@ -16,12 +16,14 @@ import { db } from "../../config/firebase";
 
 export default function SignUp() {
   useEffect(() => {
+    // Add background class when component mounts
     document.body.classList.add("auth-background");
     return () => {
       document.body.classList.remove("auth-background"); // Clean up when component unmounts
     };
   }, []);
 
+  // Hooks for managing state and navigation
   const navigate = useNavigate();
   const { userLoggedIn } = useAuth();
   const [email, setEmail] = useState("");
@@ -30,7 +32,9 @@ export default function SignUp() {
   const [isSigningIn, setIsSigningIn] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
+  // Function for signing up
   const signUp = async () => {
+    // Validate form inputs
     if (email !== "" && password !== "" && confirmPassword !== "") {
       if (password !== confirmPassword) {
         alert("Password do not match");
@@ -44,6 +48,7 @@ export default function SignUp() {
           const userEmail = authResult.user.email;
           navigate("/getuserdetails", { state: { userId, email: userEmail } });
         } catch (error) {
+          // Handle authentication errors
           if (error.code === "auth/invalid-email") {
             setErrorMessage("Invalid email or password. Please try again.");
           } else if (error.code === "auth/weak-password") {
@@ -56,6 +61,7 @@ export default function SignUp() {
     }
   };
 
+  // Function to check if user exists in Firestore collection
   const checkUserExistsInCollection = async (email) => {
     try {
       const userRef = collection(db, "users");
@@ -68,6 +74,7 @@ export default function SignUp() {
     }
   };
 
+  // Function for signing in with Google
   const signIngoogle = async () => {
     if (!isSigningIn) {
       setIsSigningIn(true);
@@ -94,12 +101,14 @@ export default function SignUp() {
   return (
     <div className={styles.formContainer}>
       <div className={styles.form}>
+        {/* Sign-up form */}
         <div className={styles.headingContainer}>
           <h1 className={styles.heading}>
             <FontAwesomeIcon icon={faPaw} /> Sign Up
           </h1>
         </div>
 
+        {/* Input fields */}
         <div className={styles.inputBox}>
           <input
             className={styles.input}
@@ -126,17 +135,21 @@ export default function SignUp() {
           />
         </div>
 
+        {/* Sign-up button */}
         <div className={styles.button}>
           <button className={styles.signInButton} onClick={signUp}>
             Sign Up
           </button>
         </div>
 
+        {/* Sign-in link */}
         <div className={styles.formLink}>
           <span>Already have an account?</span>
           <Link to="/LogIn"> Login</Link>
         </div>
         <div className={styles.line}></div>
+
+        {/* Google sign-in button */}
         <button className={styles.googleButton} onClick={signIngoogle}>
           <span className={styles.googleSpan}>
             <span className={styles.googleIcon}>
@@ -145,6 +158,8 @@ export default function SignUp() {
             Sign up with Google
           </span>
         </button>
+
+        {/* Error message */}
         {errorMessage && <p className={styles.errorMessage}>{errorMessage}</p>}
         <br />
       </div>

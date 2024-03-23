@@ -8,6 +8,7 @@ export default function NoticeCard({ data }) {
     return status === "lost";
   };
 
+  // Get time different between current date and created date
   const getTimeDifference = (createdDate) => {
     const currentDate = new Date();
     const diffTime = Math.abs(currentDate - new Date(createdDate));

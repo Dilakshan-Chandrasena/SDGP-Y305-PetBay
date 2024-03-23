@@ -21,6 +21,7 @@ export default function BreedDetails({ breedData }) {
             <MDBCardBody className="p-4">
               <MDBRow>
                 <MDBCol sm="5" lg="4">
+                  {/* Display the breed image */}
                   <MDBCardImage
                     src={breedData.imageLink}
                     alt="Pet Breed Image"
@@ -35,6 +36,7 @@ export default function BreedDetails({ breedData }) {
                 <MDBCol lg="8">
                   <MDBCard className={styles.breedDetails}>
                     <MDBCardBody>
+                      {/* Display breed name */}
                       <MDBRow className="mb-4">
                         <MDBCol>
                           <MDBCardTitle
@@ -45,11 +47,15 @@ export default function BreedDetails({ breedData }) {
                           </MDBCardTitle>
                           <MDBCardText
                             className="mb-3"
-                            style={{ fontSize: "20px",textTransform:"capitalize" }}
+                            style={{
+                              fontSize: "20px",
+                              textTransform: "capitalize",
+                            }}
                           >
                             {breedData.breedName}
                           </MDBCardText>
                         </MDBCol>
+                        {/* Display average height */}
                         <MDBCol>
                           <MDBCardTitle
                             className="mb-2"
@@ -65,6 +71,7 @@ export default function BreedDetails({ breedData }) {
                           </MDBCardText>
                         </MDBCol>
                       </MDBRow>
+                      {/* Display breed group */}
                       <MDBRow className="mb-4">
                         <MDBCol>
                           <MDBCardTitle
@@ -80,6 +87,7 @@ export default function BreedDetails({ breedData }) {
                             {breedData.breedGroup}
                           </MDBCardText>
                         </MDBCol>
+                        {/* Display average weight */}
                         <MDBCol>
                           <MDBCardTitle
                             className="mb-2"
@@ -95,6 +103,7 @@ export default function BreedDetails({ breedData }) {
                           </MDBCardText>
                         </MDBCol>
                       </MDBRow>
+                      {/* Display average lifespan */}
                       <div className="mb-4">
                         <MDBCardTitle
                           className="mb-2"

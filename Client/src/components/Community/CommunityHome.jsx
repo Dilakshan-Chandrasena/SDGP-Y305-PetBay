@@ -64,7 +64,8 @@ export default function CommunityPage() {
         const data = res.data;
         if (data.length > 0) {
           setData(data);
-          setPoint(point++);
+          let value = point + 1
+          setPoint(value);
         }
       })
       .catch((err) => {

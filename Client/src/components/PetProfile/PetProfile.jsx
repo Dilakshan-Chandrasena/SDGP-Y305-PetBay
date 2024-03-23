@@ -35,6 +35,7 @@ export default function PetProfile() {
   return (
     <div className={styles.petProfContainer}>
       <div>
+        {/* Pet Image card structure */}
         <Card className={styles.petIdentityContainer}>
           <Card.Body>
             <Card.Title className={styles.petName}>
@@ -46,6 +47,7 @@ export default function PetProfile() {
       </div>
 
       <div>
+        {/* Pet Details rendering card structure */}
         <Card className={styles.petInfoContainer}>
           <Card.Body>
             <Card.Subtitle className={styles.petDetSubtitle}>

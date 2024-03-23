@@ -98,7 +98,10 @@ export default function UploadImage() {
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
   return (
     <div className={styles.dropzoneContainer}>
+      {/* dynamically changing the view based on image upload status */}
       {uploaded ? (
+
+        // rendering if image is umploaded with uploaded image
         <div className={styles.postUpload}>
           <img src={imagePreview} alt="predicted-image" />
 
@@ -127,6 +130,7 @@ export default function UploadImage() {
           </div>
         </div>
       ) : (
+        // rendering image uploading dropzone
         <div className={styles.dropzone} {...getRootProps()}>
           <FontAwesomeIcon
             className={styles.icon}

@@ -9,6 +9,7 @@ import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 
 export default function PetCard({ name, petId, petImageURL, reloadPetList }) {
+  // configuring base url based on the env
   const base_url =
   import.meta.env.VITE_SERVER_NODE_ENV === "development"
       ? import.meta.env.VITE_LOCAL_BASE_URL
@@ -17,20 +18,24 @@ export default function PetCard({ name, petId, petImageURL, reloadPetList }) {
   const navigate = useNavigate();
   const { userId } = useParams();
 
+  // initializing state hooks for pet details
   const [petID, setPetID] = useState();
   const [petName, setPetName] = useState();
   const [petImage, setPetImage] = useState();
 
+  // setting state hooks with props (pet details)
   useEffect(() => {
     setPetID(petId);
     setPetName(name);
     setPetImage(petImageURL);
   });
 
+  // navigate to particular details of a pet 
   const viewPetProfile = () => {
     navigate(`/pet-profile/${petID}`);
   };
 
+  // backend call for deleting a pet profile DELETE call
   const deletePetByID = async () => {
     await axios
       .delete(`${base_url}/petbay/api/v1/pet-profiles/${petID}`)

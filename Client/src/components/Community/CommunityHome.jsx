@@ -35,6 +35,7 @@ export default function CommunityPage() {
     comments: [],
   });
 
+  // Function to handle form submission
   const handleSubmit = async (event) => {
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
@@ -61,6 +62,7 @@ export default function CommunityPage() {
     getComments();
   }, []);
 
+  // Function to get all the community posts
   const getPosts = async () => {
     await axios
       .get(`${base_url}/petbay/api/v1/community/feed`)
@@ -77,6 +79,7 @@ export default function CommunityPage() {
       });
   };
 
+  // Function to get all post comments
   const getComments = async () => {
     await axios
       .get(`${base_url}/petbay/api/v1/community/getComments`)
@@ -91,6 +94,7 @@ export default function CommunityPage() {
       });
   };
 
+  // Function to handle comment submission
   const handleCommentSubmit = async (postId) => {
     console.log(comment)
     if (comment.commentText == "") {
@@ -110,7 +114,6 @@ export default function CommunityPage() {
       setValidated(true);
     }
   };
-
 
   return (
     <Container fluid>

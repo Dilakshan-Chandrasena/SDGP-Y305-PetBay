@@ -22,6 +22,8 @@ function ReminderHome() {
   const { userId } = useAuth();
   const [reminders, setReminder] = useState([]);
   const [showEmptyRecs, setShowEmptyRecs] = useState(false);
+
+  // Fetch reminders and check for immediate reminders on component mount
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -51,10 +53,12 @@ function ReminderHome() {
     };
     fetchData();
 
+    // Fetch reminders periodically (every minute)
     const intervalId = setInterval(fetchData, 60000); 
     return () => clearInterval(intervalId);
   }, []);
 
+  // Fetch reminders and pet names on component mount
   useEffect(() => {
     getReminders();
   });
@@ -65,6 +69,7 @@ function ReminderHome() {
     getPetNames();
   }, []);
 
+  // Function to fetch reminders from the backend
   const getReminders = async () => {
     await axios
       .get(`${base_url}/petbay/api/v1/reminders/reminder/${userId}`)
@@ -81,6 +86,7 @@ function ReminderHome() {
       });
   };
 
+  // Function to delete a reminder
   const deleteReminderHandle = async (id) => {
     await axios
       .delete(`${base_url}/petbay/api/v1/reminders/deleteReminder/${id}`)
@@ -93,6 +99,7 @@ function ReminderHome() {
       .catch((err) => console.log(err));
   };
 
+  // Function to fetch pet names from the backend
   const getPetNames = async () => {
     await axios
       .get(`${base_url}/petbay/api/v1/pet-profiles/owned-pets/${userId}`)

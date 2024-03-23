@@ -8,6 +8,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 export default function ComparisonTable({ comparisonResults }) {
+  // Render a message if no comparison results are available
   if (!comparisonResults || comparisonResults.length === 0) {
     return (
       <div className={styles.tabContent}>
@@ -16,6 +17,7 @@ export default function ComparisonTable({ comparisonResults }) {
     );
   }
 
+  // Function to render appropriate icon based on matching percentage
   const renderIcon = (matchingPercentage) => {
     if (matchingPercentage >= 80) {
       return (
@@ -43,6 +45,7 @@ export default function ComparisonTable({ comparisonResults }) {
 
   return (
     <>
+      {/* Render the comparison table */}
       <section className={`border p-4 mb-4 ${styles.tabContent}`}>
         <MDBTable responsive className={styles.tableNoBorder}>
           <MDBTableHead>
@@ -60,6 +63,7 @@ export default function ComparisonTable({ comparisonResults }) {
             </tr>
           </MDBTableHead>
           <MDBTableBody>
+            {/* Map through comparison results to render rows */}
             {comparisonResults.map((result, index) => (
               <tr key={index}>
                 <td>{result.characteristic}</td>

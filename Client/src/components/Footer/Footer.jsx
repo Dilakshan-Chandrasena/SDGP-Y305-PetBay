@@ -15,22 +15,30 @@ import {
   faInstagram,
 } from "@fortawesome/free-brands-svg-icons";
 
+/**
+ * Footer component renders the footer section of the application.
+ * @returns {JSX.Element} - JSX for the footer.
+ */
 export default function Footer() {
   return (
     <div className={styles.footer}>
+      {/* MDBReact UI Footer */}
       <MDBFooter
         bgColor="dark"
         className="text-center text-lg-start text-light"
       >
+        {/* Top section */}
         <section className="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
           <div className="me-5 d-none d-lg-block">
             <span></span>
           </div>
         </section>
 
+        {/* Main content section */}
         <section className="">
           <MDBContainer className="text-center text-md-start mt-5">
             <MDBRow className="mt-3">
+              {/* About PetBay */}
               <MDBCol md="3" lg="4" xl="3" className="mx-auto mb-4">
                 <h6 className="text-uppercase fw-bold mb-4">
                   <FontAwesomeIcon icon={faPaw} /> PetBay
@@ -42,6 +50,7 @@ export default function Footer() {
                 </p>
               </MDBCol>
 
+              {/* Quick Links */}
               <MDBCol md="2" lg="2" xl="2" className="mx-auto mb-4">
                 <h6 className="text-uppercase fw-bold mb-4">Quick Links</h6>
                 <p>
@@ -82,6 +91,7 @@ export default function Footer() {
                 </p>
               </MDBCol>
 
+              {/* Useful Links */}
               <MDBCol md="3" lg="2" xl="2" className="mx-auto mb-4">
                 <h6 className="text-uppercase fw-bold mb-4">Useful links</h6>
                 <p>
@@ -122,6 +132,7 @@ export default function Footer() {
                 </p>
               </MDBCol>
 
+              {/* Newsletter and Social Media */}
               <MDBCol md="4" lg="3" xl="3" className="mx-auto mb-md-0 mb-4">
                 <h6 className="text-uppercase fw-bold mb-4">Newsletter</h6>
                 <div className="d-flex align-items-center justify-content-center mb-4">
@@ -162,11 +173,12 @@ export default function Footer() {
           </MDBContainer>
         </section>
 
+        {/* Bottom section */}
         <div
           className="text-center p-4"
           style={{ backgroundColor: "rgba(255, 255, 255, 0.05)" }}
         >
-          PetBay | All Rights Recerved © 2024
+          PetBay | All Rights Reserved © 2024
         </div>
       </MDBFooter>
     </div>

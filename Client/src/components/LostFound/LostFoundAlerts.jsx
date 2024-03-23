@@ -8,6 +8,7 @@ import EmptyRecords from "./EmptyRecords/EmptyRecords";
 import Pagination from "react-bootstrap/Pagination";
 
 export default function LostFoundAlerts() {
+  // configuring base url based on the env
   const base_url =
     import.meta.env.VITE_SERVER_NODE_ENV === "development"
       ? import.meta.env.VITE_LOCAL_BASE_URL
@@ -20,10 +21,12 @@ export default function LostFoundAlerts() {
   const [currentPage, setCurrentPage] = useState(1);
   const postsPerPage = 3;
 
+  //execute the getAllPosts function
   useEffect(() => {
     getAllPosts();
   }, []);
 
+  //Call the GET HTTP request using axios to retrieve all posts
   const getAllPosts = async () => {
     try {
       const res = await axios.get(
@@ -43,6 +46,7 @@ export default function LostFoundAlerts() {
     }
   };
 
+  // Filter posts according to the lost or found status
   const handleFilterChange = (filter) => {
     if (filter === "all") {
       setFilteredPosts(lostFoundDetails);
@@ -78,6 +82,7 @@ export default function LostFoundAlerts() {
                 <NoticeCard data={post} key={post.id} />
               ))}
             </div>
+            {/* Handle Pagination*/}
             <div style={{ marginTop: "50px" }}>
               <Pagination>
                 <Pagination.Prev

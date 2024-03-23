@@ -22,12 +22,13 @@ import {
   MDBTypography,
 } from "mdb-react-ui-kit";
 
+// configuring base url based on the env
 function ViewDetails({ postId }) {
   const base_url =
-  import.meta.env.VITE_SERVER_NODE_ENV === "development"
+    import.meta.env.VITE_SERVER_NODE_ENV === "development"
       ? import.meta.env.VITE_LOCAL_BASE_URL
       : import.meta.env.VITE_PROD_BASE_URL;
-      
+
   const [fullscreen, setFullscreen] = useState(true);
   const [show, setShow] = useState(false);
   const [lostFoundDetails, setLostFoundDetails] = useState({});
@@ -38,15 +39,15 @@ function ViewDetails({ postId }) {
     setShow(true);
   }
 
+  // Execute the getPostById function
   useEffect(() => {
     getPostById(postId);
   }, []);
 
+  // Call the Http Get request to retreive a post by id
   const getPostById = async (postId) => {
     await axios
-      .get(
-        `${base_url}/petbay/api/v1/lost-found/post-details/${postId}`
-      )
+      .get(`${base_url}/petbay/api/v1/lost-found/post-details/${postId}`)
       .then((res) => {
         setLostFoundDetails(res.data);
       })

@@ -35,6 +35,7 @@ export default function AddReminder({loadReminders}) {
     getPetNames();
   }, []);
 
+  // Function to handle form submission
   const handleSubmit = async (event) => {
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
@@ -56,7 +57,8 @@ export default function AddReminder({loadReminders}) {
       .catch((err) => console.log(err));
     setValidated(true);
   };
-
+  
+ // Function to get all Pet Names
   const getPetNames = async () => {
     await axios
       .get(

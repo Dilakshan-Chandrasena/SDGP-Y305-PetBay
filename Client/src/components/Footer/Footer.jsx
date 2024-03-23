@@ -15,10 +15,6 @@ import {
   faInstagram,
 } from "@fortawesome/free-brands-svg-icons";
 
-/**
- * Footer component renders the footer section of the application.
- * @returns {JSX.Element} - JSX for the footer.
- */
 export default function Footer() {
   return (
     <div className={styles.footer}>

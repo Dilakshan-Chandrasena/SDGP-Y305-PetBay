@@ -14,6 +14,7 @@ import { useAuth } from "../../contexts/authContext";
 import "firebase/auth";
 
 function AddLostFoundModal({ reloadLostFoundPosts }) {
+  // configuring base url based on the env
   const base_url =
     import.meta.env.VITE_SERVER_NODE_ENV === "development"
       ? import.meta.env.VITE_LOCAL_BASE_URL
@@ -23,6 +24,7 @@ function AddLostFoundModal({ reloadLostFoundPosts }) {
   const [status, setStatus] = useState("");
   const [gender, setGender] = useState("");
 
+  //Declaring accepted file formats for record
   const ACCEPTED_IMAGE_TYPES = [
     "image/jpeg",
     "image/jpg",
@@ -32,6 +34,7 @@ function AddLostFoundModal({ reloadLostFoundPosts }) {
 
   const today = new Date().toISOString().split("T")[0]; // Get today's date in YYYY-MM-DD format
 
+  //defining a zod schema to validate form inputs
   const formSchema = z.object({
     name: z.string().min(1, "Name is required"),
     breed: z.string().min(1, "Breed is required"),
@@ -58,6 +61,7 @@ function AddLostFoundModal({ reloadLostFoundPosts }) {
       ),
   });
 
+  //handling the form
   const {
     register,
     handleSubmit,
@@ -65,24 +69,29 @@ function AddLostFoundModal({ reloadLostFoundPosts }) {
     formState: { errors, isSubmitting },
   } = useForm({ resolver: zodResolver(formSchema) });
 
+  //Close pop up form
   const handleClose = () => {
     setShow(false);
   };
 
+  //open pop up form
   const handleShow = () => setShow(true);
   const onInvalid = (errors) => console.error(errors);
 
+  //on submitting the form calling backend async method
   const onSubmit = async (data) => {
     const addLostFoundData = createFormData(data);
     await addLostFoundPost(addLostFoundData);
   };
 
+  //Get Current Date Time
   const getCurrentDateTime = () => {
     const now = new Date();
     const formattedDateTime = now.toISOString();
     return formattedDateTime;
   };
 
+  //creates the form data from the user input
   const createFormData = (data) => {
     const formData = new FormData();
     formData.append("userId", userId);
@@ -104,6 +113,7 @@ function AddLostFoundModal({ reloadLostFoundPosts }) {
     return formData;
   };
 
+  // Call Post Http Request using axios to Save the post in the DB
   const addLostFoundPost = async (newLostFoundData) => {
     try {
       const res = await axios.post(

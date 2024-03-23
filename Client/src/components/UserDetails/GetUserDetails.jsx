@@ -5,12 +5,18 @@ import { faAngleDown } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 import { useLocation, useNavigate } from "react-router-dom";
 
+/**
+ * GetUserDetails component renders a form to collect additional user details to complete the sign-up process.
+ * @returns {JSX.Element} - JSX for the user details form.
+ */
 export default function GetUserDetails() {
+  // Base URL for API requests based on environment
   const base_url =
-  import.meta.env.VITE_SERVER_NODE_ENV === "development"
+    import.meta.env.VITE_SERVER_NODE_ENV === "development"
       ? import.meta.env.VITE_LOCAL_BASE_URL
       : import.meta.env.VITE_PROD_BASE_URL;
-      
+
+  // Effect hook to add/remove background class
   useEffect(() => {
     document.body.classList.add("auth-background");
     return () => {
@@ -21,22 +27,27 @@ export default function GetUserDetails() {
   const navigate = useNavigate();
   const location = useLocation();
 
+  // State variables for form fields and error message
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [subscriptionPlan, setSubscriptionPlan] = useState("");
   const [paymentMethod, setPaymentMethod] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
+  // Extract userId and email from location state
   const { userId, email } = location.state;
 
+  // Handler for subscription plan change
   const handleSubscriptionChange = (e) => {
     setSubscriptionPlan(e.target.value);
   };
 
+  // Handler for payment method change
   const handlePaymentMethodChange = (e) => {
     setPaymentMethod(e.target.value);
   };
 
+  // Function to post user data to the server
   const PostUserData = async (userData) => {
     try {
       const response = await axios.post(
@@ -50,6 +61,7 @@ export default function GetUserDetails() {
     }
   };
 
+  // Function to finish sign up process
   const finishSignUp = async () => {
     if (
       firstName === "" ||
@@ -90,6 +102,7 @@ export default function GetUserDetails() {
           <h1 className={styles.heading}>Let's Finish Sign Up</h1>
         </div>
 
+        {/* First Name input field */}
         <div className={styles.inputBox}>
           <input
             className={styles.input}
@@ -99,6 +112,7 @@ export default function GetUserDetails() {
           />
         </div>
 
+        {/* Last Name input field */}
         <div className={styles.inputBox}>
           <input
             className={styles.input}
@@ -107,6 +121,8 @@ export default function GetUserDetails() {
             onChange={(e) => setLastName(e.target.value)}
           />
         </div>
+
+        {/* Subscription Plan dropdown */}
         <div className={`${styles.inputBox} ${styles.dropdown}`}>
           <select
             className={`${styles.input} ${styles.select}`}
@@ -122,6 +138,8 @@ export default function GetUserDetails() {
             <FontAwesomeIcon icon={faAngleDown} />
           </div>
         </div>
+
+        {/* Payment Method dropdown */}
         <div className={`${styles.inputBox} ${styles.dropdown}`}>
           <select
             className={`${styles.input} ${styles.select}`}
@@ -139,12 +157,15 @@ export default function GetUserDetails() {
             <FontAwesomeIcon icon={faAngleDown} />
           </div>
         </div>
+
+        {/* Finish Sign Up button */}
         <div className={styles.button}>
           <button className={styles.signInButton} onClick={finishSignUp}>
             Finish Sign Up
           </button>
         </div>
 
+        {/* Error message */}
         {errorMessage && <p className={styles.errorMessage}>{errorMessage}</p>}
         <br />
       </div>

@@ -14,30 +14,37 @@ import { useLocation } from "react-router";
 import { useNavigate } from "react-router-dom";
 
 export default function Recommendation() {
+  // Authentication context
+  const { userId } = useAuth();
+
+  // State variables
+  const [breedData, setBreedData] = useState({}); // Data for the recommended breed
+  const { state } = useLocation(); // Get location state
+  const breed = state?.breed; // Destructuring the breed property safely
+
+  const [result, setResult] = useState(""); // Result of matching percentage
+  const [preferencesSet, setPreferencesSet] = useState(false); // Indicates if user preferences are set
+  const navigate = useNavigate(); // Navigation hook
+
+  // Base URL based on environment
   const base_url =
     import.meta.env.VITE_SERVER_NODE_ENV === "development"
       ? import.meta.env.VITE_LOCAL_BASE_URL
       : import.meta.env.VITE_PROD_BASE_URL;
 
-  const { userId } = useAuth();
-  const [breedData, setBreedData] = useState({});
-  const { state } = useLocation();
-  const breed = state.breed; // Destructuring the breed property safely
-
-  const [result, setResult] = useState("");
-  const [preferencesSet, setPreferencesSet] = useState(false);
-  const navigate = useNavigate();
-
+  // Effect to fetch recommendation when breed changes
   useEffect(() => {
     if (breed) {
-      // Check if breed exists
       getBreedRecommendation(userId);
     }
   }, [breed]); // Trigger useEffect when breed changes
 
+  // Function to handle setting preferences
   const setPreferenceClick = async () => {
     navigate("/quiz");
   };
+
+  // Function to fetch breed recommendation
   const getBreedRecommendation = async (userId) => {
     try {
       const response = await axios.post(
@@ -56,6 +63,7 @@ export default function Recommendation() {
     }
   };
 
+  // Function to determine result based on matching percentage
   const getResult = (matchingPercentage) => {
     if (matchingPercentage >= 80) {
       return "Perfect";
@@ -66,6 +74,7 @@ export default function Recommendation() {
     }
   };
 
+  // Function to render appropriate icon based on matching percentage
   const renderIcon = (matchingPercentage) => {
     if (matchingPercentage >= 80) {
       return (
@@ -122,7 +131,9 @@ export default function Recommendation() {
             </div>
           </MDBCol>
         </MDBRow>
+        {/* Render BreedDetails component if breed and preferences are set */}
         {breed && preferencesSet && <BreedDetails breedData={breedData} />}
+        {/* Render Tabs component if breed and preferences are set */}
         {breed && preferencesSet && <Tabs breedData={breedData} />}
       </MDBContainer>
     </div>

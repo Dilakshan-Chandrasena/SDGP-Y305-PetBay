@@ -12,6 +12,7 @@ import axios from "axios";
 import Loading from "../Loading/Loading";
 
 export default function AddPetRecord({ reloadRecordsList }) {
+  // configuring base url based on the env
   const base_url =
   import.meta.env.VITE_SERVER_NODE_ENV === "development"
       ? import.meta.env.VITE_LOCAL_BASE_URL
@@ -58,7 +59,7 @@ export default function AddPetRecord({ reloadRecordsList }) {
   //Opens pop up form
   const handleShow = () => setShow(true);
 
-  //on submitting the form
+  //on submitting the form calling backend async method
   const onSubmit = async (data) => {
     const addPetRecordFormData = createFormData(data);
     await addPetRecord(addPetRecordFormData);
@@ -89,8 +90,10 @@ export default function AddPetRecord({ reloadRecordsList }) {
         )
         .then((res) => {
           if (res.status == 201) {
+            // resetting form state
             reset();
             handleClose();
+            // reloading pet record list: fetch new rec
             reloadRecordsList(petId);
           } else {
             throw new Error(res);

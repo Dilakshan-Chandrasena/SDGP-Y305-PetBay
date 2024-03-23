@@ -13,6 +13,7 @@ import axios from "axios";
 import Loading from "../Loading/Loading";
 
 function AddPetModal({ reloadPetList }) {
+  // configuring base url based on env
   const base_url =
   import.meta.env.VITE_SERVER_NODE_ENV === "development"
       ? import.meta.env.VITE_LOCAL_BASE_URL
@@ -20,6 +21,8 @@ function AddPetModal({ reloadPetList }) {
       
   const { userId } = useParams();
   const [show, setShow] = useState(false);
+
+  //Declaring accepted file formats for record
   const ACCEPTED_IMAGE_TYPES = [
     "image/jpeg",
     "image/jpg",
@@ -27,6 +30,7 @@ function AddPetModal({ reloadPetList }) {
     "image/webp",
   ];
 
+  //defining a zod schema to validate form inputs
   const formSchema = z.object({
     name: z.string().min(1, "Name is required"),
     breed: z.string().min(1, "Breed is required"),
@@ -43,6 +47,7 @@ function AddPetModal({ reloadPetList }) {
       ),
   });
 
+  //handling the form
   const {
     register,
     handleSubmit,
@@ -50,17 +55,21 @@ function AddPetModal({ reloadPetList }) {
     formState: { errors, isSubmitting },
   } = useForm({ resolver: zodResolver(formSchema) });
 
+  //Close pop up form  
   const handleClose = () => {
     setShow(false);
   };
 
+  //Opens pop up form
   const handleShow = () => setShow(true);
 
+  //on submitting the form calling backend async method
   const onSubmit = async (data) => {
     const addPetFormData = createFormData(data);
     await addPet(addPetFormData);
   };
 
+  //creates the form data from the user input
   const createFormData = (data) => {
     const formData = new FormData();
     formData.append("userId", userId);
@@ -78,6 +87,7 @@ function AddPetModal({ reloadPetList }) {
     return formData;
   };
 
+    //saves a new pet in the DB using backend api call:POST
   const addPet = async (newPetData) => {
     console.log(newPetData);
     try {
@@ -89,8 +99,10 @@ function AddPetModal({ reloadPetList }) {
         .then((res) => {
           console.log(res);
           if (res.status == 201) {
+            // resetting form state
             reset();
             handleClose();
+            // reloading pet list: fetch new pet
             reloadPetList(userId);
           } else {
             throw new Error(res);

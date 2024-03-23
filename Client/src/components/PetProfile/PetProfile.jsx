@@ -8,6 +8,7 @@ import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 
 export default function PetProfile() {
+  // configuring based url based on the env
   const base_url =
   import.meta.env.VITE_SERVER_NODE_ENV === "development"
       ? import.meta.env.VITE_LOCAL_BASE_URL
@@ -15,10 +16,12 @@ export default function PetProfile() {
   const { petId } = useParams();
   const [petDetails, setPetDetails] = useState({});
 
+  // loading all the details of a pet
   useEffect(() => {
     getPetDetailsById(petId);
   }, []);
 
+  // backend call for getting a pet by id - GET
   const getPetDetailsById = async (petId) => {
     axios
       .get(`${base_url}/petbay/api/v1/pet-profiles/${petId}`)

@@ -44,7 +44,7 @@ function ReminderHome() {
           currentDateTime.getDate() === reminderDateTime.getDate() &&
           currentDateTime.getHours() === reminderDateTime.getHours() &&
           currentDateTime.getMinutes() === reminderDateTime.getMinutes()) {
-            alert("Reminder works")
+            alert("Reminder: " + reminder.dogName + "'s " + reminder.reminderText + " is due today!")
           }
         });
       } catch (error) {

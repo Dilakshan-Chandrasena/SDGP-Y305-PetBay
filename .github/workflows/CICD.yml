@@ -47,6 +47,6 @@ jobs:
       - name: Delete old container
         run: docker rm -f petbay-react-app-container
       - name: Run Docker Container
-        run: docker run -d -p 8080:8080 --name petbay-node-app-container dilakshanchandrasena/petbay-node-app
+        run: docker run -d -p 9010:9010 --name petbay-node-app-container dilakshanchandrasena/petbay-node-app
       - name: Run Docker Container
-        run: docker run -d -p 5173:80 --name petbay-react-app-container dilakshanchandrasena/petbay-react-app
+        run: docker run -d -p 9000:80 --name petbay-react-app-container dilakshanchandrasena/petbay-react-app

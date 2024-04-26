@@ -37,7 +37,7 @@ export default function UploadImage() {
   const predict = async (image) => {
     const predictImage = createFormData(image);
     await axios
-      .post("http://13.49.241.62:80/predict", predictImage)
+      .post("http://13.51.70.250/predict", predictImage)
       .then((res) => {
         let breedName = res.data.pred;
         // processing predicted breed name for better UI/UX

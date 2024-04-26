@@ -2,6 +2,7 @@ const request = require("supertest");
 const { app, server } = require("../../index");
 
 const fs = require('fs');
+const { log } = require("console");
 
 let petId ="";
 
@@ -34,6 +35,7 @@ describe("HTTP Endpoint Tests for Pet Profiles", () => {
       .attach('filename', imageContent, 'image.jpg')
       .field(reqData);
     
+    console.log(res)
     petId = res.body.id;
     expect(res.body.id).not.toBe("")  
     expect(res.status).toBe(201);
